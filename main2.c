@@ -49,7 +49,7 @@ int             main(void)
     sphere->origin = malloc(sizeof(t_coord));
     ft_coord(0,0, -55,sphere->origin);
     sphere->color= malloc(sizeof(t_coord));
-    ft_coord(1,0,0,sphere->color);
+    ft_coord(1,1,0,sphere->color);
 
 
 
