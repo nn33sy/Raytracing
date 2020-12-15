@@ -18,6 +18,13 @@ typedef struct  s_data {
     int         endian;
 }               t_data;
 
+void            my_mlx_pixel_put(t_data *data, int x, int y, int color)
+{
+    char    *dst;
+
+    dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+    *(unsigned int*)dst = color;
+}
 int             main(void)
 {
     t_vars      vars;
@@ -27,30 +34,37 @@ int             main(void)
     int h = 400;
     int w = 400;
     double fov = 60 *PI / 180;
-    t_sphere *sphere;
+   t_sphere *sphere = malloc(sizeof(t_sphere));
 
     sphere->rayon = 20;
+    sphere->origin = malloc(sizeof(t_coord));
     ft_coord(0,0, -55,sphere->origin);
 
-
     vars.mlx = mlx_init();
-    vars.win = mlx_new_window(vars.mlx, h, w, "Hello world!");
+    vars.win = mlx_new_window(vars.mlx, 400, 400, "Hello world!");
+     img.img = mlx_new_image(vars.mlx, 400, 400);
+    img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
     t_ray *ray;
     ray = malloc(sizeof(t_ray));
+    ray->origin = malloc(sizeof(t_coord));
+    ray->direction = malloc(sizeof(t_coord));
     ft_coord(0, 0,0, ray->origin);
 
 
-while (i < height)
+while (i < h)
 {
-    while (j < width)
+    while (j < w)
     {
         ft_coord(j-(w/2),i-(h/2), -w/(2*tan(fov/2)), ray->direction);
         ft_normalize(ray->direction);
+        if (intersection_sphere(sphere,ray) == 1)
+            my_mlx_pixel_put(&img, i, j, 0x00FF0000);
+        j++;
         
     }
+    j = 0;
+    i++;
 }
-    my_mlx_pixel_put(&img, i, j, 0x00FF0000);
-    
-     mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
+     mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
      mlx_loop(vars.mlx);
 }

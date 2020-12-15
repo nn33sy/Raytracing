@@ -1,14 +1,13 @@
 #include <math.h>
 #include "function_maths.h"
 
-void    ft_coord(float x, float y,float z, t_coord *pt) // Determine les coord d
+void    ft_coord(float x, float y,float z, t_coord *pt) // Determine les coord d checked
 {
-    t_coord *pt;
     pt->x = x;
     pt->y = y;
     pt->z = z;
 }
-void    ft_vect(t_coord *a, t_coord *b, t_coord *ab) // Definir un vecteur
+void    ft_vect(t_coord *a, t_coord *b, t_coord *ab) // Definir un vecteur //checked
 {
     ab->x = b->x - a->x;
     ab->y = b->y - a->y;
@@ -16,56 +15,58 @@ void    ft_vect(t_coord *a, t_coord *b, t_coord *ab) // Definir un vecteur
 }
 
 void    ft_produit_vectoriel(t_coord *a, t_coord *b, t_coord *prod) // Calcul le produit vectoriel entre deux vecteur a et b
-{
+{//checked
     prod->x = (a->y * b->z) - (a->z * b->y);
     prod->y = (a->z * b->x) - (a->x * b->z);
     prod->z = (a->x * b->y) - (a->y * b->x);
 }
 
 void    ft_vectors_substract(t_coord *a, t_coord *b, t_coord *res)
-{
-    res->x = a->x - b->x;
-    res->y = a->y - b->y;
-    res->z = a->z - b->z;
+{//checked
+    res->x = b->x - a->x;
+    res->y = b->y - a->y;
+    res->z = b->z - a->z;
 }
 
 
 void    ft_vectors_add(t_coord *a, t_coord *b, t_coord *res)
-{
+{//checked
     res->x = a->x + b->x;
     res->y = a->y + b->y;
     res->z = a->z + b->z;
 }
 
 void    ft_vectors_mult(t_coord *a, float b, t_coord *res)
-{
+{//checked
     res->x = a->x * b;
     res->y = a->y * b;
     res->z = a->z * b;
 }
 void    ft_vectors_div(t_coord *a, float b, t_coord *res)
-{
+{//checked
     res->x = a->x / b;
     res->y = a->y / b;
     res->z = a->z / b;
 }
 
-void    ft_scal_produce(t_coord *a, t_coord *b, t_coord *res)
-{
-    res->x = a->x * b->x;
-    res->y = a->y * b->y;
-    res->z = a->z * b->z;
+double  ft_scal_produce(t_coord *a, t_coord *b)
+{//checked
+    double res ;
+    res = a->x * b->x;
+    res += a->y * b->y;
+    res += a->z * b->z;
+    return (res);
 }
 
 double    ft_norm2(t_coord* a)
 {
-    return (pow(a->x,2) +pow(a->y,2),pow(a->z,2))
-}
+    return (pow(a->x,2) +pow(a->y,2)+pow(a->z,2));
+}//checked
 
 void    ft_normalize(t_coord* a)
-{
+{//checked
     double norme;
-    norme = ft_norm2(a);
+    norme = sqrt(ft_norm2(a));
     a->x /= norme;
     a->y /= norme;
     a->z /= norme;
@@ -74,6 +75,39 @@ void    ft_normalize(t_coord* a)
 int intersection_sphere(t_sphere *s, t_ray *r)
 {
     double a = 1;
-    t_coord *sub;
-    double b = 2 * ft_scal_produce(r->direction, ft_substract(r->origin - s->origin,) )
+    double b;
+    double c;
+    t_coord sub;
+    ft_vectors_substract(s->origin, r->origin, &sub);
+    b =2 * ft_scal_produce(r->direction, &sub);
+    c = ft_norm2(&sub) - pow(s->rayon,2);
+    double delta = pow(b,2) - 4*a*c;
+    if (delta < 0)
+        return (-1);
+   double t1 = (-b -sqrt(delta)) / (2*a);
+    double t2 = (-b +sqrt(delta)) / (2*a);
+    if (t2 > 0)
+        return(1);
+    else
+        return(-1);
 }
+/*
+int main()
+{
+    t_coord *a;
+    a =malloc(sizeof(t_coord));
+    ft_coord(5,5,-5,a);
+    printf("%f %f %f\n",a->x, a->y,a->z);
+    t_sphere s;
+    s.origin = a;
+    s.rayon = 5;
+
+    t_ray t;
+    t.origin = malloc(sizeof(t_coord));
+    t.direction = malloc(sizeof(t_coord));
+    ft_coord(0,0,0,t.origin);
+    ft_coord(5,5,-10,t.direction);
+    printf("%d",intersection_sphere(&s,&t));
+
+
+}*/

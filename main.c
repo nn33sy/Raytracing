@@ -77,13 +77,6 @@ typedef struct  s_data {
 }               t_data;
 
 
-typedef struct s_triangle{
-    t_coord a1;
-    t_coord a2;
-    t_coord a3;
-}t_triangle;
-
-
 
 int		create_trgb(int t, int r, int g, int b) // Mettre RGB entre 0 et 255 par decalage de bits
 {
@@ -111,35 +104,20 @@ int             main(void)
 
     vars.mlx = mlx_init();
     vars.win = mlx_new_window(vars.mlx, 400, 400, "Hello world!");
-    mlx_key_hook(vars.win, key_hook, &vars);
-/*    img.img = mlx_new_image(mlx, 400, 400);
+  //  mlx_key_hook(vars.win, key_hook, &vars);
+  img.img = mlx_new_image(vars.mlx, 400, 400);
     img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
                                  &img.endian);
 
 
-    t_coord *A;
-    t_coord *B;
-    t_coord *C;
-    A=ft_coord(2,3,4);
-    B = ft_coord(5,6,7);
-    C =ft_coord(3,3,3);
-    t_vect *ab;
-    t_vect *ac;
 
-    ab = ft_vect(A,B);
-    ac = ft_vect(A,C);
-    t_coord *produit;
-    produit = ft_produit_vectoriel(ab,ac);
 
 
     int i = 0;
     int j = 0;
-t_coord *M;
-M =malloc(t_coord);
 
 
-    int i = 0;
-    int j = 0;
+
     while (i < 400)
     {
         while (j < 400)
@@ -157,11 +135,8 @@ M =malloc(t_coord);
         j =0;
     }
 
-     my_mlx_pixel_put(&img, 5, 50, 0x00FF0000);
-     my_mlx_pixel_put(&img, 5, 51, 0x00FF0000);
-*/
 
-//    mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
+    mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
 
     mlx_loop(vars.mlx);
 }
