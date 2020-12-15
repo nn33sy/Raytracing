@@ -41,17 +41,21 @@ int             main(void)
    t_sphere *sphere = malloc(sizeof(t_sphere));
    t_light light;
    light.pos=malloc(sizeof(t_coord));
-   ft_coord(70,15, -30,light.pos);
+   ft_coord(15,60, -40,light.pos);
    light.i = 1000000;
 
 
     sphere->rayon = 20;
     sphere->origin = malloc(sizeof(t_coord));
     ft_coord(0,0, -55,sphere->origin);
+    sphere->color= malloc(sizeof(t_coord));
+    ft_coord(1,0,0,sphere->color);
+
+
 
     vars.mlx = mlx_init();
-    vars.win = mlx_new_window(vars.mlx, 400, 400, "Hello world!");
-     img.img = mlx_new_image(vars.mlx, 400, 400);
+    vars.win = mlx_new_window(vars.mlx, h, w, "Hello world!");
+     img.img = mlx_new_image(vars.mlx, h, w);
     img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
     t_ray *ray;
     ray = malloc(sizeof(t_ray));
@@ -73,7 +77,7 @@ while (i < h)
             {
                 double intensity;
                 double dist;
-                ft_vectors_substract(light.pos, pos, l);
+                ft_vectors_substract(light.pos,pos, l);
                 dist = ft_norm2(l);
                 ft_normalize(l);
                 intensity = (light.i * ft_max(ft_scal_produce(l,normal),255)) / dist ;
@@ -81,7 +85,7 @@ while (i < h)
                     intensity = 0;
                 if (intensity > 255)
                     intensity = 255;
-                my_mlx_pixel_put(&img, i, j,create_trgb(150,intensity,intensity,intensity));
+                my_mlx_pixel_put(&img, i, j,create_trgb(150,sphere->color->x * intensity,sphere->color->y * intensity,sphere->color->z * intensity));
             }
         j++;
     }

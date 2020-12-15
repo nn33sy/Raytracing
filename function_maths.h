@@ -19,11 +19,17 @@ typedef struct s_light
     t_coord *pos;
     int     i;//intensite
 }t_light;
+
+
+
 typedef struct s_sphere
 {
     t_coord *origin;
     double  rayon;
+    t_coord *color; //x -> R y--> G z-->B
+    
 }t_sphere;
+void    ft_vectors_mult_by_two(t_coord *a, t_coord *b, t_coord *res);
 double  ft_max(double a,const double b);
 int intersection_sphere2(t_sphere *s, t_ray *r);
 void    ft_coord(double x, double y,double z, t_coord *pt);

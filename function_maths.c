@@ -42,6 +42,12 @@ void    ft_vectors_mult(t_coord *a, double b, t_coord *res)
     res->y = a->y * b;
     res->z = a->z * b;
 }
+void    ft_vectors_mult_by_two(t_coord *a, t_coord *b, t_coord *res)
+{//checked
+    res->x = a->x * b->x;
+    res->y = a->y * b->y;
+    res->z = a->z * b->z;
+}
 void    ft_vectors_div(t_coord *a, double b, t_coord *res)
 {//checked
     res->x = a->x / b;
