@@ -76,23 +76,14 @@ typedef struct  s_data {
     int         endian;
 }               t_data;
 
-typedef  struct s_coord
-{
-    int x;
-    int y;
-    int z;
-}t_coord;
+
 typedef struct s_triangle{
     t_coord a1;
     t_coord a2;
     t_coord a3;
 }t_triangle;
 
-typedef struct s_vecteur{
-    int x;
-    int y;
-    int z;
-}t_vect;
+
 
 int		create_trgb(int t, int r, int g, int b) // Mettre RGB entre 0 et 255 par decalage de bits
 {
@@ -106,32 +97,8 @@ void            my_mlx_pixel_put(t_data *data, int x, int y, int color)
     *(unsigned int*)dst = color;
 }
 
-t_coord *ft_produit_vectoriel(t_vect *a, t_vect *b)
-{
-    t_coord *c;
-    c = malloc(sizeof(t_coord));
-    c->x = (a->y * b->z) - (a->z * b->y);
-    c->y = (a->z * b->x) - (a->x * b->z);
-    c->z = (a->x * b->y) - (a->y * b->x);
-    return(c);
-}
-t_vect *ft_vect(t_coord *a, t_coord *b)
-{
-    t_vect *c =malloc(sizeof(t_vect));
-    c->x = b->x - a->x;
-    c->y = b->y - a->y;
-    c->z = b->z - a->z;
-    return (c);
-}
-t_coord *ft_coord(int x, int y,int z)
-{
-    t_coord *pt;
-    pt = malloc(sizeof(t_coord));
-    pt->x = x;
-    pt->y = y;
-    pt->z = z;
-    return(pt);
-}
+
+
 int             key_hook(int keycode, t_vars *vars)
 {
     printf("Hello from key_hook!\n");
