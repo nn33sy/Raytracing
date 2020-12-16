@@ -81,7 +81,7 @@ int    ft_list_sphere(t_sphere **s)
     ptn = malloc(sizeof(t_sphere));
     if (ptn == 0)
         return(-1);
-    ptn->rayon = 20;
+    ptn->rayon = 10;
     ptn->origin = malloc(sizeof(t_coord));
     if (ptn->origin == 0)
     {
@@ -97,7 +97,23 @@ int    ft_list_sphere(t_sphere **s)
         return(-1);
     }
     ft_coord(1,1,0,ptn->color);
-    ptn->next = NULL;
+    
+
+
+    ptn->next = malloc(sizeof(t_sphere));
+    ptn->next->rayon = 20;
+    ptn->next->origin = malloc(sizeof(t_coord));
+    ft_coord(0,30, -80,ptn->next->origin);
+    ptn->next->color= malloc(sizeof(t_coord));
+    ft_coord(1,0,1,ptn->next->color);
+
+    ptn->next->next = malloc(sizeof(t_sphere));
+    ptn->next->next->rayon = 30;
+    ptn->next->next->origin = malloc(sizeof(t_coord));
+    ft_coord(30,0, -100,ptn->next->next->origin);
+    ptn->next->next->color= malloc(sizeof(t_coord));
+    ft_coord(0,2,0,ptn->next->next->color);
+    ptn->next->next->next = NULL;
     *s = ptn;
     return(1);
 }
