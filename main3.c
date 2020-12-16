@@ -124,7 +124,7 @@ int             main(void)
         {
 
            // if  (double_i + double_j <= d)
-            if  (( ((i - 200)*(i-200)) + ((j - 200) *(j-200))) <= (100*100))
+                if (j > 50)
                 my_mlx_pixel_put(&img, i, j, 0x00FF0000);
 
             j++;
