@@ -23,3 +23,6 @@
 - Add the mirror effect on the sphere 
 
 ![Capture d’écran 2020-12-17 à 00 19 57](https://user-images.githubusercontent.com/55030071/102402476-3cd88d00-3ffe-11eb-89ac-14feb99ee938.png)
+
+-Have problems figure out where is situated the light and possition.
+And I have a kind of oreol too
