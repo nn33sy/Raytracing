@@ -52,5 +52,5 @@ void    ft_vectors_div(t_coord *a, double b, t_coord *res);
 void    ft_vectors_mult(t_coord *a, double b, t_coord *res);
 void    ft_vectors_add(t_coord *a, t_coord *b, t_coord *res);
 void    ft_vectors_substract(t_coord *a, t_coord *b, t_coord *res);
-int intersection_sphere(t_sphere *s, t_ray *r, t_coord *pos, t_coord *normal);
+int intersection_sphere(t_sphere *s, t_ray *r, t_coord *pos, t_coord *normal, double *t_min);
 #endif

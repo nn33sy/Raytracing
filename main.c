@@ -135,31 +135,39 @@ t_coord *pos = malloc(sizeof(t_coord));
 t_coord *normal = malloc(sizeof(t_coord));
 t_coord *l =malloc(sizeof(t_coord));
 
+double t_min = -1;
 while (i < scene->h)
 {
     while (j < scene->w)
     {
         ft_coord(j-(scene->w/2),i-(scene->h/2), -scene->w/(2*tan(scene->fov/2)), scene->ray->direction);
         ft_normalize(scene->ray->direction);
-        if (intersection_sphere(sphere,scene->ray,pos,normal) == 1)
+        t_min = -1;
+        while (sphere != NULL)
             {
-                double intensity;
-                double dist;
-                ft_vectors_substract(scene->light->pos,pos, l);
-                dist = ft_norm2(l);
-                ft_normalize(l);
+                if (intersection_sphere(sphere,scene->ray,pos,normal,&t_min) == 1)
+                {
+                    
+                    double intensity;
+                    double dist;
+                    ft_vectors_substract(scene->light->pos,pos, l);
+                    dist = ft_norm2(l);
+                    ft_normalize(l);
                 intensity = (scene->light->i * ft_max(ft_scal_produce(l,normal),255)) / dist ;
                 if (intensity < 0)
                     intensity = 0;
                 if (intensity > 255)
                     intensity = 255;
                 my_mlx_pixel_put(&img, i, j,create_trgb(150,sphere->color->x * intensity,sphere->color->y * intensity,sphere->color->z * intensity));
+                }
+            sphere =sphere->next;
             }
+        sphere = *list;
         j++;
     }
     j = 0;
     i++;
 }
-     mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
-     mlx_loop(vars.mlx);
+    mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
+    mlx_loop(vars.mlx);
 }
