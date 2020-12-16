@@ -1,4 +1,4 @@
-# RT-42
+# RT-42 🌙
 ### DAY 1
 - Understand the librairy
 - Figure it out how to compile
