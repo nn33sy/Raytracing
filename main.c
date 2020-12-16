@@ -10,6 +10,7 @@ typedef struct    s_vars
     void          *mlx;
     void          *win;
 }                 t_vars;
+
 typedef struct  s_data {
     void        *img;
     char        *addr;
@@ -100,6 +101,14 @@ int    ft_list_sphere(t_sphere **s)
     *s = ptn;
     return(1);
 }
+void ft_initialize_img(t_vars *vars, t_data *img, t_scene *scene)
+{
+    vars->mlx = mlx_init();
+    vars->win = mlx_new_window(vars->mlx, scene->h, scene->w, "Hello world!");
+    img->img = mlx_new_image(vars->mlx, scene->h, scene->w);
+    img->addr = mlx_get_data_addr(img->img, &(img->bits_per_pixel), &(img->line_length), &(img->endian));
+}
+
 int             main(void)
 {
     t_vars   vars;
@@ -120,12 +129,8 @@ int             main(void)
         }
     t_sphere *sphere = *list;
 
-    vars.mlx = mlx_init();
-    vars.win = mlx_new_window(vars.mlx, scene->h, scene->w, "Hello world!");
-     img.img = mlx_new_image(vars.mlx, scene->h, scene->w);
-    img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-
-
+    ft_initialize_img(&vars, &img, scene);
+    
 t_coord *pos = malloc(sizeof(t_coord));
 t_coord *normal = malloc(sizeof(t_coord));
 t_coord *l =malloc(sizeof(t_coord));
