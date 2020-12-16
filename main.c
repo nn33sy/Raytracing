@@ -29,50 +29,96 @@ int		create_trgb(int t, int r, int g, int b)
 {
 	return(t << 24 | r << 16 | g << 8 | b);
 }
-typedef struct s_scene
-{
-    t_light *light;
-    t_ray   *ray;
-    t_sphere *sphere;
-    int     h;
-    int     w;
-    double  fov;
 
-}t_scene;
-
-void ft_parsing_scene(t_scene *scene)
+int ft_parsing_scene(t_scene *scene)
 {
     scene->h = 400;
     scene->fov = 60 *PI / 180;
     scene->w = 400;
     scene->light = malloc(sizeof(t_light));
+    if (scene->light == 0)
+        return(-1);
     scene->light->pos=malloc(sizeof(t_coord));
-    ft_coord(15,60, -40,scene->light->pos);
-    scene->light->i = 1000000;
+    if (scene->light->pos == 0)
+    {
+        free(scene->light);
+        return(-1);
+    }
 
     scene->ray = malloc(sizeof(t_ray));
+    if (scene->ray == 0)
+    {
+        free(scene->light->pos);
+        free(scene->light);
+        return(-1);
+    }
     scene->ray->origin = malloc(sizeof(t_coord));
+    if (scene->ray->origin == 0)
+    {
+        free(scene->light->pos);
+        free(scene->light);
+        free(scene->ray);
+        return(-1);
+    }
     scene->ray->direction = malloc(sizeof(t_coord));
+    if (scene->ray->direction == 0)
+    {
+        free(scene->light->pos);
+        free(scene->light);
+        free(scene->ray->origin);
+        free(scene->ray);
+        return(-1);
+    }
+    ft_coord(15,60, -40,scene->light->pos);
+    scene->light->i = 1000000;
     ft_coord(0, 0,0, scene->ray->origin);
+    return(1);
 }
-
+int    ft_list_sphere(t_sphere **s)
+{
+    t_sphere *ptn;
+    ptn = malloc(sizeof(t_sphere));
+    if (ptn == 0)
+        return(-1);
+    ptn->rayon = 20;
+    ptn->origin = malloc(sizeof(t_coord));
+    if (ptn->origin == 0)
+    {
+        free(ptn);
+        return(-1);
+    }
+    ft_coord(0,0, -55,ptn->origin);
+    ptn->color= malloc(sizeof(t_coord));
+    if (ptn->color == 0)
+    {
+        free(ptn->origin);
+        free(ptn);
+        return(-1);
+    }
+    ft_coord(1,1,0,ptn->color);
+    ptn->next = NULL;
+    *s = ptn;
+    return(1);
+}
 int             main(void)
 {
-    t_vars      vars;
+    t_vars   vars;
     t_data  img;
     int     i= 0;
     int     j = 0;
     t_scene *scene = malloc(sizeof(t_scene));
-    ft_parsing_scene(scene);
-
-   t_sphere *sphere = malloc(sizeof(t_sphere));
-    sphere->rayon = 20;
-    sphere->origin = malloc(sizeof(t_coord));
-    ft_coord(0,0, -55,sphere->origin);
-    sphere->color= malloc(sizeof(t_coord));
-    ft_coord(1,1,0,sphere->color);
-
-
+    if (scene == 0 || ft_parsing_scene(scene) == -1)
+    {
+        free(scene);
+        return(0);
+    }
+    t_sphere **list = malloc(sizeof(t_sphere *));
+    if (list == 0 || ft_list_sphere(list) == -1)
+        {
+            free(list);
+            return(0);
+        }
+    t_sphere *sphere = *list;
 
     vars.mlx = mlx_init();
     vars.win = mlx_new_window(vars.mlx, scene->h, scene->w, "Hello world!");
