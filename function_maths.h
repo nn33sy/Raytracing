@@ -23,6 +23,7 @@ typedef struct s_sphere
 {
     t_coord *origin;
     double  rayon;
+    int mirror ; //1 oui 0 non
     t_coord *color; //x -> R y--> G z-->B
     struct s_sphere *next;
     

@@ -79,8 +79,6 @@ void    ft_normalize(t_coord* a)
 }
 double  ft_max(double a,const double b)
 {
-    if (a < 0)
-        return(0); 
     if (a > b)
         return(b);
     return(a);
