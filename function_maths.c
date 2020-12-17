@@ -112,7 +112,7 @@ int intersection_sphere(t_sphere *s, t_ray *r, t_coord *pos, t_coord *normal, do
     double b;
     double c;
     t_coord sub;
-    ft_vectors_substract(s->origin, r->origin, &sub); // ?????? pq ca marche 
+    ft_vectors_substract(s->origin, r->origin, &sub); 
     b =2 * ft_scal_produce(r->direction, &sub);
     c = ft_norm2(&sub) - pow(s->rayon,2);
     double delta = pow(b,2) - 4*a*c;

@@ -1,6 +1,8 @@
 #ifndef FUNCTION_MATHS_H
 # define FUNCTION_MATHS_H
 # define PI 3.14159265359
+# define GLASS 1.3
+# define AIR 1.0
 typedef  struct s_coord
 {
     double x;
@@ -24,6 +26,7 @@ typedef struct s_sphere
     t_coord *origin;
     double  rayon;
     int mirror ; //1 oui 0 non
+    int clear ; // 1 transparant, 0 non;
     t_coord *color; //x -> R y--> G z-->B
     struct s_sphere *next;
     
