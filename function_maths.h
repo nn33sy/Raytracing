@@ -1,8 +1,12 @@
 #ifndef FUNCTION_MATHS_H
 # define FUNCTION_MATHS_H
 # define PI 3.14159265359
-# define GLASS 1.3
+# define nrays 5
+# define GLASS 1.1
 # define AIR 1.0
+#include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
 typedef  struct s_coord
 {
     double x;
@@ -51,6 +55,8 @@ void    ft_vect(t_coord *a, t_coord *b, t_coord *ab);
 void    ft_produit_vectoriel(t_coord *a, t_coord *b, t_coord *prod);
 void    ft_normalize(t_coord* a);
 double    ft_norm2(t_coord* a);
+double get_random(); //Anti Aliasing
+double generate_nb();//Anti Aliasing
 double  ft_scal_produce(t_coord *a, t_coord *b);
 void    ft_vectors_div(t_coord *a, double b, t_coord *res);
 void    ft_vectors_mult(t_coord *a, double b, t_coord *res);

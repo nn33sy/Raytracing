@@ -33,9 +33,9 @@ int		create_trgb(int t, int r, int g, int b)
 
 int ft_parsing_scene(t_scene *scene)
 {
-    scene->h = 600;
+    scene->h = 400;
     scene->fov = 60 *PI / 180;
-    scene->w = 600;
+    scene->w = 400;
     scene->light = malloc(sizeof(t_light));
     if (scene->light == 0)
         return(-1);
@@ -69,11 +69,14 @@ int ft_parsing_scene(t_scene *scene)
         free(scene->ray);
         return(-1);
     }
-    ft_coord(15,70, 30,scene->light->pos);
+    ft_coord(0,50, 80,scene->light->pos);
     scene->light->i = 100000000;
-    ft_coord(0, 0,0, scene->ray->origin);
+    ft_coord(0, 0,-70, scene->ray->origin);
     return(1);
+
 }
+
+
 int    ft_list_sphere(t_sphere **s)
 {
     
@@ -81,24 +84,19 @@ int    ft_list_sphere(t_sphere **s)
     ptn = malloc(sizeof(t_sphere));
     if (ptn == 0)
         return(-1);
-/*
-        ptn->rayon = 250;
-    ptn->origin = malloc(sizeof(t_coord));
-    ft_coord(0,290, 300,ptn->origin);
-    ptn->color= malloc(sizeof(t_coord));
-    ft_coord(0,2,0,ptn->color);
-    ptn->next = NULL;
-    */
-    ptn->rayon = 5;
+
+       
+    
+    ptn->rayon = 1;
     ptn->origin = malloc(sizeof(t_coord));
     if (ptn->origin == 0)
     {
         free(ptn);
         return(-1);
     }
-    ft_coord(0,10, 55,ptn->origin);
+    ft_coord(40,-50, 80,ptn->origin);
     ptn->mirror = 0;
-    ptn->clear = 1;
+    ptn->clear = 0;
     ptn->color= malloc(sizeof(t_coord));
     if (ptn->color == 0)
     {
@@ -107,18 +105,18 @@ int    ft_list_sphere(t_sphere **s)
         return(-1);
     }
     
-    ft_coord(1,1,0,ptn->color);
+    ft_coord(0.7,0,0.5,ptn->color);
     /*
      ptn->next = malloc(sizeof(t_sphere));
-    ptn->next->rayon = 250;
+    ptn->next->rayon = 70;
     ptn->next->origin = malloc(sizeof(t_coord));
-    ft_coord(0,290, 200,ptn->next->origin);
+    ft_coord(0,-100, 150,ptn->next->origin);
     ptn->next->color= malloc(sizeof(t_coord));
-    ft_coord(0,2,0,ptn->next->color);
+    ft_coord(0.3,0,0,ptn->next->color);
     ptn->next->mirror = 0;
     ptn->next->next = NULL;
 */
-/*
+
     ptn->next = malloc(sizeof(t_sphere));
     ptn->next->rayon = 35;
     ptn->next->origin = malloc(sizeof(t_coord));
@@ -126,33 +124,33 @@ int    ft_list_sphere(t_sphere **s)
     ptn->next->color= malloc(sizeof(t_coord));
     ft_coord(1,0,1,ptn->next->color);
     
-    ptn->next->mirror =0;*/
+    ptn->next->mirror =0;
 
     ptn->next = malloc(sizeof(t_sphere));
     ptn->next->mirror = 0;
     ptn->next->rayon = 2000;
     ptn->next->clear = 0;
     ptn->next->origin = malloc(sizeof(t_coord));
-    ft_coord(0,-2000-20, 0,ptn->next->origin);
+    ft_coord(0,-2000-50, 80,ptn->next->origin);
     ptn->next->color= malloc(sizeof(t_coord));
-    ft_coord(0,2,3,ptn->next->color);
+    ft_coord(0,0.2,0.7,ptn->next->color);
 
     ptn->next->next= malloc(sizeof(t_sphere));
     ptn->next->next->mirror = 0;
-    ptn->next->next->rayon = 2000;
+    ptn->next->next->rayon = 1800;
     ptn->next->next->clear = 0;
     ptn->next->next->origin = malloc(sizeof(t_coord));
-    ft_coord(0,0, 3500,ptn->next->next->origin);
+    ft_coord(0,0, 2500,ptn->next->next->origin);
     ptn->next->next->color= malloc(sizeof(t_coord));
-    ft_coord(1,0,2,ptn->next->next->color);
+    ft_coord(0.3,0.4,0.1,ptn->next->next->color);
     ptn->next->next->next=NULL;
     
     ptn->next->next->next = malloc(sizeof(t_sphere));
-    ptn->next->next->next->mirror = 0;
-    ptn->next->next->next->clear = 1;
-    ptn->next->next->next->rayon = 10;
+    ptn->next->next->next->mirror = 1;
+    ptn->next->next->next->clear = 0;
+    ptn->next->next->next->rayon = 30;
     ptn->next->next->next->origin=malloc(sizeof(t_coord));
-    ft_coord(10,0,80,ptn->next->next->next->origin);
+    ft_coord(0,-5,80,ptn->next->next->next->origin);
         ptn->next->next->next->color= malloc(sizeof(t_coord));
     ft_coord(0,1,0,ptn->next->next->next->color);
     ptn->next->next->next->next = NULL;
@@ -163,9 +161,9 @@ int    ft_list_sphere(t_sphere **s)
     ptn->next->next->next->next->clear = 0;
     ptn->next->next->next->next->rayon = 2000;
     ptn->next->next->next->next->origin=malloc(sizeof(t_coord));
-    ft_coord(-2200,0,0,ptn->next->next->next->next->origin);
+    ft_coord(-2500,0,0,ptn->next->next->next->next->origin);
         ptn->next->next->next->next->color= malloc(sizeof(t_coord));
-    ft_coord(1,1,2,ptn->next->next->next->next->color);
+    ft_coord(0.1,0.1,0.2,ptn->next->next->next->next->color);
     ptn->next->next->next->next->next =NULL;
     *s = ptn;
     return(1);
@@ -178,23 +176,27 @@ void ft_initialize_img(t_vars *vars, t_data *img, t_scene *scene)
     img->addr = mlx_get_data_addr(img->img, &(img->bits_per_pixel), &(img->line_length), &(img->endian));
 }
 
-int ft_ombre(t_sphere **list, t_sphere *sphere, t_coord *pos, double dist, t_scene *scene)
+int ft_ombre(t_sphere **list, t_sphere *sphere, t_coord *pos,t_coord *normal, double dist, t_scene *scene)
 {
         t_ray ray_reflect;
         t_sphere *tmp;
         double t_inter;
 
         ray_reflect.direction = malloc(sizeof(t_coord));
-        ray_reflect.origin = pos;
-        ft_vectors_substract(scene->light->pos,pos, ray_reflect.direction);
+        ray_reflect.origin = malloc(sizeof(t_coord));
+        ft_vectors_substract(pos,scene->light->pos, ray_reflect.direction);
         ft_normalize(ray_reflect.direction);
         tmp = *list;
+        
+        ft_vectors_mult(normal,0.001,ray_reflect.origin);
+        ft_vectors_add(ray_reflect.origin,pos,ray_reflect.origin);
                     while (tmp != NULL)
                     {  
-                        if ((tmp != sphere) && (ft_visibilite(tmp, &ray_reflect, &t_inter) == 1 )) //  intersection
+                        if ((ft_visibilite(tmp, &ray_reflect, &t_inter) == 1 )) //  intersection
                                 {
-                                    if (t_inter * t_inter < dist)
-                                        return(0);
+                                    if (t_inter *t_inter *t_inter < dist)
+                                           return(0);
+
                                 }
                             tmp = tmp->next;
                     }
@@ -222,9 +224,10 @@ double dist;
 
 if (*nb_rebond == 0)
 {
-     color->r = 0;
-    color->g = 0;
-    color->b = 0;
+     color->r = 1;
+    color->g = 1;
+    color->b = 1;
+    color->intensity = 1;
     return;
 }
 
@@ -283,10 +286,10 @@ if (*nb_rebond == 0)
                         delta = 1-(pow((n1/n2),2)*pow((1-ft_scal_produce(ray->direction,normal)),2));
                         if (delta < 0)
                         {
-                                 color->r = 0;
-                                color->g = 0;
-                                color->b = 0;
-                                color->intensity = 0;
+                                 color->r = 1;
+                                color->g = 1;
+                                color->b = 1;
+                                color->intensity = 1;
                                 return;
                         }
                         ft_vectors_mult(normal,-sqrt(delta),&t_t);
@@ -301,7 +304,7 @@ if (*nb_rebond == 0)
                     ft_vectors_substract(pos,scene->light->pos, l);
                     dist = ft_norm2(l);
                     ft_normalize(l);
-                    V = ft_ombre(list, sphere, pos, dist, scene);
+                    V = ft_ombre(list, sphere, pos,normal, dist, scene);
                     color->intensity = (scene->light->i * ft_max(ft_scal_produce(l,normal),255) * V) / dist ;
                     color->intensity = (color->intensity < 0) ? 0 : color->intensity;
                     color->intensity = (color->intensity > 255) ? 255 : color->intensity;
@@ -321,7 +324,7 @@ if (*nb_rebond == 0)
 int             main(void)
 {
     t_vars   vars;
-    t_data  img;
+   t_data  img;
     int     i= 0;
     int     j = 0;
     t_scene *scene = malloc(sizeof(t_scene));
@@ -346,19 +349,58 @@ ray_reflect->direction = malloc(sizeof(t_coord));
 
 t_palette color;
 int nb_rebond = 5;
+int k;
+t_palette color_f;
 while (i < scene->h)
 {
     while (j < scene->w)
     {
-        ft_coord(i-(scene->h/2),-j+(scene->w/2), (scene->h/(2*tan(scene->fov/2))), scene->ray->direction);
+        k = 0;
+         double r1 = 0.5;
+            double r2 = 0.5;
+        while (k < nrays)
+        {
+            r1 +=0.1;
+            r2-= 0.1;
+            double R = sqrt(-2 *log(r1));
+            double dx = R*cos(2 * PI *log(r2));
+            double dy = R*sin(2 * PI*log(r2));
+            if (nrays ==1)
+            {
+                dx = 0;
+                dy=0;
+            }
+        ft_coord(i-(scene->h/2)+ dx,-j+(scene->w/2)+ dy, (scene->h/(2*tan(scene->fov/2))), scene->ray->direction);
         ft_normalize(scene->ray->direction);
         ft_color_intensity(&color, list,scene, scene->ray, &nb_rebond);
-        my_mlx_pixel_put(&img, i, j,create_trgb(150,color.r * color.intensity,color.g * color.intensity,color.b * color.intensity));
+        
+        nb_rebond = 5;
+        color_f.r += color.r;
+        color_f.g += color.g;
+        color_f.b += color.b;
+        color_f.intensity += color.intensity;
+        k++;
+
+        }
+        color_f.r /= nrays;
+        color_f.g /= nrays;
+        color_f.b /= nrays;
+        color_f.intensity/= nrays;
+        my_mlx_pixel_put(&img, i, j,create_trgb(100,color_f.r * color_f.intensity,color_f.g * color_f.intensity,color_f.b * color_f.intensity));
         color.r = 0;
         color.g = 0;
+        color.intensity = 0;
         color.b = 0;
+        color_f.r =0;
+        color_f.g =0;
+        color_f.b =0;
+        color_f.intensity  =0;
+
+
+        
         j++;
-        nb_rebond = 5;
+        
+        
     }
     j = 0;
     i++;

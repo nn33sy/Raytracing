@@ -7,6 +7,15 @@ void    ft_coord(double x, double y,double z, t_coord *pt) // Determine les coor
     pt->y = y;
     pt->z = z;
 }
+double get_random() { return ((double)rand() / (double)RAND_MAX); }
+
+double generate_nb()
+{
+    double n = 0;
+    srand(time(NULL)); // randomize seed
+    n = get_random();
+    return (n);
+}
 void    ft_vect(t_coord *a, t_coord *b, t_coord *ab) // Definir un vecteur //checked
 {
     ab->x = b->x - a->x;
@@ -89,7 +98,7 @@ int ft_visibilite(t_sphere *s, t_ray *r, double *t)
     double b;
     double c;
     t_coord sub;
-    ft_vectors_substract(s->origin, r->origin, &sub); // ?????? pq ca marche 
+    ft_vectors_substract(s->origin, r->origin, &sub); 
     b =2 * ft_scal_produce(r->direction, &sub);
     c = ft_norm2(&sub) - pow(s->rayon,2);
     double delta = pow(b,2) - 4*a*c;
