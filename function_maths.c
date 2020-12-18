@@ -9,6 +9,7 @@ void    ft_coord(double x, double y,double z, t_coord *pt) // Determine les coor
 }
 double get_random() { return ((double)rand() / (double)RAND_MAX); }
 
+
 double generate_nb()
 {
     double n = 0;
@@ -50,6 +51,12 @@ void    ft_vectors_mult(t_coord *a, double b, t_coord *res)
     res->x = a->x * b;
     res->y = a->y * b;
     res->z = a->z * b;
+}
+void    ft_vectors_add_const(t_coord *a, double b, t_coord *res)
+{//checked
+    res->x = a->x + b;
+    res->y = a->y + b;
+    res->z = a->z + b;
 }
 void    ft_vectors_mult_by_two(t_coord *a, t_coord *b, t_coord *res)
 {//checked

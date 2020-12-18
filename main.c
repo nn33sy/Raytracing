@@ -33,9 +33,9 @@ int		create_trgb(int t, int r, int g, int b)
 
 int ft_parsing_scene(t_scene *scene)
 {
-    scene->h = 400;
+    scene->h = 600;
     scene->fov = 60 *PI / 180;
-    scene->w = 400;
+    scene->w = 600;
     scene->light = malloc(sizeof(t_light));
     if (scene->light == 0)
         return(-1);
@@ -146,7 +146,7 @@ int    ft_list_sphere(t_sphere **s)
     ptn->next->next->next=NULL;
     
     ptn->next->next->next = malloc(sizeof(t_sphere));
-    ptn->next->next->next->mirror = 1;
+    ptn->next->next->next->mirror = 0;
     ptn->next->next->next->clear = 0;
     ptn->next->next->next->rayon = 30;
     ptn->next->next->next->origin=malloc(sizeof(t_coord));
@@ -214,6 +214,7 @@ typedef struct s_palette{
 
 void ft_color_intensity(t_palette *color, t_sphere **list, t_scene *scene, t_ray *ray, int *nb_rebond)
 {
+   
     double t_min = -1;
     t_sphere *sphere;
     sphere = *list;
@@ -300,14 +301,63 @@ if (*nb_rebond == 0)
 
                     }
                     else
-                    {
+                    {// eclairage direct
                     ft_vectors_substract(pos,scene->light->pos, l);
                     dist = ft_norm2(l);
                     ft_normalize(l);
                     V = ft_ombre(list, sphere, pos,normal, dist, scene);
-                    color->intensity = (scene->light->i * ft_max(ft_scal_produce(l,normal),255) * V) / dist ;
+                    color->intensity = ((scene->light->i / PI)* ft_max(ft_scal_produce(l,normal),255) * V) / dist ;
                     color->intensity = (color->intensity < 0) ? 0 : color->intensity;
                     color->intensity = (color->intensity > 255) ? 255 : color->intensity;
+ 
+                    //eclairage indirect
+                    
+                    int k;
+                    k = 0;
+                    double r1;
+                    double r2;
+                    double intensity = color->intensity;
+                    r1=0.5;
+                    r2=0.5;
+                    t_coord vecteur_alea;
+    
+                        t_ray aleatoire;
+                        t_coord rep_alea;
+                         aleatoire.direction=malloc(sizeof(t_coord));
+                        aleatoire.origin=malloc(sizeof(t_coord));
+                        t_coord tangeant;
+                        t_coord tangeant2;
+                    
+                       
+                        ft_vectors_mult(normal,0.001, aleatoire.origin);
+                        ft_vectors_add(aleatoire.origin,pos,aleatoire.origin);
+
+                         ft_coord(cos(2*PI*r1)*sqrt(1-r2), sin(2*PI*r1)*sqrt(1-r2), sqrt(r2),&rep_alea);
+                       ft_vectors_mult(normal,rep_alea.z, aleatoire.direction); 
+                                      
+                        ft_coord(generate_nb(),generate_nb(),generate_nb(),&vecteur_alea);
+                         ft_produit_vectoriel(normal,aleatoire.direction,&tangeant);
+                         
+                       
+                        ft_produit_vectoriel(&tangeant,normal,&tangeant2);
+                        ft_vectors_add_const(&tangeant,rep_alea.x,&tangeant);
+                        ft_vectors_add_const(&tangeant2,rep_alea.y,&tangeant2);
+
+                        ft_vectors_add(aleatoire.direction,&tangeant,aleatoire.direction);
+                        
+                       ft_vectors_add(aleatoire.direction,&tangeant2,aleatoire.direction);
+                   //   ft_coord(5,-3,7,aleatoire.direction);
+                        *nb_rebond--;
+                        
+                  
+                        ft_color_intensity(color,list, scene, &aleatoire,nb_rebond);
+                        intensity += color->intensity * (scene->light->i / PI);
+                        
+                      
+                        r1-=0.05;
+                        r2 += 0.05;
+                 
+                    color->intensity = intensity;
                     color->r = sphere->color->x;
                     color->g = sphere->color->y;
                     color->b = sphere->color->z;
@@ -315,9 +365,7 @@ if (*nb_rebond == 0)
                     }
                   sphere = sphere->next;
             }
-        free(pos);
-        free(normal);
-        free(l);
+ 
 }
 
 
@@ -348,7 +396,7 @@ t_ray *ray_reflect= malloc(sizeof(t_ray));
 ray_reflect->direction = malloc(sizeof(t_coord));
 
 t_palette color;
-int nb_rebond = 5;
+int nb_rebond = 3;
 int k;
 t_palette color_f;
 while (i < scene->h)
@@ -386,7 +434,7 @@ while (i < scene->h)
         color_f.g /= nrays;
         color_f.b /= nrays;
         color_f.intensity/= nrays;
-        my_mlx_pixel_put(&img, i, j,create_trgb(100,color_f.r * color_f.intensity,color_f.g * color_f.intensity,color_f.b * color_f.intensity));
+        my_mlx_pixel_put(&img, i, j,create_trgb(150,color_f.r * color_f.intensity,color_f.g * color_f.intensity,color_f.b * color_f.intensity));
         color.r = 0;
         color.g = 0;
         color.intensity = 0;

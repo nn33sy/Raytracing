@@ -1,8 +1,8 @@
 #ifndef FUNCTION_MATHS_H
 # define FUNCTION_MATHS_H
 # define PI 3.14159265359
-# define nrays 5
-# define GLASS 1.1
+# define nrays 1
+# define GLASS 1.3
 # define AIR 1.0
 #include <stdio.h>
 #include <time.h>
@@ -64,4 +64,5 @@ void    ft_vectors_add(t_coord *a, t_coord *b, t_coord *res);
 void    ft_vectors_substract(t_coord *a, t_coord *b, t_coord *res);
 int intersection_sphere(t_sphere *s, t_ray *r, t_coord *pos, t_coord *normal, double *t_min);
 int ft_visibilite(t_sphere *s, t_ray *r, double *t);
+void    ft_vectors_add_const(t_coord *a, double b, t_coord *res);
 #endif
