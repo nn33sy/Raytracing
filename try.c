@@ -8,6 +8,12 @@ double generate_nb()
 {
     double n = 0;
     srand(time(NULL)); // randomize seed
-    n = get_random()
+    n = get_random();
+    if (n > 0.9 || n < 0.1)
+        return(-n);
     return (n);
+}
+int main()
+{
+    printf("%f",generate_nb());
 }

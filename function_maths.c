@@ -15,6 +15,7 @@ double generate_nb()
     double n = 0;
     srand(time(NULL)); // randomize seed
     n = get_random();
+
     return (n);
 }
 void    ft_vect(t_coord *a, t_coord *b, t_coord *ab) // Definir un vecteur //checked

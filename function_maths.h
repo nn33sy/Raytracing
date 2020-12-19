@@ -1,7 +1,7 @@
 #ifndef FUNCTION_MATHS_H
 # define FUNCTION_MATHS_H
 # define PI 3.14159265359
-# define nrays 1
+# define nrays 5
 # define GLASS 1.3
 # define AIR 1.0
 #include <stdio.h>
@@ -33,6 +33,7 @@ typedef struct s_sphere
     int clear ; // 1 transparant, 0 non;
     t_coord *color; //x -> R y--> G z-->B
     struct s_sphere *next;
+    int multicolor;
     
 }t_sphere;
 typedef struct s_scene
