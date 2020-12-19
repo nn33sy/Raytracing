@@ -32,3 +32,4 @@ And I have a kind of aureole too
 - Add the reflective effect, quite similar to the mirror one
 - The probleme with the oreole is when the color is saturated
 - Try to do the ambiant lighting but have pb with segfault
+![Capture d’écran 2020-12-17 à 20 51 45](https://user-images.githubusercontent.com/55030071/102697383-e615c200-424e-11eb-9e96-fbd63462c4a6.png)
