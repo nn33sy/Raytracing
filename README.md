@@ -26,3 +26,9 @@
 
 -Have problems figure out where is situated the light and possition.
 And I have a kind of aureole too
+
+###DAY 4 17/12/20
+-Arranged the problem with position and direction
+- Add the reflective effect, quite similar to the mirror one
+- The probleme with the oreole is when the color is saturated
+- Try to do the ambiant lighting but have pb with segfault
