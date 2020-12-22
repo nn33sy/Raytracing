@@ -32,6 +32,7 @@ And I have a kind of aureole too
 - Add the reflective effect, quite similar to the mirror one
 - The probleme with the oreole is when the color is saturated
 - Try to do the ambiant lighting but have pb with segfault
+
 ![Capture d’écran 2020-12-17 à 20 51 45](https://user-images.githubusercontent.com/55030071/102697383-e615c200-424e-11eb-9e96-fbd63462c4a6.png)
 ###DAY 5 18/12/20
 
@@ -40,3 +41,5 @@ And I have a kind of aureole too
 ###DAY 6 22/12/20
 - Change the ambiant light. Remove the interaction between objects
 -Did the parsing
+
+![Capture d’écran 2020-12-21 à 23 51 25](https://user-images.githubusercontent.com/55030071/102925742-66396300-44ad-11eb-9a23-ce4340d31aa0.png)
