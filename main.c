@@ -33,9 +33,9 @@ int		create_trgb(int t, int r, int g, int b)
 
 int ft_parsing_scene(t_scene *scene)
 {
-    scene->h = 600;
+    scene->r_y = 600;
     scene->fov = 60 *PI / 180;
-    scene->w = 600;
+    scene->r_x = 600;
     scene->light = malloc(sizeof(t_light));
     if (scene->light == 0)
         return(-1);
@@ -44,7 +44,7 @@ int ft_parsing_scene(t_scene *scene)
     
     ft_coord(-100,50, 150,&scene->light->pos);
     scene->light->i = 10000000;
-    ft_coord(0, 0,0, &(scene->ray.origin));
+    ft_coord(0, 0,0, &(scene->camera.origin));
     /*scene->amb->r = 20;
     scene->amb->g = 0;
     scene->amb->b = 20;
@@ -138,8 +138,8 @@ int    ft_list_sphere(t_sphere **s)
 void ft_initialize_img(t_vars *vars, t_data *img, t_scene *scene)
 {
     vars->mlx = mlx_init();
-    vars->win = mlx_new_window(vars->mlx, scene->h, scene->w, "Hello world!");
-    img->img = mlx_new_image(vars->mlx, scene->h, scene->w);
+    vars->win = mlx_new_window(vars->mlx, scene->r_y, scene->r_x, "Hello world!");
+    img->img = mlx_new_image(vars->mlx, scene->r_y, scene->r_x);
     img->addr = mlx_get_data_addr(img->img, &(img->bits_per_pixel), &(img->line_length), &(img->endian));
 }
 
@@ -207,17 +207,17 @@ if (*nb_rebond == 0)
                     color->intensity = (color->intensity < 0) ? 0 : color->intensity;
                     color->intensity = (color->intensity > 255) ? 255 : color->intensity;
                 
-                     color->r= sphere->r;
-                    color->g= sphere->g;
-                    color->b = sphere->b;
+                     color->rgb.r= sphere->r;
+                    color->rgb.g= sphere->g;
+                    color->rgb.b = sphere->b;
                 return (color->intensity);
                 }
                 else
                     {
                         color->intensity = 1;
-                        color->r= 0;
-                    color->g= 0;
-                    color->b = 0;
+                        color->rgb.r= 0;
+                    color->rgb.g= 0;
+                    color->rgb.b = 0;
                         return (1);
                     }
 }
@@ -255,9 +255,9 @@ t_palette color;
 int nb_rebond = 3;
 int k;
 t_palette color_f;
-while (i < scene->h)
+while (i < scene->r_y)
 {
-    while (j < scene->w)
+    while (j < scene->r_x)
     {
 
        k = 0;
@@ -275,38 +275,38 @@ while (i < scene->h)
                 dx = 0;
                 dy=0;
             }
-        ft_coord(i-(scene->h/2)+dx,-j+(scene->w/2)+dy, (scene->h/(2*tan(scene->fov/2))), &scene->ray.direction);
-        ft_normalize(&scene->ray.direction);
-        ft_color_intensity(&color, list,scene, &scene->ray, &nb_rebond);
+        ft_coord(i-(scene->r_y/2)+dx,-j+(scene->r_x/2)+dy, (scene->r_x/(2*tan(scene->fov/2))), &scene->camera.direction);
+        ft_normalize(&scene->camera.direction);
+        ft_color_intensity(&color, list,scene, &scene->camera, &nb_rebond);
         nb_rebond = 3;
-        color_f.r += color.r;
-        color_f.g += color.g;
-        color_f.b += color.b;
+        color_f.rgb.r += color.rgb.r;
+        color_f.rgb.g += color.rgb.g;
+        color_f.rgb.b += color.rgb.b;
         color_f.intensity += color.intensity;
         k++;
 
         }
-        color_f.r /= nrays;
-        color_f.g /= nrays;
-        color_f.b /= nrays;
+        color_f.rgb.r /= nrays;
+        color_f.rgb.g /= nrays;
+        color_f.rgb.b /= nrays;
         color_f.intensity/= nrays;
-        my_mlx_pixel_put(&img, i, j,create_trgb(150,sqrt(color_f.r * color_f.intensity),sqrt(color_f.g * color_f.intensity),sqrt(color_f.b * color_f.intensity)));
-        color.r = 0;
-        color.g = 0;
+        my_mlx_pixel_put(&img, i, j,create_trgb(150,sqrt(color_f.rgb.r * color_f.intensity),sqrt(color_f.rgb.g * color_f.intensity),sqrt(color_f.rgb.b * color_f.intensity)));
+        color.rgb.r = 0;
+        color.rgb.g = 0;
         color.intensity = 0;
-        color.b = 0;
-        color_f.r =0;
-        color_f.g =0;
-        color_f.b =0;
+        color.rgb.b = 0;
+        color_f.rgb.r =0;
+        color_f.rgb.g =0;
+        color_f.rgb.b =0;
         color_f.intensity  =0;
 
         j++;
     }
-    printf("ok");
+  
          j = 0;
     i++;
     }
-    printf("stop");
+
     mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
     mlx_loop(vars.mlx);
 }

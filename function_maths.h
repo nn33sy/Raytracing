@@ -13,11 +13,14 @@ typedef  struct s_coord
     double y;
     double z;
 }t_coord;
-
-typedef struct s_palette{
+typedef struct t_rgb
+{
     double r;
     double g;
     double b;
+}s_rgb;
+typedef struct s_palette{
+    s_rgb   rgb;
     double intensity;
 }t_palette;
 
@@ -27,21 +30,19 @@ typedef struct s_ray
     t_coord direction;
 }t_ray;
 
+
 typedef struct s_light
 {
     t_coord pos;
-    int     i;
-    double r;
-    double g;
-    double b;
+    double     i;
+    s_rgb   rgb;
+    struct s_light *next;
 }t_light;
 
 typedef struct s_amb_light
 {
     double ratio;
-    double r;
-    double g;
-    double b;
+    s_rgb   rgb;
 }t_amb_lig;
 
 typedef struct s_sphere
@@ -61,13 +62,13 @@ typedef struct s_sphere
 typedef struct s_scene
 {
     t_light *light;
-    t_ray   ray;
-    int     h;
-    int     w;
+    t_ray   camera;
+    int     r_x;
+    int     r_y;
     double  fov;
+    t_amb_lig amb_light;
 
 }t_scene;
-
 
 
 void    ft_vectors_mult_by_two(t_coord *a, t_coord *b, t_coord *res);
