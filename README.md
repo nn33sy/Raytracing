@@ -37,3 +37,6 @@ And I have a kind of aureole too
 
 - Did the anti aliasing
 - Fixed the ambiant light
+###DAY 6 22/12/20
+- Change the ambiant light. Remove the interaction between objects
+-Did the parsing
