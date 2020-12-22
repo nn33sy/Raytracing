@@ -14,32 +14,54 @@ typedef  struct s_coord
     double z;
 }t_coord;
 
+typedef struct s_palette{
+    double r;
+    double g;
+    double b;
+    double intensity;
+}t_palette;
+
 typedef struct s_ray
 {
-    t_coord *origin;
-    t_coord *direction;
+    t_coord origin;
+    t_coord direction;
 }t_ray;
 
 typedef struct s_light
 {
-    t_coord *pos;
-    int     i;//intensite
+    t_coord pos;
+    int     i;
+    double r;
+    double g;
+    double b;
 }t_light;
+
+typedef struct s_amb_light
+{
+    double ratio;
+    double r;
+    double g;
+    double b;
+}t_amb_lig;
+
 typedef struct s_sphere
 {
-    t_coord *origin;
+    t_coord origin;
     double  rayon;
     int mirror ; //1 oui 0 non
     int clear ; // 1 transparant, 0 non;
-    t_coord *color; //x -> R y--> G z-->B
+    double r;
+    double g;
+    double b; //x -> R y--> G z-->B
     struct s_sphere *next;
     int multicolor;
-    
+
 }t_sphere;
+
 typedef struct s_scene
 {
     t_light *light;
-    t_ray   *ray;
+    t_ray   ray;
     int     h;
     int     w;
     double  fov;
