@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <math.h>
+#include "libft.h"
 
 static int	ft_space(char c)
 {
@@ -19,19 +19,11 @@ static int	ft_space(char c)
 		return (1);
 	return (0);
 }
-double 		count_nb(const char *str)
-{
-	int i;
-	i = 0;
-	while ((str[i] >= '0')&& (str[i] <= '9'))
-		i++;
-	return((double)i);
-}
 
-double		ft_atoi(const char *str)
+int			ft_atoi(const char *str)
 {
 	int			sign;
-	double		res;
+	long long	res;
 
 	sign = 1;
 	res = 0;
@@ -48,10 +40,5 @@ double		ft_atoi(const char *str)
 		res = res * 10 + (*str - '0');
 		str++;
 	}
-	if (*str == '.')
-		{
-			str++;
-			res += ft_atoi(str) * pow(10,-count_nb(str));
-		}
 	return (sign * res);
 }

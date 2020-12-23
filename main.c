@@ -37,11 +37,6 @@ int ft_parsing_scene(t_scene *scene)
     scene->fov = 60 *PI / 180;
     scene->r_x = 600;
     scene->light = malloc(sizeof(t_light));
-    if (scene->light == 0)
-        return(-1);
-
-    
-    
     ft_coord(-100,50, 150,&scene->light->pos);
     scene->light->i = 10000000;
     ft_coord(0, 0,0, &(scene->camera.origin));
@@ -78,28 +73,7 @@ int    ft_list_sphere(t_sphere **s)
     ptn->next->b = 70;
     ptn->next->mirror = 0;
     ptn->next->next = NULL;
-    /*
-
-
-    ptn->next = malloc(sizeof(t_sphere));
-    ptn->next->rayon = 35;
-    ptn->next->origin = malloc(sizeof(t_coord));
-    ft_coord(30,0, 200,ptn->next->origin);
-    ptn->next->color= malloc(sizeof(t_coord));
-    ft_coord(1,0,1,ptn->next->color);
-    
-    ptn->next->mirror =0;
-
-    ptn->next = malloc(sizeof(t_sphere));
-    ptn->next->mirror = 0;
-    ptn->next->rayon = 2000;
-    ptn->next->clear = 0;
-    ptn->next->origin = malloc(sizeof(t_coord));
-    ft_coord(0,-2000-50, 80,ptn->next->origin);
-    ptn->next->color= malloc(sizeof(t_coord));
-    ft_coord(0,0.2,0.7,ptn->next->color);
-    ptn->next->next = NULL;
-*/
+   
     ptn->next->next= malloc(sizeof(t_sphere));
     ptn->next->next->mirror = 0;
     ptn->next->next->rayon = 100;
@@ -110,28 +84,7 @@ int    ft_list_sphere(t_sphere **s)
     ptn->next->next->b = 0.1;
 
     ptn->next->next->next=NULL;
-    /*
-    ptn->next->next->next = malloc(sizeof(t_sphere));
-    ptn->next->next->next->mirror = 0;
-    ptn->next->next->next->multicolor = 1;
-    ptn->next->next->next->clear = 0;
-    ptn->next->next->next->rayon = 30;
-    ptn->next->next->next->origin=malloc(sizeof(t_coord));
-    ft_coord(0,-5,80,ptn->next->next->next->origin);
-        ptn->next->next->next->color= malloc(sizeof(t_coord));
-    ft_coord(0,1,0,ptn->next->next->next->color);
-    ptn->next->next->next->next = NULL;
 
-
-        ptn->next->next->next->next = malloc(sizeof(t_sphere));
-    ptn->next->next->next->next->mirror = 0;
-    ptn->next->next->next->next->clear = 0;
-    ptn->next->next->next->next->rayon = 2000;
-    ptn->next->next->next->next->origin=malloc(sizeof(t_coord));
-    ft_coord(-2500,0,0,ptn->next->next->next->next->origin);
-        ptn->next->next->next->next->color= malloc(sizeof(t_coord));
-    ft_coord(0.1,0.1,0.2,ptn->next->next->next->next->color);
-    ptn->next->next->next->next->next =NULL;*/
     *s = ptn;
     return(1);
 }

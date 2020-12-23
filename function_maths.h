@@ -1,5 +1,6 @@
 #ifndef FUNCTION_MATHS_H
 # define FUNCTION_MATHS_H
+#include "libft/libft.h"
 # define PI 3.14159265359
 # define nrays 5
 # define GLASS 1.3
@@ -13,14 +14,14 @@ typedef  struct s_coord
     double y;
     double z;
 }t_coord;
-typedef struct t_rgb
+typedef struct s_rgb
 {
     double r;
     double g;
     double b;
-}s_rgb;
+}t_rgb;
 typedef struct s_palette{
-    s_rgb   rgb;
+    t_rgb   rgb;
     double intensity;
 }t_palette;
 
@@ -35,14 +36,14 @@ typedef struct s_light
 {
     t_coord pos;
     double     i;
-    s_rgb   rgb;
+    t_rgb   rgb;
     struct s_light *next;
 }t_light;
 
 typedef struct s_amb_light
 {
     double ratio;
-    s_rgb   rgb;
+    t_rgb   rgb;
 }t_amb_lig;
 
 typedef struct s_sphere
@@ -51,13 +52,45 @@ typedef struct s_sphere
     double  rayon;
     int mirror ; //1 oui 0 non
     int clear ; // 1 transparant, 0 non;
-    double r;
-    double g;
-    double b; //x -> R y--> G z-->B
-    struct s_sphere *next;
+    t_rgb rgb;
     int multicolor;
 
 }t_sphere;
+
+typedef struct s_plan
+{
+    t_coord center;
+    t_coord direction;
+    t_rgb   rgb;
+}t_plan;
+
+typedef struct s_square
+{
+    t_coord center;
+    t_coord direction;
+    double side_size;
+    t_rgb   rgb;
+}t_square;
+
+typedef struct s_triangle
+{
+    t_coord first;
+    t_coord second;
+    t_coord third;
+    t_rgb   rgb;
+}t_triangle;
+
+typedef struct s_cylinder
+{
+    t_coord center;
+    t_coord direction;
+    double diameter;
+    double height;
+    t_rgb rgb;
+
+}t_cylinder;
+
+
 
 typedef struct s_scene
 {
@@ -67,6 +100,7 @@ typedef struct s_scene
     int     r_y;
     double  fov;
     t_amb_lig amb_light;
+    t_list **list;
 
 }t_scene;
 
