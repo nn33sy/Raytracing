@@ -60,17 +60,17 @@ int    ft_list_sphere(t_sphere **s)
     ft_coord(0,0, 150,&ptn->origin);
     ptn->mirror = 0;
     ptn->clear = 0;
-   ptn->r = 70;
-   ptn->g = 0;
-   ptn->b = 3;
+   ptn->rgb.r= 70;
+   ptn->rgb.g = 0;
+   ptn->rgb.b = 3;
     ptn->next = NULL;
     
      ptn->next = malloc(sizeof(t_sphere));
     ptn->next->rayon = 10;
     ft_coord(0,-30, 130,&ptn->next->origin);
-    ptn->next->r = 0.3;
-    ptn->next->g = 50;
-    ptn->next->b = 70;
+    ptn->next->rgb.r = 0.3;
+    ptn->next->rgb.g = 50;
+    ptn->next->rgb.b = 70;
     ptn->next->mirror = 0;
     ptn->next->next = NULL;
    
@@ -79,9 +79,9 @@ int    ft_list_sphere(t_sphere **s)
     ptn->next->next->rayon = 100;
     ptn->next->next->clear = 0;
     ft_coord(0,-150, 130,&ptn->next->next->origin);
-    ptn->next->next->r = 60;
-    ptn->next->next->g = 156;
-    ptn->next->next->b = 0.1;
+    ptn->next->next->rgb.r = 60;
+    ptn->next->next->rgb.g = 156;
+    ptn->next->next->rgb.b = 0.1;
 
     ptn->next->next->next=NULL;
 
@@ -160,9 +160,9 @@ if (*nb_rebond == 0)
                     color->intensity = (color->intensity < 0) ? 0 : color->intensity;
                     color->intensity = (color->intensity > 255) ? 255 : color->intensity;
                 
-                     color->rgb.r= sphere->r;
-                    color->rgb.g= sphere->g;
-                    color->rgb.b = sphere->b;
+                     color->rgb.r= sphere->rgb.r;
+                    color->rgb.g= sphere->rgb.g;
+                    color->rgb.b = sphere->rgb.b;
                 return (color->intensity);
                 }
                 else

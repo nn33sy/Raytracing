@@ -54,6 +54,7 @@ typedef struct s_sphere
     int clear ; // 1 transparant, 0 non;
     t_rgb rgb;
     int multicolor;
+    struct s_sphere *next;
 
 }t_sphere;
 
@@ -113,8 +114,8 @@ void    ft_vect(t_coord *a, t_coord *b, t_coord *ab);
 void    ft_produit_vectoriel(t_coord *a, t_coord *b, t_coord *prod);
 void    ft_normalize(t_coord* a);
 double    ft_norm2(t_coord* a);
-double get_random(); //Anti Aliasing
-double generate_nb();//Anti Aliasing
+double get_random(); 
+double generate_nb();
 double  ft_scal_produce(t_coord *a, t_coord *b);
 void    ft_vectors_div(t_coord *a, double b, t_coord *res);
 void    ft_vectors_mult(t_coord *a, double b, t_coord *res);
