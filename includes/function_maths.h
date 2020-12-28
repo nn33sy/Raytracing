@@ -125,5 +125,6 @@ int intersection_sphere(t_sphere *s, t_ray *r, t_coord *pos, t_coord *normal, do
 int ft_visibilite(t_sphere *s, t_ray *r, double *t);
 void    ft_vectors_add_const(t_coord *a, double b, t_coord *res);
 int main_function(void);
-void ft_scaling(double *value);
+void ft_scaling_one_value(double *value);
+int interaction_plan(t_plan *plan,t_ray *ray,t_coord *pos,t_coord *normal,double *t_min);
 #endif

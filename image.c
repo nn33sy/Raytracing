@@ -93,6 +93,8 @@ if (*nb_rebond == 0)
             {
                  if (tmp->type == 0 && intersection_sphere((t_sphere *)tmp->object ,ray,pos,normal,&t_min) == 1 )
                      min = (t_sphere *)tmp->object;
+                 /*if (tmp->type == 1 && interaction_plan((t_plan *)tmp->object, ray,pos,normal,&t_min) == 1)
+                    min = (t_plan *)tmp->object;*/
                  tmp = tmp->next;
             }
             if (min != NULL)
@@ -103,8 +105,7 @@ if (*nb_rebond == 0)
                     ft_normalize(l);
                     V = ft_ombre(scene->list, min, pos,normal, dist, scene);
                     color->intensity = ((scene->light->i / PI)* ft_max(ft_scal_produce(l,normal),255) * V) / dist ;
-                    color->intensity = (color->intensity < 0) ? 0 : color->intensity;
-                    color->intensity = (color->intensity > 255) ? 255 : color->intensity;
+                   ft_scaling_one_value(&(color->intensity));
                     color->intensity +=120;
                      color->rgb.r= min->rgb.r;
                     color->rgb.g=  min->rgb.g;
@@ -121,7 +122,13 @@ if (*nb_rebond == 0)
                     }
 }
 
-
+void ft_scaling_one_value(double *value)
+{
+    if (*value > 255)
+        *value = 255;
+    if (*value < 0)
+        *value = 0;
+}
 
 
 int main_function(void)

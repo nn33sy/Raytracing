@@ -157,7 +157,22 @@ int intersection_sphere(t_sphere *s, t_ray *r, t_coord *pos, t_coord *normal, do
     return(1);
 }
 
-
+int interaction_plan(t_plan *plan,t_ray *ray,t_coord *pos,t_coord *normal,double *t_min)
+{
+    t_coord a;
+    double t;
+    if (ft_scal_produce(&(ray->direction),&(plan->direction)) > 0)
+        return (-1);
+    t = ft_scal_produce(&a,&(plan->direction));
+    t /= ft_scal_produce(&(ray->direction),&(plan->direction));
+    if (*t_min != -1 && t > *t_min)
+        return(-1);
+    *t_min = t;
+    ft_coord(plan->direction.x,plan->direction.y,plan->direction.z,normal);
+    ft_vectors_mult(&(ray->direction), t,pos);
+    ft_vectors_add(pos, &(ray->origin),pos);
+    return(1);
+}
 
 /*
 int main()
