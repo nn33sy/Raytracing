@@ -4,6 +4,10 @@
 #include <math.h>
 #include "mlx.h"
 #include "function_maths.h"
+#include "get_next_line.h"
+#include "libft.h"
+#include "parsing.h"
+
 
 typedef struct    s_vars
 {
@@ -31,63 +35,7 @@ int		create_trgb(int t, int r, int g, int b)
 	return(t << 24 | r << 16 | g << 8 | b);
 }
 
-int ft_parsing_scene(t_scene *scene)
-{
-    scene->r_y = 600;
-    scene->fov = 60 *PI / 180;
-    scene->r_x = 600;
-    scene->light = malloc(sizeof(t_light));
-    ft_coord(-100,50, 150,&scene->light->pos);
-    scene->light->i = 10000000;
-    ft_coord(0, 0,0, &(scene->camera.origin));
-    /*scene->amb->r = 20;
-    scene->amb->g = 0;
-    scene->amb->b = 20;
-    scene->amb->ratio = 50;*/
-    return(1);
 
-}
-
-
-int    ft_list_sphere(t_sphere **s)
-{
-    
-    t_sphere *ptn;
-
-    ptn = malloc(sizeof(t_sphere));
-
-    ptn->rayon = 20;
-    ft_coord(0,0, 150,&ptn->origin);
-    ptn->mirror = 0;
-    ptn->clear = 0;
-   ptn->rgb.r= 70;
-   ptn->rgb.g = 0;
-   ptn->rgb.b = 3;
-    ptn->next = NULL;
-    
-     ptn->next = malloc(sizeof(t_sphere));
-    ptn->next->rayon = 10;
-    ft_coord(0,-30, 130,&ptn->next->origin);
-    ptn->next->rgb.r = 0.3;
-    ptn->next->rgb.g = 50;
-    ptn->next->rgb.b = 70;
-    ptn->next->mirror = 0;
-    ptn->next->next = NULL;
-   
-    ptn->next->next= malloc(sizeof(t_sphere));
-    ptn->next->next->mirror = 0;
-    ptn->next->next->rayon = 100;
-    ptn->next->next->clear = 0;
-    ft_coord(0,-150, 130,&ptn->next->next->origin);
-    ptn->next->next->rgb.r = 60;
-    ptn->next->next->rgb.g = 156;
-    ptn->next->next->rgb.b = 0.1;
-
-    ptn->next->next->next=NULL;
-
-    *s = ptn;
-    return(1);
-}
 void ft_initialize_img(t_vars *vars, t_data *img, t_scene *scene)
 {
     vars->mlx = mlx_init();
@@ -96,24 +44,24 @@ void ft_initialize_img(t_vars *vars, t_data *img, t_scene *scene)
     img->addr = mlx_get_data_addr(img->img, &(img->bits_per_pixel), &(img->line_length), &(img->endian));
 }
 
-float ft_ombre(t_sphere **list, t_sphere *sphere, t_coord *pos,t_coord *normal, double dist, t_scene *scene)
+float ft_ombre(t_list **list, t_sphere *sphere, t_coord *pos,t_coord *normal, double dist, t_scene *scene)
 {
         t_ray ray_reflect;
-        t_sphere *tmp;
+        t_list *ptn;
         double t_inter;
        
         ft_vectors_substract(pos,&scene->light->pos, &ray_reflect.direction);
         ft_normalize(&ray_reflect.direction);
-        tmp = *list;
+        ptn = *list;
         
         ft_vectors_mult(normal,0.001,&ray_reflect.origin);
         ft_vectors_add(&ray_reflect.origin,pos,&ray_reflect.origin);
-                    while (tmp != NULL)
+                    while (ptn != NULL)
                     {  
-                        if ((ft_visibilite(tmp, &ray_reflect, &t_inter) == 1 )) //  intersection
-                                    if (t_inter *t_inter *t_inter < dist)
+                        if (ptn->type == 0 && (ft_visibilite((t_sphere *)ptn->object, &ray_reflect, &t_inter) == 1 )) //  intersection
+                                    if (t_inter *t_inter < dist)
                                            return(0);
-                            tmp = tmp->next;
+                            ptn = ptn->next;
                     }
         return(1);
 }
@@ -121,15 +69,16 @@ float ft_ombre(t_sphere **list, t_sphere *sphere, t_coord *pos,t_coord *normal, 
 
 
 
-double ft_color_intensity(t_palette *color, t_sphere **list, t_scene *scene, t_ray *ray, int *nb_rebond)
+double ft_color_intensity(t_palette *color, t_scene *scene, t_ray *ray, int *nb_rebond)
 {
    
     double t_min = -1;
-    t_sphere *sphere;
-    sphere = *list;
     float V ;
 double dist;
 double intensity;
+
+t_list *tmp= *(scene->list);
+
 
 if (*nb_rebond == 0)
     return(0);
@@ -140,29 +89,26 @@ if (*nb_rebond == 0)
     t_sphere *min;
 
 
-       while (sphere != NULL)
+       while (tmp != NULL)
             {
-                 if (intersection_sphere(sphere,ray,pos,normal,&t_min) == 1 )
-                     min = sphere;
-                 sphere =sphere->next;
+                 if (tmp->type == 0 && intersection_sphere((t_sphere *)tmp->object ,ray,pos,normal,&t_min) == 1 )
+                     min = (t_sphere *)tmp->object;
+                 tmp = tmp->next;
             }
-            sphere = min;
-            if (sphere != NULL)
+            if (min != NULL)
 {
 
                     ft_vectors_substract(pos,&scene->light->pos, l);
                     dist = ft_norm2(l);
                     ft_normalize(l);
-                    V = ft_ombre(list, sphere, pos,normal, dist, scene);
-                   
+                    V = ft_ombre(scene->list, min, pos,normal, dist, scene);
                     color->intensity = ((scene->light->i / PI)* ft_max(ft_scal_produce(l,normal),255) * V) / dist ;
-                    color->intensity +=120;
                     color->intensity = (color->intensity < 0) ? 0 : color->intensity;
                     color->intensity = (color->intensity > 255) ? 255 : color->intensity;
-                
-                     color->rgb.r= sphere->rgb.r;
-                    color->rgb.g= sphere->rgb.g;
-                    color->rgb.b = sphere->rgb.b;
+                    color->intensity +=120;
+                     color->rgb.r= min->rgb.r;
+                    color->rgb.g=  min->rgb.g;
+                    color->rgb.b = min->rgb.b;
                 return (color->intensity);
                 }
                 else
@@ -184,21 +130,9 @@ int main_function(void)
    t_data  img;
     int     i= 0;
     int     j = 0;
-    t_scene *scene = malloc(sizeof(t_scene));
-    if (scene == 0 || ft_parsing_scene(scene) == -1)
-    {
-        free(scene);
-        return(0);
-    }
-    t_sphere **list = malloc(sizeof(t_sphere *));
-    if (list == 0 || ft_list_sphere(list) == -1)
-        {
-            free(list);
-            return(0);
-        }
-    t_sphere *sphere = *list;
+    t_scene *scene = main_parsing();
 
-    ft_initialize_img(&vars, &img, scene);
+ft_initialize_img(&vars, &img, scene);
     
 
 t_ray *ray_reflect= malloc(sizeof(t_ray));
@@ -230,7 +164,7 @@ while (i < scene->r_y)
             }
         ft_coord(i-(scene->r_y/2)+dx,-j+(scene->r_x/2)+dy, (scene->r_x/(2*tan(scene->fov/2))), &scene->camera.direction);
         ft_normalize(&scene->camera.direction);
-        ft_color_intensity(&color, list,scene, &scene->camera, &nb_rebond);
+        ft_color_intensity(&color,scene, &scene->camera, &nb_rebond);
         nb_rebond = 3;
         color_f.rgb.r += color.rgb.r;
         color_f.rgb.g += color.rgb.g;

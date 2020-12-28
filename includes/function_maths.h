@@ -125,4 +125,5 @@ int intersection_sphere(t_sphere *s, t_ray *r, t_coord *pos, t_coord *normal, do
 int ft_visibilite(t_sphere *s, t_ray *r, double *t);
 void    ft_vectors_add_const(t_coord *a, double b, t_coord *res);
 int main_function(void);
+void ft_scaling(double *value);
 #endif

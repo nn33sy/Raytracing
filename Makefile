@@ -29,7 +29,7 @@ all: $(NAME)
 		@echo "Linking" [ $< ] $(OK)
 
 $(NAME): $(OBJ)
-	@make -C libft/
+	@make re -C libft/
 	@cp libft/libft.a ./$(NAME)
 	@ar rc $@ $^
 	@echo "Compiling & indexing" [ $(NAME) ] $(SUCCESS)

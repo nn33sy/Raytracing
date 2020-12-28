@@ -19,7 +19,7 @@ static int	ft_space(char c)
 		return (1);
 	return (0);
 }
-double 		count_nb(const char *str)
+static double 		count_nb(const char *str)
 {
 	int i;
 	i = 0;
