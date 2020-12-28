@@ -44,3 +44,10 @@ And I have a kind of aureole too
 -Did the parsing
 - Scaling of color
 ![Capture d’écran 2020-12-21 à 23 51 25](https://user-images.githubusercontent.com/55030071/102925742-66396300-44ad-11eb-9a23-ce4340d31aa0.png)
+
+###DAY 7 28/12/20
+- Did the make file
+- Linked the parsing to the main file
+-Did the interaction function with the plan
+- Have to manage the color and intensity 
+
