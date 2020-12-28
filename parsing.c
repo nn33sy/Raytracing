@@ -1,7 +1,7 @@
 #include "function_maths.h"
 #include "parsing.h"
-#include "libft/libft.h"
-#include "gnl/get_next_line.h"
+#include "libft.h"
+#include "get_next_line.h"
 #include <fcntl.h>
 
 int ft_r(char *line, t_scene *scene)
@@ -126,7 +126,7 @@ int ft_s(char *line, t_scene *scene)
     return(1);
 }
 
-int main()
+t_scene *main_parsing(char *chain)
 {
     char *line[100];
     int i;
@@ -135,17 +135,16 @@ int main()
 int fd;
 fd=open("scene.rt",O_RDONLY);
 while (get_next_line(fd, &line[++i]) > 0)
-    printf("%s\n",line[i]);
 nb = i - 1;
 i = 0;
 
 t_scene scene;
 t_light light ;
-/**(scene.light) = light;
+*(scene.light) = light;
 ft_r(line[0],&scene);
 ft_a(line[1],&scene);
 ft_c(line[3],&scene);
-ft_l(line[4],&light);*/
+ft_l(line[4],&light);
 
 scene.list = malloc(sizeof(t_list *));
 ft_s(line[6],&scene);
@@ -154,7 +153,11 @@ ft_s(line[8],&scene);
 ft_s(line[9],&scene);
 t_list *tmp= *(scene.list);
 t_sphere *sphere_ptn= (t_sphere *)tmp->object; 
+/*
+tmp = tmp->next;
+sphere_ptn = (t_sphere *)tmp->object;*/
 
+/*
 printf("\n%f\n",sphere_ptn->origin.x);
 printf("%f\n",sphere_ptn->origin.y);
 printf("%f\n\n",sphere_ptn->origin.z);
@@ -162,37 +165,7 @@ printf("%f\n\n",sphere_ptn->rayon);
 printf("%f\n",sphere_ptn->rgb.r);
 printf("%f\n",sphere_ptn->rgb.g);
 printf("%f\n",sphere_ptn->rgb.b);
-printf("\n\n ---------\n");
-tmp = tmp->next;
-sphere_ptn = (t_sphere *)tmp->object;
-printf("\n%f\n",sphere_ptn->origin.x);
-printf("%f\n",sphere_ptn->origin.y);
-printf("%f\n\n",sphere_ptn->origin.z);
-printf("%f\n\n",sphere_ptn->rayon);
-printf("%f\n",sphere_ptn->rgb.r);
-printf("%f\n",sphere_ptn->rgb.g);
-printf("%f\n",sphere_ptn->rgb.b);
-printf("\n\n ---------\n");
-tmp = tmp->next;
-sphere_ptn = (t_sphere *)tmp->object;
-printf("\n%f\n",sphere_ptn->origin.x);
-printf("%f\n",sphere_ptn->origin.y);
-printf("%f\n\n",sphere_ptn->origin.z);
-printf("%f\n\n",sphere_ptn->rayon);
-printf("%f\n",sphere_ptn->rgb.r);
-printf("%f\n",sphere_ptn->rgb.g);
-printf("%f\n",sphere_ptn->rgb.b);
-printf("\n\n ---------\n");
-tmp = tmp->next;
-sphere_ptn = (t_sphere *)tmp->object;
-printf("\n%f\n",sphere_ptn->origin.x);
-printf("%f\n",sphere_ptn->origin.y);
-printf("%f\n\n",sphere_ptn->origin.z);
-printf("%f\n\n",sphere_ptn->rayon);
-printf("%f\n",sphere_ptn->rgb.r);
-printf("%f\n",sphere_ptn->rgb.g);
-printf("%f\n",sphere_ptn->rgb.b);
-printf("\n\n ---------\n");
+printf("\n\n ---------\n");*/
 
     return(0);
 }
