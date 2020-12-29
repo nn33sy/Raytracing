@@ -44,22 +44,26 @@ void ft_initialize_img(t_vars *vars, t_data *img, t_scene *scene)
     img->addr = mlx_get_data_addr(img->img, &(img->bits_per_pixel), &(img->line_length), &(img->endian));
 }
 
-float ft_ombre(t_list **list, t_sphere *sphere, t_coord *pos,t_coord *normal, double dist, t_scene *scene)
+float ft_ombre(t_coord *pos,t_coord *normal, double dist, t_scene *scene)
 {
         t_ray ray_reflect;
         t_list *ptn;
-        double t_inter;
+        double t_inter = -1;
        
         ft_vectors_substract(pos,&scene->light->pos, &ray_reflect.direction);
         ft_normalize(&ray_reflect.direction);
-        ptn = *list;
+        ptn = *(scene->list);
         
         ft_vectors_mult(normal,0.001,&ray_reflect.origin);
         ft_vectors_add(&ray_reflect.origin,pos,&ray_reflect.origin);
                     while (ptn != NULL)
                     {  
-                        if (ptn->type == 0 && (ft_visibilite((t_sphere *)ptn->object, &ray_reflect, &t_inter) == 1 )) //  intersection
+                        
+                        if (ptn->type == 0 && (intersection_sphere((t_sphere *)ptn->object, &ray_reflect, NULL, NULL, &t_inter)== 1)) //  intersection
                                     if (t_inter *t_inter < dist)
+                                           return(0);
+                        if (ptn->type == 1 && (interaction_plan((t_plan *)ptn->object,&ray_reflect,NULL,NULL,&t_inter) == 1))
+                            if (t_inter *t_inter < dist)
                                            return(0);
                             ptn = ptn->next;
                     }
@@ -103,8 +107,7 @@ if (*nb_rebond == 0)
                     ft_vectors_substract(pos,&scene->light->pos, l);
                     dist = ft_norm2(l);
                     ft_normalize(l);
-                   // V = ft_ombre(scene->list, min, pos,normal, dist, scene);
-                   V = 1;
+                    V = ft_ombre(pos,normal, dist, scene);
                     color->intensity = ((scene->light->i / PI)* ft_max(ft_scal_produce(l,normal),255) * V) / dist ;
                    ft_scaling_one_value(&(color->intensity));
                     color->intensity +=120;
