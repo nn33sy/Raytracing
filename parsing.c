@@ -168,6 +168,29 @@ int ft_sq(char *line, t_scene *scene)
     line = ft_parsing_rgb( &square->rgb,line);
     ft_lstadd_front(scene->list,ft_lstnew((void *)square, 2));
 }
+int ft_tr(char *line, t_scene *scene)
+{
+    if (*line != 't')
+        return(-1);
+    line++;
+    if (*line != 'r')
+        return(-1);
+    line++;
+    t_triangle *triangle =malloc(sizeof(t_triangle));
+    while (*line && (*line == ' '))
+        line++;
+    line = ft_parsing_position(line,&triangle->first);
+    while (*line && (*line == ' '))
+        line++;
+    line = ft_parsing_position(line,&triangle->second);
+    while (*line && (*line == ' '))
+        line++;
+    line = ft_parsing_position(line,&triangle->third);
+    while (*line && (*line == ' '))
+        line++;
+    line = ft_parsing_rgb(&triangle->rgb,line);
+    ft_lstadd_front(scene->list,ft_lstnew((void *)triangle, 3));
+}
 
 t_scene *main_parsing(void)
 {
@@ -202,15 +225,17 @@ while (i < nb)
            ft_sq(line[i],scene); 
     if (*line[i] == 'p')
         ft_p(line[i],scene);
+    if (line[i][0] == 't' && line[i][1] == 'r')
+           ft_tr(line[i],scene);
     i++;
 }
-/*
+
 
 printf("ok");
 t_list *tmp= *(scene->list);
 while (tmp != NULL)
 {
-
+/*
 
 if (tmp->type == 2)
 {
@@ -239,10 +264,27 @@ if (tmp->type == 2)
      printf("%f\n",plan->rgb.r);
      printf("%f\n",plan->rgb.g);
      printf("%f\n",plan->rgb.b);
-}
-tmp = tmp->next;
+}*/
+if (tmp->type == 3)
+{
+    t_triangle *t= (t_triangle *)tmp->object;
+    printf("%f\n",t->first.x);
+    printf("%f\n",t->first.y);
+    printf("%f\n",t->first.z);
+    printf("%f\n",t->second.x);
+    printf("%f\n",t->second.y);
+    printf("%f\n",t->second.z);
+    printf("%f\n",t->third.x);
+    printf("%f\n",t->third.y);
+    printf("%f\n",t->third.z);
+     printf("%f\n",t->rgb.r);
+     printf("%f\n",t->rgb.g);
+     printf("%f\n",t->rgb.b);
 }
 
+tmp = tmp->next;
+}
+/*
 tmp = tmp->next;
 sphere_ptn = (t_sphere *)tmp->object;
 
