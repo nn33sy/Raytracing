@@ -99,7 +99,7 @@ int ft_l(char *line,t_light *light)
     return(1);
 
 }
-int ft_s(char *line, t_scene *scene)
+int ft_sp(char *line, t_scene *scene)
 {
     if (*line != 's')
         return(-1);
@@ -143,6 +143,31 @@ int ft_p(char *line, t_scene *scene)
     ft_lstadd_front(scene->list,ft_lstnew((void *)plan, 1));
     return(1);
 }
+int ft_sq(char *line, t_scene *scene)
+{
+    if (*line != 's')
+        return(-1);
+    line++;
+    if (*line != 'q')
+        return(-1);
+    line++;
+    t_square *square = malloc(sizeof(t_square));
+    while (*line && (*line == ' '))
+        line++;
+    line = ft_parsing_position(line,&square->center);
+    while (*line && (*line == ' '))
+        line++;
+    line = ft_parsing_position(line,&square->direction);
+    while (*line && (*line == ' '))
+        line++;
+    square->side_size = ft_atoi_rt(line);
+    while (*line && ((*line >= '0' && *line <= '9') || (*line == '.')))
+        line++;
+    while (*line && (*line == ' '))
+        line++;
+    line = ft_parsing_rgb( &square->rgb,line);
+    ft_lstadd_front(scene->list,ft_lstnew((void *)square, 2));
+}
 
 t_scene *main_parsing(void)
 {
@@ -171,20 +196,38 @@ scene->list = malloc(sizeof(t_list *));
 i = 6;
 while (i < nb)
 {
-    if (*line[i] == 's')
-        ft_s(line[i],scene);
+    if (line[i][0] == 's' && line[i][1] == 'p')
+        ft_sp(line[i],scene);
+    if (line[i][0] == 's' && line[i][1] == 'q')
+           ft_sq(line[i],scene); 
     if (*line[i] == 'p')
         ft_p(line[i],scene);
     i++;
 }
 /*
+
 printf("ok");
 t_list *tmp= *(scene->list);
 while (tmp != NULL)
 {
 
 
-if (tmp->type == 1)
+if (tmp->type == 2)
+{
+    t_square *square= (t_square *)tmp->object;
+    printf("%f\n",square->center.x);
+    printf("%f\n",square->center.y);
+    printf("%f\n",square->center.z);
+     printf("%f\n",square->direction.x);
+     printf("%f\n",square->direction.y);
+     printf("%f\n",square->direction.z);
+     printf("%f\n",square->rgb.r);
+     printf("%f\n",square->rgb.g);
+     printf("%f\n",square->rgb.b);
+     printf("%f\n",square->side_size);
+}
+
+if (tmp->type == 2)
 {
     t_plan *plan= (t_plan *)tmp->object;
     printf("%f\n",plan->center.x);
@@ -201,9 +244,9 @@ tmp = tmp->next;
 }
 
 tmp = tmp->next;
-sphere_ptn = (t_sphere *)tmp->object;*/
+sphere_ptn = (t_sphere *)tmp->object;
 
-/*
+
 printf("\n%f\n",sphere_ptn->origin.x);
 printf("%f\n",sphere_ptn->origin.y);
 printf("%f\n\n",sphere_ptn->origin.z);

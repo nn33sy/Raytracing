@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
-#include "mlx.h"
+#include "minilibx-linux/mlx.h"
 #include "function_maths.h"
 #include "get_next_line.h"
 #include "libft.h"
@@ -57,14 +57,16 @@ float ft_ombre(t_coord *pos,t_coord *normal, double dist, t_scene *scene)
         ft_vectors_mult(normal,0.001,&ray_reflect.origin);
         ft_vectors_add(&ray_reflect.origin,pos,&ray_reflect.origin);
                     while (ptn != NULL)
-                    {  
-                        
-                        if (ptn->type == 0 && (intersection_sphere((t_sphere *)ptn->object, &ray_reflect, NULL, NULL, &t_inter)== 1)) //  intersection
-                                    if (t_inter *t_inter < dist)
-                                           return(0);
-                        if (ptn->type == 1 && (interaction_plan((t_plan *)ptn->object,&ray_reflect,NULL,NULL,&t_inter) == 1))
+                    { 
+                        if (ptn->type == 0 && (intersection_sphere((t_sphere *)ptn->object, &ray_reflect, NULL, NULL, &t_inter)== 0)) //  intersection
                             if (t_inter *t_inter < dist)
-                                           return(0);
+                                    return(0);
+                        if (ptn->type == 1 && (intersection_plan((t_plan *)ptn->object,&ray_reflect,NULL,NULL,&t_inter) == 0))
+                            if (t_inter *t_inter < dist)
+                                    return(0);
+                        if (ptn->type == 2 && (intersection_square((t_square *)ptn->object, &ray_reflect,NULL,NULL,&t_inter) == 0))
+                            if (t_inter *t_inter < dist)
+                                    return(0);
                             ptn = ptn->next;
                     }
         return(1);
@@ -97,7 +99,9 @@ if (*nb_rebond == 0)
             {
                  if (tmp->type == 0 && intersection_sphere((t_sphere *)tmp->object ,ray,pos,normal,&t_min) == 1 )
                      min = tmp;
-                 if (tmp->type == 1 && interaction_plan((t_plan *)tmp->object, ray,pos,normal,&t_min) == 1)
+                 if (tmp->type == 1 && intersection_plan((t_plan *)tmp->object, ray,pos,normal,&t_min) == 1)
+                    min = tmp;
+                if (tmp->type == 2 && intersection_square((t_square *)tmp->object, ray,pos,normal,&t_min) == 1)
                     min = tmp;
                  tmp = tmp->next;
             }
@@ -122,6 +126,12 @@ if (*nb_rebond == 0)
                     color->rgb.r= ((t_plan*)(min->object))->rgb.r;
                     color->rgb.g=  ((t_plan*)(min->object))->rgb.g;
                     color->rgb.b =((t_plan*)(min->object))->rgb.b;
+                    }
+                    if (min->type == 2)
+                    {
+                    color->rgb.r= ((t_square*)(min->object))->rgb.r;
+                    color->rgb.g=  ((t_square*)(min->object))->rgb.g;
+                    color->rgb.b =((t_square*)(min->object))->rgb.b;
                     }
                      
                 return (color->intensity);

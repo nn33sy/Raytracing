@@ -102,6 +102,12 @@ double  ft_max(double a,const double b)
     return(a);
 }
 
+double ft_abs(double x)
+{
+    if (x < 0)
+        return(-x);
+    return(x);
+}
 
 int intersection_sphere(t_sphere *s, t_ray *r, t_coord *pos, t_coord *normal, double *t_min)
 {
@@ -129,7 +135,7 @@ int intersection_sphere(t_sphere *s, t_ray *r, t_coord *pos, t_coord *normal, do
     else
         *t_min = t;
     if (pos == NULL)
-        return(1);
+        return(0);
     t_coord mult ;
     ft_vectors_mult(&r->direction,t, &mult);
     ft_vectors_add(&r->origin,&mult, pos);
@@ -138,26 +144,59 @@ int intersection_sphere(t_sphere *s, t_ray *r, t_coord *pos, t_coord *normal, do
     return(1);
 }
 
-int interaction_plan(t_plan *plan,t_ray *ray,t_coord *pos,t_coord *normal,double *t_min)
+double intersection_basic(t_ray *ray, t_coord *direction, t_coord *center)
 {
-    t_coord a;
     double t;
-    if (ft_scal_produce(&(ray->direction),&(plan->direction)) > 0)
+    t_coord a;
+    if (ft_scal_produce(&(ray->direction),direction) > 0)
         return (-1);
-    ft_vectors_substract(&(ray->origin),&(plan->center), &a);
-    t = ft_scal_produce(&a,&(plan->direction));
-    t /= ft_scal_produce(&(ray->direction),&(plan->direction));
+    ft_vectors_substract(&(ray->origin),center, &a);
+    t = ft_scal_produce(&a,direction);
+    t /= ft_scal_produce(&(ray->direction),direction);
+    return(t);
+}
+
+int intersection_plan(t_plan *plan,t_ray *ray,t_coord *pos,t_coord *normal,double *t_min)
+{
+    double t;
+    t = intersection_basic(ray,&(plan->direction), &(plan->center));
+    if (t == -1)
+        return(-1);
     if (*t_min != -1 && t > *t_min)
         return(-1);
     *t_min = t;
     if (normal == NULL)
-        return(1);
+        return(0);
     ft_coord(plan->direction.x,plan->direction.y,plan->direction.z,normal);
     ft_vectors_mult(&(ray->direction), t,pos);
     ft_vectors_add(pos, &(ray->origin),pos);
     return(1);
 }
 
+int intersection_square(t_square *square, t_ray *ray,t_coord *pos,t_coord *normal,double *t_min)
+{
+    double t;
+    t_coord proj;
+    t = intersection_basic(ray, &(square->direction), &(square->center));
+    if (t == -1)
+        return(-1);
+    if (*t_min != -1 && t > *t_min)
+        return(-1);
+    ft_vectors_mult(&(ray->direction),t,&proj);
+    ft_vectors_add(&proj, &(ray->origin),&proj);
+    if (ft_abs(proj.x - square->center.x) > (square->side_size)/2)
+        return(-1);
+    if (ft_abs(proj.y - square->center.y) > (square->side_size)/2)
+        return(-1);
+    if (ft_abs(proj.z - square->center.z) > (square->side_size)/2)
+        return(-1);
+    *t_min = t;
+    if (normal == NULL)
+        return(0);
+    ft_coord(square->direction.x,square->direction.y,square->direction.z,normal);
+    ft_coord(proj.x,proj.y,proj.z,pos);
+    return(1);
+}
 /*
 int main()
 {
