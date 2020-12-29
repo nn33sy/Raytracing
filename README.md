@@ -45,9 +45,25 @@ And I have a kind of aureole too
 - Scaling of color
 ![Capture d’écran 2020-12-21 à 23 51 25](https://user-images.githubusercontent.com/55030071/102925742-66396300-44ad-11eb-9a23-ce4340d31aa0.png)
 
+
 ###DAY 7 28/12/20
 - Did the make file
 - Linked the parsing to the main file
 -Did the interaction function with the plan
 - Have to manage the color and intensity 
+
+
+
+###DAY 8 29/12/20
+- Implement the plan inside the main functions 
+
+![Capture d’écran 2020-12-29 à 14 06 27](https://user-images.githubusercontent.com/55030071/103308918-1585b500-4a2d-11eb-8fc9-b1e75abb3ec5.png)
+
+- Did the parsing for the square
+-Implement the square and join to the main functions 
+
+![Capture d’écran 2020-12-29 à 22 52 18](https://user-images.githubusercontent.com/55030071/103308979-4239cc80-4a2d-11eb-896a-7fbd8e761c80.png)
+
+-Did the parsing for the triangle
+
 
