@@ -86,15 +86,15 @@ if (*nb_rebond == 0)
     t_coord *pos = malloc(sizeof(t_coord));
     t_coord *normal = malloc(sizeof(t_coord));
     t_coord *l =malloc(sizeof(t_coord));
-    t_sphere *min;
+    t_list *min;
 
 
        while (tmp != NULL)
             {
                  if (tmp->type == 0 && intersection_sphere((t_sphere *)tmp->object ,ray,pos,normal,&t_min) == 1 )
-                     min = (t_sphere *)tmp->object;
-                 /*if (tmp->type == 1 && interaction_plan((t_plan *)tmp->object, ray,pos,normal,&t_min) == 1)
-                    min = (t_plan *)tmp->object;*/
+                     min = tmp;
+                 if (tmp->type == 1 && interaction_plan((t_plan *)tmp->object, ray,pos,normal,&t_min) == 1)
+                    min = tmp;
                  tmp = tmp->next;
             }
             if (min != NULL)
@@ -103,13 +103,24 @@ if (*nb_rebond == 0)
                     ft_vectors_substract(pos,&scene->light->pos, l);
                     dist = ft_norm2(l);
                     ft_normalize(l);
-                    V = ft_ombre(scene->list, min, pos,normal, dist, scene);
+                   // V = ft_ombre(scene->list, min, pos,normal, dist, scene);
+                   V = 1;
                     color->intensity = ((scene->light->i / PI)* ft_max(ft_scal_produce(l,normal),255) * V) / dist ;
                    ft_scaling_one_value(&(color->intensity));
                     color->intensity +=120;
-                     color->rgb.r= min->rgb.r;
-                    color->rgb.g=  min->rgb.g;
-                    color->rgb.b = min->rgb.b;
+                    if (min->type == 0)
+                    {
+                    color->rgb.r= ((t_sphere*)(min->object))->rgb.r;
+                    color->rgb.g=  ((t_sphere*)(min->object))->rgb.g;
+                    color->rgb.b =((t_sphere*)(min->object))->rgb.b;
+                    }
+                    if (min->type == 1)
+                    {
+                    color->rgb.r= ((t_plan*)(min->object))->rgb.r;
+                    color->rgb.g=  ((t_plan*)(min->object))->rgb.g;
+                    color->rgb.b =((t_plan*)(min->object))->rgb.b;
+                    }
+                     
                 return (color->intensity);
                 }
                 else

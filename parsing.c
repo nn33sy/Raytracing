@@ -122,17 +122,39 @@ int ft_s(char *line, t_scene *scene)
     ft_lstadd_front(scene->list,ft_lstnew((void *)sphere, 0));
     return(1);
 }
+int ft_p(char *line, t_scene *scene)
+{
+    if (*line != 'p')
+        return(-1);
+    line++;
+    if (*line != 'l')
+        return(-1);
+    line++; 
+    t_plan *plan = malloc(sizeof(t_plan));
+    while (*line && (*line == ' '))
+        line++;
+    line = ft_parsing_position(line,&plan->center);
+    while (*line && (*line == ' '))
+        line++;
+    line = ft_parsing_position(line,&plan->direction);
+    while (*line && (*line == ' '))
+        line++;
+    line = ft_parsing_rgb( &plan->rgb,line);
+    ft_lstadd_front(scene->list,ft_lstnew((void *)plan, 1));
+    return(1);
+}
 
 t_scene *main_parsing(void)
 {
     char *line[100];
     int i;
     int nb;
-    i = -1;
+    i = 0;
 int fd;
 fd=open("scenes/scene.rt",O_RDONLY);
-while (get_next_line(fd, &line[++i]) > 0)
-nb = i - 1;
+while (get_next_line(fd, &line[i]) > 0)
+    i++;
+nb = ++i ;
 i = 0;
 
 t_scene *scene;
@@ -146,12 +168,37 @@ ft_c(line[3],scene);
 ft_l(line[4],light);
 
 scene->list = malloc(sizeof(t_list *));
-ft_s(line[6],scene);
-ft_s(line[7],scene);
-ft_s(line[8],scene);
-ft_s(line[9],scene);
-/*t_list *tmp= *(scene.list);
-t_sphere *sphere_ptn= (t_sphere *)tmp->object; 
+i = 6;
+while (i < nb)
+{
+    if (*line[i] == 's')
+        ft_s(line[i],scene);
+    if (*line[i] == 'p')
+        ft_p(line[i],scene);
+    i++;
+}
+/*
+printf("ok");
+t_list *tmp= *(scene->list);
+while (tmp != NULL)
+{
+
+
+if (tmp->type == 1)
+{
+    t_plan *plan= (t_plan *)tmp->object;
+    printf("%f\n",plan->center.x);
+    printf("%f\n",plan->center.y);
+    printf("%f\n",plan->center.z);
+     printf("%f\n",plan->direction.x);
+     printf("%f\n",plan->direction.y);
+     printf("%f\n",plan->direction.z);
+     printf("%f\n",plan->rgb.r);
+     printf("%f\n",plan->rgb.g);
+     printf("%f\n",plan->rgb.b);
+}
+tmp = tmp->next;
+}
 
 tmp = tmp->next;
 sphere_ptn = (t_sphere *)tmp->object;*/

@@ -163,6 +163,7 @@ int interaction_plan(t_plan *plan,t_ray *ray,t_coord *pos,t_coord *normal,double
     double t;
     if (ft_scal_produce(&(ray->direction),&(plan->direction)) > 0)
         return (-1);
+    ft_vectors_substract(&(ray->origin),&(plan->center), &a);
     t = ft_scal_produce(&a,&(plan->direction));
     t /= ft_scal_produce(&(ray->direction),&(plan->direction));
     if (*t_min != -1 && t > *t_min)

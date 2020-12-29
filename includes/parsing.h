@@ -14,7 +14,7 @@ int ft_c(char *line, t_scene *scene);
 int ft_a(char *line, t_scene *scene);
 int ft_l(char *line,t_light *light);
 int ft_s(char *line, t_scene *scene);
-
+int ft_p(char *line, t_scene *scene);
 t_scene *main_parsing(void);
 
 #endif
