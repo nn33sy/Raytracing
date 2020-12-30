@@ -1,23 +1,13 @@
 #include <math.h>
 #include "function_maths.h"
 
-void    ft_coord(double x, double y,double z, t_coord *pt) // Determine les coord d checked
+void    ft_coord(double x, double y,double z, t_coord *pt)
 {
     pt->x = x;
     pt->y = y;
     pt->z = z;
 }
-double get_random() { return ((double)rand() / (double)RAND_MAX); }
 
-
-double generate_nb()
-{
-    double n = 0;
-    srand(time(NULL)); // randomize seed
-    n = get_random();
-
-    return (n);
-}
 
 void    ft_vect(t_coord *a, t_coord *b, t_coord *ab) // Definir un vecteur //checked
 {
@@ -197,6 +187,93 @@ int intersection_square(t_square *square, t_ray *ray,t_coord *pos,t_coord *norma
     ft_coord(proj.x,proj.y,proj.z,pos);
     return(1);
 }
+
+int ft_intersection_triangle(t_triangle *tri, t_ray *ray,t_coord *pos,t_coord *normal,double *t_min)
+{
+    double t;
+    t_coord tmp[3];
+
+    ft_vectors_substract(&tri->first, &tri->second,&tmp[0]);
+    ft_vectors_substract(&tri->first, &tri->third,&tmp[1]);
+    ft_produit_vectoriel(&tmp[0], &tmp[1], &tmp[2]);
+    ft_normalize(&tmp[2]);
+    t = intersection_basic(ray, &tmp[2], &(tri->first));
+    if (t == -1)
+        return(-1);
+    if (*t_min != -1 && t > *t_min)
+        return(-1);
+    ft_vectors_mult(&(ray->direction),t,&tmp[0]);
+    ft_vectors_add(&tmp[0], &(ray->origin),&tmp[0]);
+    if (ft_barycentric_triangle(&tmp[0] ,tri) == -1)
+        return (-1);
+    *t_min = t;
+    if (normal == NULL)
+        return(0);
+    ft_coord(tmp[2].x, tmp[2].y, tmp[2].z, normal);
+    ft_coord(tmp[0].x,tmp[0].y,tmp[0].z,pos);
+    return(1);
+}
+int ft_barycentric_triangle(t_coord *pos, t_triangle *tri)
+{
+    double beta;
+    double alpha;
+    double sigma;
+
+    beta = ft_calculate_beta(tri, pos);
+    sigma = ft_calculate_sigma(tri, pos);
+    alpha = ft_calculate_alpha(sigma, beta);
+    if (beta < 0 || sigma < 0 || alpha < 0)
+        return (-1);
+    return (1);
+}
+double ft_determinant_matrix(t_matrix_two *matrix)
+{
+    return ((matrix->x1 * matrix->y2) - (matrix->x2 * matrix->y1));
+
+}
+double ft_calculate_beta(t_triangle *tri, t_coord *P)
+{
+    double beta;
+    t_matrix_two matrix;
+    t_coord tmp[3];
+
+    ft_vectors_substract(&tri->first, P, &tmp[2]);
+    ft_vectors_substract(&tri->first, &tri->second, &tmp[0]);
+     ft_vectors_substract(&tri->first, &tri->third, &tmp[1]);
+    matrix.x1 = ft_scal_produce(&tmp[2], &tmp[0]);
+    matrix.x2 = ft_scal_produce(&tmp[1], &tmp[0]);
+    matrix.y1 = ft_scal_produce(&tmp[2], &tmp[1]);
+    matrix.y2 = ft_norm2(&tmp[1]);
+    beta = ft_determinant_matrix(&matrix);
+    matrix.x1 = ft_norm2(&tmp[0]);
+    matrix.y1 = ft_scal_produce(&tmp[0], &tmp[1]);
+    beta /= ft_determinant_matrix(&matrix);
+    return(beta);
+}
+double ft_calculate_sigma(t_triangle *tri, t_coord *P)
+{
+    double sigma;
+    t_matrix_two matrix;
+    t_coord tmp[3];
+
+    ft_vectors_substract(&tri->first, P, &tmp[2]);
+    ft_vectors_substract(&tri->first, &tri->second, &tmp[0]);
+     ft_vectors_substract(&tri->first, &tri->third, &tmp[1]);
+    matrix.x1 = ft_norm2(&tmp[0]);
+    matrix.y1 = ft_scal_produce(&tmp[0], &tmp[1]);
+    matrix.x2 = ft_scal_produce(&tmp[2], &tmp[0]);
+    matrix.y2 = ft_scal_produce(&tmp[2], &tmp[1]);
+    sigma = ft_determinant_matrix(&matrix);
+    matrix.x2 = ft_scal_produce(&tmp[1], &tmp[0]);
+    matrix.y2 = ft_norm2(&tmp[1]);
+    sigma /= ft_determinant_matrix(&matrix);
+    return (sigma);
+}
+double ft_calculate_alpha(double sigma, double beta)
+{
+    return (1 - sigma - beta);
+}
+
 /*
 int main()
 {

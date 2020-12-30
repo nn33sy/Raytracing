@@ -91,7 +91,13 @@ typedef struct s_cylinder
 
 }t_cylinder;
 
-
+typedef struct s_matrix_two
+{
+    double x1;
+    double x2;
+    double y1;
+    double y2;
+}t_matrix_two;
 
 typedef struct s_scene
 {
@@ -126,6 +132,12 @@ int ft_visibilite(t_sphere *s, t_ray *r, double *t);
 void    ft_vectors_add_const(t_coord *a, double b, t_coord *res);
 int main_function(void);
 void ft_scaling_one_value(double *value);
+double ft_determinant_matrix(t_matrix_two *matrix);
 int intersection_square(t_square *square, t_ray *ray,t_coord *pos,t_coord *normal,double *t_min);
 int intersection_plan(t_plan *plan,t_ray *ray,t_coord *pos,t_coord *normal,double *t_min);
+double ft_calculate_sigma(t_triangle *tri, t_coord *P);
+double ft_calculate_beta(t_triangle *tri, t_coord *P);
+int ft_barycentric_triangle(t_coord *pos, t_triangle *tri);
+double ft_calculate_alpha(double sigma, double beta);
+int ft_intersection_triangle(t_triangle *tri, t_ray *ray,t_coord *pos,t_coord *normal,double *t_min);
 #endif

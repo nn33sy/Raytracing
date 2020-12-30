@@ -230,12 +230,12 @@ while (i < nb)
     i++;
 }
 
-
+/*
 printf("ok");
 t_list *tmp= *(scene->list);
 while (tmp != NULL)
 {
-/*
+
 
 if (tmp->type == 2)
 {
@@ -264,7 +264,7 @@ if (tmp->type == 2)
      printf("%f\n",plan->rgb.r);
      printf("%f\n",plan->rgb.g);
      printf("%f\n",plan->rgb.b);
-}*/
+}
 if (tmp->type == 3)
 {
     t_triangle *t= (t_triangle *)tmp->object;
@@ -284,7 +284,7 @@ if (tmp->type == 3)
 
 tmp = tmp->next;
 }
-/*
+
 tmp = tmp->next;
 sphere_ptn = (t_sphere *)tmp->object;
 

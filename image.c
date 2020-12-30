@@ -67,6 +67,9 @@ float ft_ombre(t_coord *pos,t_coord *normal, double dist, t_scene *scene)
                         if (ptn->type == 2 && (intersection_square((t_square *)ptn->object, &ray_reflect,NULL,NULL,&t_inter) == 0))
                             if (t_inter *t_inter < dist)
                                     return(0);
+                        if (ptn->type == 3 && (ft_intersection_triangle((t_triangle *)ptn->object, &ray_reflect,NULL,NULL,&t_inter) == 0))
+                            if (t_inter *t_inter < dist)
+                                    return(0);
                             ptn = ptn->next;
                     }
         return(1);
@@ -103,6 +106,8 @@ if (*nb_rebond == 0)
                     min = tmp;
                 if (tmp->type == 2 && intersection_square((t_square *)tmp->object, ray,pos,normal,&t_min) == 1)
                     min = tmp;
+                if (tmp->type == 3 && ft_intersection_triangle((t_triangle *)tmp->object, ray,pos,normal,&t_min) == 1)
+                    min = tmp;
                  tmp = tmp->next;
             }
             if (min != NULL)
@@ -132,6 +137,12 @@ if (*nb_rebond == 0)
                     color->rgb.r= ((t_square*)(min->object))->rgb.r;
                     color->rgb.g=  ((t_square*)(min->object))->rgb.g;
                     color->rgb.b =((t_square*)(min->object))->rgb.b;
+                    }
+                    if (min->type == 3)
+                    {
+                    color->rgb.r= ((t_triangle*)(min->object))->rgb.r;
+                    color->rgb.g=  ((t_triangle*)(min->object))->rgb.g;
+                    color->rgb.b =((t_triangle*)(min->object))->rgb.b;
                     }
                      
                 return (color->intensity);
