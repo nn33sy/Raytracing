@@ -99,7 +99,7 @@ double ft_abs(double x)
     return(x);
 }
 
-int intersection_sphere(t_sphere *s, t_ray *r, t_coord *pos, t_coord *normal, double *t_min)
+double intersection_sphere(t_sphere *s, t_ray *r, t_coord *pos, t_coord *normal, double *t_min)
 {
     double a = 1;
     double b;
@@ -131,9 +131,56 @@ int intersection_sphere(t_sphere *s, t_ray *r, t_coord *pos, t_coord *normal, do
     ft_vectors_add(&r->origin,&mult, pos);
     ft_vectors_substract(&s->origin,pos,normal);
     ft_normalize(normal);
+    
+ 
     return(1);
 }
+int ft_intersection_cylindre(t_cylinder *c,  t_ray *r, t_coord *pos, t_coord *normal, double *t_min)
+{
+    
+}
+int ft_intersection_heart(t_heart *h, t_ray *r, t_coord *pos, t_coord *normal, double *t_min)
+{
+    t_sphere s;
+    t_coord tmp[2];
+    double res;
+    double t;
+    double t_bis;
 
+    ft_coord(h->center.x, h->center.y, h->center.z, &(s.origin));
+    s.rayon = 20;
+    if ((t_bis = intersection_sphere(&s, r, &tmp[0], &tmp[1], t_min)) == -1)
+        return (-1);
+    t= *t_min;
+    double inter;
+    if (t > t_bis) 
+    {
+        inter = t_bis;
+        t_bis = t;
+        t = inter;
+    }
+    while(t <= t_bis)
+    {
+        printf("ok");
+    t_coord mult ;
+    ft_vectors_mult(&r->direction,t, &mult);
+    ft_vectors_add(&r->origin,&mult, &tmp[0]);
+    ft_vectors_substract(&s.origin,&tmp[0],&tmp[1]);
+    ft_normalize(&tmp[1]);
+    res = pow(tmp[0].x , 2) + ((9/4) * pow(tmp[0].y , 2)) + pow(tmp[0].z , 2) - 1;
+    res = pow(res, 3);
+    res -= pow(tmp[0].x , 2) * pow(tmp[0].z , 3);
+    res -= (9/80) * pow(tmp[0].y , 2) *  pow(tmp[0].z , 3);
+    if (res == 0)
+        break;
+        t += 0.05;
+    }
+    if (t == t_bis)
+        return(-1);
+    ft_coord(tmp[0].x, tmp[0].y, tmp[0].z, pos);
+    ft_coord(tmp[1].x, tmp[1].y, tmp[1].z, normal);
+    return(1);
+}
 double intersection_basic(t_ray *ray, t_coord *direction, t_coord *center)
 {
     double t;
@@ -273,6 +320,7 @@ double ft_calculate_alpha(double sigma, double beta)
 {
     return (1 - sigma - beta);
 }
+
 
 /*
 int main()
