@@ -214,7 +214,11 @@ ft_r(line[0],scene);
 ft_a(line[1],scene);
 ft_c(line[3],scene);
 ft_l(line[4],light);
-
+t_coord x;
+x.x = 200;
+x.y = 0;
+x.z = 0;;
+ft_vectors_translate(&(light->pos), &x);
 scene->list = malloc(sizeof(t_list *));
 i = 6;
 while (i < nb)

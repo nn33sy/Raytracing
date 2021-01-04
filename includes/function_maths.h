@@ -136,6 +136,7 @@ double intersection_sphere(t_sphere *s, t_ray *r, t_coord *pos, t_coord *normal,
 int ft_visibilite(t_sphere *s, t_ray *r, double *t);
 void    ft_vectors_add_const(t_coord *a, double b, t_coord *res);
 int main_function(void);
+int ft_intersection_cylinder(t_cylinder *cy, t_ray *ray,t_coord *pos,t_coord *normal,double *t_min);
 char *ft_parsing_double(char *line, double *nb);
 void ft_scaling_one_value(double *value);
 double ft_determinant_matrix(t_matrix_two *matrix);
@@ -145,6 +146,7 @@ double ft_calculate_sigma(t_triangle *tri, t_coord *P);
 double ft_calculate_beta(t_triangle *tri, t_coord *P);
 int ft_barycentric_triangle(t_coord *pos, t_triangle *tri);
 double ft_calculate_alpha(double sigma, double beta);
+void    ft_vectors_translate(t_coord *a, t_coord *b);
 int ft_intersection_triangle(t_triangle *tri, t_ray *ray,t_coord *pos,t_coord *normal,double *t_min);
-int ft_intersection_heart(t_heart *h, t_ray *r, t_coord *pos, t_coord *normal, double *t_min);
+
 #endif

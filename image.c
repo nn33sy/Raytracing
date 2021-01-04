@@ -108,11 +108,13 @@ if (*nb_rebond == 0)
                     min = tmp;
                 if (tmp->type == 3 && ft_intersection_triangle((t_triangle *)tmp->object, ray,pos,normal,&t_min) == 1)
                     min = tmp;
+                if (tmp->type == 4 && ft_intersection_cylinder((t_cylinder*)tmp->object, ray,pos,normal,&t_min) == 1)
+                    min = tmp;
                  tmp = tmp->next;
             }
             if (min != NULL)
 {
-
+                   
                     ft_vectors_substract(pos,&scene->light->pos, l);
                     dist = ft_norm2(l);
                     ft_normalize(l);
@@ -143,6 +145,12 @@ if (*nb_rebond == 0)
                     color->rgb.r= ((t_triangle*)(min->object))->rgb.r;
                     color->rgb.g=  ((t_triangle*)(min->object))->rgb.g;
                     color->rgb.b =((t_triangle*)(min->object))->rgb.b;
+                    }
+                    if (min->type == 4)
+                    {
+                    color->rgb.r= ((t_cylinder*)(min->object))->rgb.r;
+                    color->rgb.g=  ((t_cylinder*)(min->object))->rgb.g;
+                    color->rgb.b =((t_cylinder*)(min->object))->rgb.b;
                     }
                 return (color->intensity);
                 }
