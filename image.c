@@ -70,6 +70,9 @@ float ft_ombre(t_coord *pos,t_coord *normal, double dist, t_scene *scene)
                         if (ptn->type == 3 && (ft_intersection_triangle((t_triangle *)ptn->object, &ray_reflect,NULL,NULL,&t_inter) == 0))
                             if (t_inter *t_inter < dist)
                                     return(0);
+                        if (ptn->type == 4 && (ft_intersection_cylinder((t_cylinder *)ptn->object, &ray_reflect,NULL,NULL,&t_inter) == 0))
+                            if (t_inter *t_inter < dist)
+                                return(0);
                             ptn = ptn->next;
                     }
         return(1);
@@ -226,7 +229,7 @@ while (i < scene->r_y)
         color_f.rgb.g /= nrays;
         color_f.rgb.b /= nrays;
         color_f.intensity/= nrays;
-        my_mlx_pixel_put(&img, i, j,create_trgb(150,sqrt(color_f.rgb.r * color_f.intensity),sqrt(color_f.rgb.g * color_f.intensity),sqrt(color_f.rgb.b * color_f.intensity)));
+        my_mlx_pixel_put(&img, i, j,create_trgb(50,sqrt(color_f.rgb.r * color_f.intensity),sqrt(color_f.rgb.g * color_f.intensity),sqrt(color_f.rgb.b * color_f.intensity)));
         color.rgb.r = 0;
         color.rgb.g = 0;
         color.intensity = 0;

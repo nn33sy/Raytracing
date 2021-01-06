@@ -10,6 +10,7 @@ SRCS = gnl/get_next_line.c \
 		image.c \
 		parsing.c \
 		intersection_cylinder.c \
+		rotation.c \
 		
 
 # COLORS

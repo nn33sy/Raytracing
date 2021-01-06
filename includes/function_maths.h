@@ -83,7 +83,7 @@ typedef struct s_triangle
 
 typedef struct s_cylinder
 {
-    t_coord center;
+    t_coord base;
     t_coord direction;
     double diameter;
     double height;
@@ -148,5 +148,9 @@ int ft_barycentric_triangle(t_coord *pos, t_triangle *tri);
 double ft_calculate_alpha(double sigma, double beta);
 void    ft_vectors_translate(t_coord *a, t_coord *b);
 int ft_intersection_triangle(t_triangle *tri, t_ray *ray,t_coord *pos,t_coord *normal,double *t_min);
-
+void		rx(t_coord *coord, double x);
+void		ry(t_coord *vect, double y);
+void		rz(t_coord *vect, double z);
+void		rot(t_coord *vect, t_coord *angle);
+void		anti_rot(t_coord *vect, t_coord *angle);
 #endif

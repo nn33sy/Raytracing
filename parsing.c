@@ -164,7 +164,7 @@ int ft_cy(char *line, t_scene *scene)
         return(-1);
     line++;
     t_cylinder *cylinder =malloc(sizeof(t_cylinder));
-    line = ft_parsing_position(line,&cylinder->center);
+    line = ft_parsing_position(line,&cylinder->base);
     line = ft_parsing_position(line,&cylinder->direction);
     line = ft_parsing_rgb(&cylinder->rgb, line);
     line = ft_parsing_double(line, &cylinder->diameter);
@@ -199,7 +199,7 @@ t_scene *main_parsing(void)
     int nb;
     i = 0;
 int fd;
-fd=open("scenes/scene.rt",O_RDONLY);
+fd=open("scenes/scene2.rt",O_RDONLY);
 while (get_next_line(fd, &line[i]) > 0)
     i++;
 nb = ++i ;
@@ -215,11 +215,12 @@ ft_a(line[1],scene);
 ft_c(line[3],scene);
 ft_l(line[4],light);
 t_coord x;
-x.x = 200;
-x.y = 0;
-x.z = 0;;
-ft_vectors_translate(&(light->pos), &x);
+x.x = 0;
+x.y = 3.14 * 45/180;
+x.z = 0;
+//rot(&(scene->camera.origin),&x);
 scene->list = malloc(sizeof(t_list *));
+
 i = 6;
 while (i < nb)
 {
@@ -292,9 +293,9 @@ if (tmp->type == 3)
 if (tmp->type == 4)
 {
     t_cylinder *cyl= (t_cylinder *)tmp->object;
-    printf("%f\n",cyl->center.x);
-    printf("%f\n",cyl->center.y);
-    printf("%f\n\n",cyl->center.z);
+    printf("%f\n",cyl->base.x);
+    printf("%f\n",cyl->base.y);
+    printf("%f\n\n",cyl->base.z);
     printf("%f\n",cyl->direction.x);
     printf("%f\n",cyl->direction.y);
     printf("%f\n",cyl->direction.z);

@@ -145,7 +145,7 @@ double intersection_basic(t_ray *ray, t_coord *direction, t_coord *center)
 {
     double t;
     t_coord a;
-    if (ft_scal_produce(&(ray->direction),direction) > 0)
+    if (ft_scal_produce(&(ray->direction),direction) >= 0)
         return (-1);
     ft_vectors_substract(&(ray->origin),center, &a);
     t = ft_scal_produce(&a,direction);
@@ -177,7 +177,7 @@ int intersection_square(t_square *square, t_ray *ray,t_coord *pos,t_coord *norma
     t = intersection_basic(ray, &(square->direction), &(square->center));
     if (t == -1)
         return(-1);
-    if (*t_min != -1 && t > *t_min)
+    if (*t_min != -1 && t > *t_min && t >= 0)
         return(-1);
     ft_vectors_mult(&(ray->direction),t,&proj);
     ft_vectors_add(&proj, &(ray->origin),&proj);
