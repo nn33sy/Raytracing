@@ -199,7 +199,7 @@ t_scene *main_parsing(void)
     int nb;
     i = 0;
 int fd;
-fd=open("scenes/scene2.rt",O_RDONLY);
+fd=open("scenes/scene3.rt",O_RDONLY);
 while (get_next_line(fd, &line[i]) > 0)
     i++;
 nb = ++i ;
@@ -216,9 +216,9 @@ ft_c(line[3],scene);
 ft_l(line[4],light);
 t_coord x;
 x.x = 0;
-x.y = 3.14 * 45/180;
+//x.y = 3.14 * -45/180;
 x.z = 0;
-//rot(&(scene->camera.origin),&x);
+rot(&(scene->camera.origin),&x);
 scene->list = malloc(sizeof(t_list *));
 
 i = 6;

@@ -71,8 +71,11 @@ float ft_ombre(t_coord *pos,t_coord *normal, double dist, t_scene *scene)
                             if (t_inter *t_inter < dist)
                                     return(0);
                         if (ptn->type == 4 && (ft_intersection_cylinder((t_cylinder *)ptn->object, &ray_reflect,NULL,NULL,&t_inter) == 0))
-                            if (t_inter *t_inter < dist)
+                            if (t_inter * t_inter < dist)
+                            {
+                                printf(" |%f  %f",t_inter, dist);
                                 return(0);
+                            }
                             ptn = ptn->next;
                     }
         return(1);
