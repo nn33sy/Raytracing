@@ -240,7 +240,7 @@ while (i < nb)
         ft_cy(line[i],scene);  
     i++;
 }
-
+/*
 
 printf("ok");
 t_list *tmp= *(scene->list);
@@ -291,7 +291,7 @@ if (tmp->type == 3)
      printf("%f\n",t->rgb.r);
      printf("%f\n",t->rgb.g);
      printf("%f\n",t->rgb.b);
-}*/
+}
 if (tmp->type == 4)
 {
     t_cylinder *cyl= (t_cylinder *)tmp->object;
@@ -310,7 +310,7 @@ if (tmp->type == 4)
 }
 tmp = tmp->next;
 }
-/*
+
 tmp = tmp->next;
 sphere_ptn = (t_sphere *)tmp->object;
 

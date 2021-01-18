@@ -45,6 +45,37 @@ float ft_ombre(t_coord *pos,t_coord *normal, double dist, t_scene *scene)
         return(1);
 }
 
+void ft_ray_reflect(t_coord *normal, t_coord *light, t_coord *reflect)
+{
+    double coeff;
+
+    coeff = ft_scal_produce(normal, light) * 2;
+    ft_vectors_mult(normal, coeff, reflect);
+    ft_vectors_substract(light, reflect, reflect);
+}
+
+double ft_specular(t_coord *normal, t_coord *light, t_camera *cam, t_coord *pos)
+{
+    t_coord reflect;
+    t_coord v;
+    double specular;
+
+ft_vectors_mult(light, -1, light);
+   ft_ray_reflect(normal, light, &reflect);
+    ft_vectors_substract(&cam->ray.origin, pos, &v);
+    ft_normalize(&reflect);
+    ft_normalize(&v);
+    specular = ft_scal_produce(&v, &reflect);
+    ft_vectors_mult(light, -1, light);
+    if (specular > 0)
+    {
+        specular = 0.2*pow(specular, 10);
+        return(specular);
+    }
+    else
+        return(0);
+
+}
 
 double ft_color_intensity(t_palette *color, t_scene *scene, t_ray *ray, int *nb_rebond)
 {
@@ -54,7 +85,7 @@ double ft_color_intensity(t_palette *color, t_scene *scene, t_ray *ray, int *nb_
 double dist;
 double intensity;
 double specular;
-t_coord r;
+t_coord reflect;
 
 t_list *tmp= *(scene->list);
 if (*nb_rebond == 0)
@@ -91,7 +122,7 @@ if (*nb_rebond == 0)
                    color->intensity = V * (ft_scal_produce(l,normal) / dist) * scene->light->i * 100000;
                   if (V == 1)
                   {
-                      
+                   color->intensity += ft_specular(normal, l, &scene->camera, pos);
                     /*
                     ft_vectors_mult(&ray->direction, -1,&ray->direction);
                     ft_vectors_add(&ray->direction, l, &h);
@@ -108,7 +139,7 @@ if (*nb_rebond == 0)
                     else
                         specular = 0;
                     //printf(" %f ",specular);*/
-                    color->intensity += specular;
+                   // color->intensity += specular;
                   }
                     if (min->type == 0)
                     {
@@ -285,6 +316,7 @@ ft_coord(x,y,z, &scene->camera.ray.direction);
         color_f.rgb.g = (color_f.rgb.g / nrays) + scene->light->rgb.g;
         color_f.rgb.b = (color_f.rgb.b / nrays) + scene->light->rgb.b;
         color_f.intensity/= nrays;
+      //  color_f.intensity += scene->amb_light.ratio * 0.3;
         color_f.rgb.r = (color_f.rgb.r *color_f.intensity) + (scene->amb_light.ratio * scene->amb_light.rgb.r * 0.1);
         color_f.rgb.g = (color_f.rgb.g *color_f.intensity) + (scene->amb_light.ratio * scene->amb_light.rgb.g * 0.1);
         color_f.rgb.b = (color_f.rgb.b *color_f.intensity) + (scene->amb_light.ratio * scene->amb_light.rgb.b * 0.1);
