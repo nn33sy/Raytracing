@@ -13,6 +13,7 @@ int ft_r(char *line, t_scene *scene)
         line++;
     if ((scene->r_y= ft_atoi_rt(line)) == 0)
         return(-1);
+    scene->ratio = scene->r_x / scene->r_y;
     return(1);
 }
 char *ft_parsing_position(char *line, t_coord *coord)
@@ -54,7 +55,7 @@ int ft_c(char *line, t_scene *scene)
         line++;
     else 
         return(-1);
-    line = ft_parsing_position(line, &scene->camera.origin);
+    line = ft_parsing_position(line, &scene->camera.ray.origin);
     line = ft_parsing_position(line, &scene->camera.direction);
     line = ft_parsing_double(line, &scene->fov);
     scene->fov = (scene->fov * 3.14)/180;
@@ -67,7 +68,7 @@ int ft_a(char *line, t_scene *scene)
         line++;
     else
         return(-1);
-    line = ft_parsing_double(line, &scene->fov);
+    line = ft_parsing_double(line, &scene->amb_light.ratio);
     ft_parsing_rgb(&scene->amb_light.rgb,line);
     return(1);
 }
@@ -93,6 +94,7 @@ int ft_sp(char *line, t_scene *scene)
     t_sphere *sphere = malloc(sizeof(t_sphere));
     line = ft_parsing_position(line,&sphere->origin);
     line = ft_parsing_double(line, &sphere->rayon);
+    sphere->rayon /=2;
     line = ft_parsing_rgb( &sphere->rgb,line);
     ft_lstadd_front(scene->list,ft_lstnew((void *)sphere, 0));
     return(1);
@@ -218,7 +220,7 @@ t_coord x;
 x.x = 0;
 //x.y = 3.14 * -45/180;
 x.z = 0;
-rot(&(scene->camera.origin),&x);
+//rot(&(scene->camera.origin),&x);
 scene->list = malloc(sizeof(t_list *));
 
 i = 6;

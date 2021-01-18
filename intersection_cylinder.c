@@ -6,11 +6,13 @@ int ft_intersection_cylinder(t_cylinder *cy, t_ray *ray,t_coord *pos,t_coord *no
     t_coord tmp;
     double delt[6];
     double t;
-    
-    ft_vectors_substract(&cy->base, &ray->origin, &tmp);
+    t_coord direc;
 
-    delt[0] = pow(ray->direction.x, 2) + pow(ray->direction.z, 2);
-    delt[1] = (ray->direction.x * tmp.x)+ (ray->direction.z * tmp.z);
+    ft_coord(ray->direction.x,ray->direction.y,ray->direction.z,&direc);
+    ry(&direc,3.14 * 10/ 180);
+    ft_vectors_substract(&cy->base, &ray->origin, &tmp);
+    delt[0] = pow(direc.x, 2) + pow(direc.z, 2);
+    delt[1] = (direc.x * tmp.x)+ (direc.z * tmp.z);
     delt[2] = pow(tmp.x, 2) + pow(tmp.z, 2) - pow(cy->diameter / 2, 2);
     delt[3] = pow(delt[1], 2) -  delt[0] * delt[2];
     if (delt[3] <= 0)
@@ -20,16 +22,23 @@ int ft_intersection_cylinder(t_cylinder *cy, t_ray *ray,t_coord *pos,t_coord *no
         t = delt[4];
     t_coord pos_bis;
      t_coord mult ;
-    ft_vectors_mult(&ray->direction,t, &mult);
+    ft_vectors_mult(&direc,t, &mult);
     ft_vectors_add(&ray->origin,&mult, &pos_bis);
     if ((pos_bis.y - cy->base.y) > cy->height || ((pos_bis.y - cy->base.y) < 0))
-        return(-1);
+        {
+            t = delt[5];
+                ft_vectors_mult(&direc,t, &mult);
+    ft_vectors_add(&ray->origin,&mult, &pos_bis);
+            if ((pos_bis.y - cy->base.y) > cy->height || ((pos_bis.y - cy->base.y) < 0))
+                return(-1);
+
+        }
     if (*t_min != -1 && t > *t_min)
         return(-1);
-        *t_min = t;
+    ft_coord(direc.x,direc.y,direc.z,&direc);
+    *t_min = t;
     if (pos == NULL)
         return(0);
-
     ft_coord(pos_bis.x, pos_bis.y, pos_bis.z, pos);
      //rx(pos,-3.14 * 90/ 180 );
      t_coord tmmp;

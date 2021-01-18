@@ -19,7 +19,7 @@ void		ry(t_coord *vect, double y)
 	t_coord	tmp;
 
 	tmp.x = vect->x;
-	tmp.y = vect->y ;
+	tmp.y = vect->y;
 	tmp.z = vect->z;
 	vect->x = tmp.x * cos(y) + tmp.z * sin(y);
 	vect->z = tmp.x * -sin(y) + tmp.z * cos(y);
@@ -29,10 +29,11 @@ void		rz(t_coord *vect, double z)
 {
 	t_coord	tmp;
 
-	tmp.x = vect->x * cos(z) - vect->y * sin(z);
-	tmp.y = vect->x * sin(z) + vect->y * cos(z);
+	tmp.x = vect->x;
+	tmp.y = vect->y ;
 	tmp.z = vect->z;
-	*vect = tmp;
+	vect->x = tmp.x * cos(z) - tmp.y * sin(z);
+	vect->y = tmp.x * sin(z) + tmp.y * cos(z);
 }
 
 void		rot(t_coord *vect, t_coord *angle)

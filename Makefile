@@ -11,6 +11,10 @@ SRCS = gnl/get_next_line.c \
 		parsing.c \
 		intersection_cylinder.c \
 		rotation.c \
+		sphere.c\
+		triangle.c\
+		square_plan.c \
+		initialize.c\
 		
 
 # COLORS

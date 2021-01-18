@@ -99,15 +99,25 @@ typedef struct s_matrix_two
     double y2;
 }t_matrix_two;
 
+typedef struct s_camera
+{
+    t_ray ray;
+    t_coord direction;
+    t_coord forward;
+    t_coord right;
+    t_coord up;
+}t_camera;
+
 typedef struct s_scene
 {
     t_light *light;
-    t_ray   camera;
+    t_camera   camera;
     int     r_x;
     int     r_y;
     double  fov;
     t_amb_lig amb_light;
     t_list **list;
+    double ratio;
 
 }t_scene;
 
@@ -153,4 +163,7 @@ void		ry(t_coord *vect, double y);
 void		rz(t_coord *vect, double z);
 void		rot(t_coord *vect, t_coord *angle);
 void		anti_rot(t_coord *vect, t_coord *angle);
+double ft_abs(double x);
+int intersection_plan(t_plan *plan,t_ray *ray,t_coord *pos,t_coord *normal,double *t_min);
+double intersection_basic(t_ray *ray, t_coord *direction, t_coord *center);
 #endif
