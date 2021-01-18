@@ -63,7 +63,7 @@ double ft_calculate_alpha(double sigma, double beta)
     return (1 - sigma - beta);
 }
 
-int ft_intersection_triangle(t_triangle *tri, t_ray *ray,t_coord *pos,t_coord *normal,double *t_min)
+int ft_intersection_triangle(t_triangle *tri, t_ray *ray, t_point *base, double *t_min)
 {
     double t;
     t_coord tmp[3];
@@ -82,9 +82,12 @@ int ft_intersection_triangle(t_triangle *tri, t_ray *ray,t_coord *pos,t_coord *n
     if (ft_barycentric_triangle(&tmp[0] ,tri) == -1)
         return (-1);
     *t_min = t;
-    if (normal == NULL)
+    if (base == NULL)
         return(0);
-    ft_coord(tmp[2].x, tmp[2].y, tmp[2].z, normal);
-    ft_coord(tmp[0].x,tmp[0].y,tmp[0].z,pos);
+    ft_coord(tmp[2].x, tmp[2].y, tmp[2].z, &base->normal);
+    ft_coord(tmp[0].x,tmp[0].y,tmp[0].z,&base->pos);
+    base->rgb.r = tri->rgb.r;
+    base->rgb.g = tri->rgb.g;
+    base->rgb.b = tri->rgb.b;
     return(1);
 }

@@ -15,6 +15,13 @@ SRCS = gnl/get_next_line.c \
 		triangle.c\
 		square_plan.c \
 		initialize.c\
+		function_maths_2.c \
+		function_maths_3.c \
+		ft_ombre.c \
+		ft_specular.c\
+		ft_scale_color.c\
+		ft_camera.c\
+		ft_intensity_colors.c\
 		
 
 # COLORS

@@ -174,26 +174,6 @@ int ft_cy(char *line, t_scene *scene)
     ft_lstadd_front(scene->list,ft_lstnew((void *)cylinder, 4));
     return(1);
 }
-
-int ft_heart(char *line, t_scene *scene)
-{
-    if (*line != '<')
-        return(-1);
-    line++;
-    if (*line != '3')
-        return(-1);
-    line++;
-    t_heart *heart = malloc(sizeof(t_heart));
-    while (*line && (*line == ' '))
-        line++;
-    line = ft_parsing_position(line,&heart->center);
-    while (*line && (*line == ' '))
-        line++;
-    line = ft_parsing_rgb(&heart->rgb,line);
-    ft_lstadd_front(scene->list,ft_lstnew((void *)heart, 5));
-    return(1);
-}
-
 t_scene *main_parsing(void)
 {
     char *line[2000];

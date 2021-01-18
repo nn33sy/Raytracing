@@ -1,7 +1,7 @@
 #include <math.h>
 #include "function_maths.h"
 
-double intersection_sphere(t_sphere *s, t_ray *r, t_coord *pos, t_coord *normal, double *t_min)
+double intersection_sphere(t_sphere *s, t_ray *r, t_point *base, double *t_min)
 {
     double a = 1;
     double b;
@@ -26,13 +26,16 @@ double intersection_sphere(t_sphere *s, t_ray *r, t_coord *pos, t_coord *normal,
         return(-1);
     else
         *t_min = t;
-    if (pos == NULL)
+    if (base == NULL)
         return(0);
     t_coord mult ;
     ft_vectors_mult(&r->direction,t, &mult);
-    ft_vectors_add(&r->origin,&mult, pos);
-    ft_vectors_substract(&s->origin,pos,normal);
-    ft_normalize(normal);
+    ft_vectors_add(&r->origin,&mult, &base->pos);
+    ft_vectors_substract(&s->origin, &base->pos, &base->normal);
+    ft_normalize(&base->normal);
+    base->rgb.r = s->rgb.r;
+    base->rgb.g = s->rgb.g;
+    base->rgb.b = s->rgb.b;
 
     return(1);
 }

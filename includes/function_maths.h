@@ -121,15 +121,15 @@ typedef struct s_scene
 
 }t_scene;
 
-typedef struct s_heart
-{
-    t_coord center;
-    t_rgb rgb;
-}t_heart;
+typedef struct  s_point {
+    t_coord normal;
+    t_coord pos;
+    t_ray   ray;
+    t_rgb   rgb;
+}               t_point;
 
 void    ft_vectors_mult_by_two(t_coord *a, t_coord *b, t_coord *res);
 double  ft_max(double a,const double b);
-int intersection_sphere2(t_sphere *s, t_ray *r);
 void    ft_coord(double x, double y,double z, t_coord *pt);
 void    ft_vect(t_coord *a, t_coord *b, t_coord *ab);
 void    ft_produit_vectoriel(t_coord *a, t_coord *b, t_coord *prod);
@@ -142,7 +142,7 @@ void    ft_vectors_div(t_coord *a, double b, t_coord *res);
 void    ft_vectors_mult(t_coord *a, double b, t_coord *res);
 void    ft_vectors_add(t_coord *a, t_coord *b, t_coord *res);
 void    ft_vectors_substract(t_coord *a, t_coord *b, t_coord *res);
-double intersection_sphere(t_sphere *s, t_ray *r, t_coord *pos, t_coord *normal, double *t_min);
+double intersection_sphere(t_sphere *s, t_ray *r, t_point *base, double *t_min);
 int ft_visibilite(t_sphere *s, t_ray *r, double *t);
 void    ft_vectors_add_const(t_coord *a, double b, t_coord *res);
 int main_function(void);
@@ -150,20 +150,20 @@ int ft_intersection_cylinder(t_cylinder *cy, t_ray *ray,t_coord *pos,t_coord *no
 char *ft_parsing_double(char *line, double *nb);
 void ft_scaling_one_value(double *value);
 double ft_determinant_matrix(t_matrix_two *matrix);
-int intersection_square(t_square *square, t_ray *ray,t_coord *pos,t_coord *normal,double *t_min);
-int intersection_plan(t_plan *plan,t_ray *ray,t_coord *pos,t_coord *normal,double *t_min);
+int intersection_square(t_square *square, t_ray *ray, t_point *base ,double *t_min);
+int intersection_plan(t_plan *plan,t_ray *ray, t_point *base, double *t_min);
 double ft_calculate_sigma(t_triangle *tri, t_coord *P);
 double ft_calculate_beta(t_triangle *tri, t_coord *P);
 int ft_barycentric_triangle(t_coord *pos, t_triangle *tri);
 double ft_calculate_alpha(double sigma, double beta);
 void    ft_vectors_translate(t_coord *a, t_coord *b);
-int ft_intersection_triangle(t_triangle *tri, t_ray *ray,t_coord *pos,t_coord *normal,double *t_min);
+int ft_intersection_triangle(t_triangle *tri, t_ray *ray, t_point *base, double *t_min);
 void		rx(t_coord *coord, double x);
 void		ry(t_coord *vect, double y);
 void		rz(t_coord *vect, double z);
 void		rot(t_coord *vect, t_coord *angle);
 void		anti_rot(t_coord *vect, t_coord *angle);
 double ft_abs(double x);
-int intersection_plan(t_plan *plan,t_ray *ray,t_coord *pos,t_coord *normal,double *t_min);
+
 double intersection_basic(t_ray *ray, t_coord *direction, t_coord *center);
 #endif

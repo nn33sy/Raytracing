@@ -28,4 +28,5 @@ void ft_initialize_img(t_vars *vars, t_data *img, t_scene *scene)
     vars->win = mlx_new_window(vars->mlx, scene->r_y, scene->r_x, "Hello world!");
     img->img = mlx_new_image(vars->mlx, scene->r_y, scene->r_x);
     img->addr = mlx_get_data_addr(img->img, &(img->bits_per_pixel), &(img->line_length), &(img->endian));
+    camera_matrice(scene);
 }

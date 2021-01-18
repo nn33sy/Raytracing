@@ -18,24 +18,27 @@ double intersection_basic(t_ray *ray, t_coord *direction, t_coord *center)
     return(-1);
 }
 
-int intersection_plan(t_plan *plan,t_ray *ray,t_coord *pos,t_coord *normal,double *t_min)
+int intersection_plan(t_plan *plan,t_ray *ray, t_point *base, double *t_min)
 {
     double t;
-    t = intersection_basic(ray,&(plan->direction), &(plan->center));
+    t = intersection_basic(ray, &(plan->direction), &(plan->center));
     if (t == -1)
         return(-1);
     if (*t_min != -1 && t > *t_min)
         return(-1);
     *t_min = t;
-    if (normal == NULL)
+    if (base == NULL)
         return(0);
-    ft_coord(plan->direction.x,plan->direction.y,plan->direction.z,normal);
-    ft_vectors_mult(&(ray->direction), t,pos);
-    ft_vectors_add(pos, &(ray->origin),pos);
+    ft_coord(plan->direction.x,plan->direction.y,plan->direction.z,&base->normal);
+    ft_vectors_mult(&(ray->direction), t, &base->pos);
+    ft_vectors_add(&base->pos, &(ray->origin),&base->pos);
+    base->rgb.r = plan->rgb.r;
+    base->rgb.g = plan->rgb.g;
+    base->rgb.b = plan->rgb.b;
     return(1);
 }
 
-int intersection_square(t_square *square, t_ray *ray,t_coord *pos,t_coord *normal,double *t_min)
+int intersection_square(t_square *square, t_ray *ray, t_point *base ,double *t_min)
 {
     double t;
     t_coord proj;
@@ -53,9 +56,12 @@ int intersection_square(t_square *square, t_ray *ray,t_coord *pos,t_coord *norma
     if (ft_abs(proj.z - square->center.z) > (square->side_size)/2)
         return(-1);
     *t_min = t;
-    if (normal == NULL)
+    if (base == NULL)
         return(0);
-    ft_coord(square->direction.x,square->direction.y,square->direction.z,normal);
-    ft_coord(proj.x,proj.y,proj.z,pos);
+    ft_coord(square->direction.x,square->direction.y,square->direction.z,&base->normal);
+    ft_coord(proj.x,proj.y,proj.z,&base->pos);
+    base->rgb.r = square->rgb.r;
+    base->rgb.g = square->rgb.g;
+    base->rgb.b = square->rgb.b;
     return(1);
 }
