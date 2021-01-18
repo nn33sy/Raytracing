@@ -42,6 +42,7 @@ float ft_ombre(t_coord *pos,t_coord *normal, double dist, t_scene *scene)
                                 return(0);
                             ptn = ptn->next;
                     }
+                    
         return(1);
 }
 
@@ -69,7 +70,7 @@ ft_vectors_mult(light, -1, light);
     ft_vectors_mult(light, -1, light);
     if (specular > 0)
     {
-        specular = 0.2*pow(specular, 10);
+        specular = 0.6*pow(specular, 10);
         return(specular);
     }
     else
@@ -94,11 +95,10 @@ if (*nb_rebond == 0)
     t_coord *pos = malloc(sizeof(t_coord));
     t_coord *normal = malloc(sizeof(t_coord));
     t_coord *l =malloc(sizeof(t_coord));
-    t_list *min;
-
-
+    t_list *min= NULL;
        while (tmp != NULL)
             {
+                
                  if (tmp->type == 0 && intersection_sphere((t_sphere *)tmp->object ,ray,pos,normal,&t_min) == 1 )
                      min = tmp;
                  if (tmp->type == 1 && intersection_plan((t_plan *)tmp->object, ray,pos,normal,&t_min) == 1)
@@ -111,6 +111,7 @@ if (*nb_rebond == 0)
                     min = tmp;
                  tmp = tmp->next;
             }
+
             if (min != NULL)
 {
                    
@@ -121,26 +122,8 @@ if (*nb_rebond == 0)
 
                    color->intensity = V * (ft_scal_produce(l,normal) / dist) * scene->light->i * 100000;
                   if (V == 1)
-                  {
-                   color->intensity += ft_specular(normal, l, &scene->camera, pos);
-                    /*
-                    ft_vectors_mult(&ray->direction, -1,&ray->direction);
-                    ft_vectors_add(&ray->direction, l, &h);
-                    ft_vectors_mult(&h, -1,&h);
-                    ft_normalize(&h);
-                    ft_vectors_mult(&ray->direction, -1,&ray->direction);
-                    if (ft_scal_produce(normal,&h) > 0)
-                    {
-                        specular = 500 * scene->light->i * pow(ft_scal_produce(normal,&h),10);
-                        printf("hey");
-
-                    }
-            
-                    else
-                        specular = 0;
-                    //printf(" %f ",specular);*/
-                   // color->intensity += specular;
-                  }
+                     color->intensity += ft_specular(normal, l, &scene->camera, pos);
+                  
                     if (min->type == 0)
                     {
                     color->rgb.r= ((t_sphere*)(min->object))->rgb.r;
@@ -171,8 +154,10 @@ if (*nb_rebond == 0)
                     color->rgb.g=  ((t_cylinder*)(min->object))->rgb.g;
                     color->rgb.b =((t_cylinder*)(min->object))->rgb.b;
                     }
-                return (color->intensity);
+                    return (color->intensity);
                 }
+            
+                
                 else
                     {
                         color->intensity = 1;
@@ -196,48 +181,7 @@ void ft_scaling_one_value(double *value)
     if (*value < 0)
         *value = 0;
 }
-void ft_calculate_angle(t_coord *u, t_coord *v, t_coord *angle)
-{
-    double tmp_u;
-    double tmp_v;
-    double res;
 
-    tmp_u = u->x;
-    tmp_v = v->x;
-    u->x = 0;
-    v->x = 0;
-    res = -ft_scal_produce(u,v);
-    printf("h%fh,",res);
-    res /= (sqrt(ft_norm2(u)) * sqrt(ft_norm2(v)));
-    angle->x = acos(res);
-    u->x = tmp_u;
-    v->x = tmp_v;
-
-    printf("?%f?|%f| ",res,angle->x *(180/3.14));
-
-    tmp_u = u->y;
-    tmp_v = v->y;
-    u->y = 0;
-    v->y = 0;
-    res = ft_scal_produce(u,v);
-    res /= (sqrt(ft_norm2(u)) * sqrt(ft_norm2(v)));
-    angle->y = acos(res);
-    u->y = tmp_u;
-    v->y = tmp_v;
-
-    printf("|%f| ",angle->y *(3.14/180));
-
-    tmp_u = u->z;
-    tmp_v = v->z;
-    u->z = 0;
-    v->z = 0;
-    res = ft_scal_produce(u,v);
-    res /= (sqrt(ft_norm2(u)) * sqrt(ft_norm2(v)));
-    angle->z = acos(res);
-    u->z = tmp_u;
-    v->z = tmp_v;
-    printf("|%f| ",angle->z *(3.14/180));
-}
 
 void camera_matrice(t_scene *scene)
 {
@@ -303,7 +247,7 @@ y = (scene->camera.up.x * scene->camera.ray.direction.x) + (scene->camera.up.y *
 z =  (scene->camera.forward.x * scene->camera.ray.direction.x) + (scene->camera.forward.y * scene->camera.ray.direction.y) + (scene->camera.forward.z * scene->camera.ray.direction.z);
 ft_coord(x,y,z, &scene->camera.ray.direction);
         ft_normalize(&scene->camera.ray.direction);
-        ft_color_intensity(&color,scene, &scene->camera.ray, &nb_rebond);
+       ft_color_intensity(&color,scene, &scene->camera.ray, &nb_rebond);
         nb_rebond = 3;
         color_f.rgb.r += color.rgb.r;
         color_f.rgb.g += color.rgb.g;
@@ -312,15 +256,19 @@ ft_coord(x,y,z, &scene->camera.ray.direction);
         k++;
 
         }
+        if (!(color_f.rgb.r == 0 && color_f.rgb.g == 0 && color_f.rgb.b == 0))
+        {
         color_f.rgb.r = (color_f.rgb.r / nrays) + scene->light->rgb.r;
         color_f.rgb.g = (color_f.rgb.g / nrays) + scene->light->rgb.g;
         color_f.rgb.b = (color_f.rgb.b / nrays) + scene->light->rgb.b;
         color_f.intensity/= nrays;
-      //  color_f.intensity += scene->amb_light.ratio * 0.3;
+        color_f.intensity += scene->amb_light.ratio * 0.3;
         color_f.rgb.r = (color_f.rgb.r *color_f.intensity) + (scene->amb_light.ratio * scene->amb_light.rgb.r * 0.1);
         color_f.rgb.g = (color_f.rgb.g *color_f.intensity) + (scene->amb_light.ratio * scene->amb_light.rgb.g * 0.1);
         color_f.rgb.b = (color_f.rgb.b *color_f.intensity) + (scene->amb_light.ratio * scene->amb_light.rgb.b * 0.1);
         ft_scale_rgb(&color_f.rgb);
+
+        }
         my_mlx_pixel_put(&img, i, j,create_trgb(1,color_f.rgb.r,color_f.rgb.g,color_f.rgb.b));
         color.rgb.r = 0;
         color.rgb.g = 0;

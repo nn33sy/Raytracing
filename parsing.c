@@ -216,11 +216,6 @@ ft_r(line[0],scene);
 ft_a(line[1],scene);
 ft_c(line[3],scene);
 ft_l(line[4],light);
-t_coord x;
-x.x = 0;
-//x.y = 3.14 * -45/180;
-x.z = 0;
-//rot(&(scene->camera.origin),&x);
 scene->list = malloc(sizeof(t_list *));
 
 i = 6;
@@ -229,13 +224,11 @@ while (i < nb)
     if (line[i][0] == 's' && line[i][1] == 'p')
         ft_sp(line[i],scene);
     if (line[i][0] == 's' && line[i][1] == 'q')
-           ft_sq(line[i],scene); 
+        ft_sq(line[i],scene); 
     if (*line[i] == 'p')
         ft_p(line[i],scene);
     if (line[i][0] == 't' && line[i][1] == 'r')
            ft_tr(line[i],scene);
-    if (line[i][0] == '<' && line[i][1] == '3')
-        ft_heart(line[i],scene);
     if (line[i][0] == 'c' && line[i][1] == 'y')
         ft_cy(line[i],scene);  
     i++;
@@ -247,7 +240,7 @@ t_list *tmp= *(scene->list);
 while (tmp != NULL)
 {
 
-/*
+
 if (tmp->type == 2)
 {
     t_square *square= (t_square *)tmp->object;
@@ -308,12 +301,10 @@ if (tmp->type == 4)
     printf("%f\n",cyl->height);
 
 }
-tmp = tmp->next;
-}
-
-tmp = tmp->next;
-sphere_ptn = (t_sphere *)tmp->object;
-
+if (tmp->type == 0)
+{
+    t_sphere *sphere_ptn = (t_sphere *)tmp->object;
+printf("%f",tmp->type);
 
 printf("\n%f\n",sphere_ptn->origin.x);
 printf("%f\n",sphere_ptn->origin.y);
@@ -322,7 +313,12 @@ printf("%f\n\n",sphere_ptn->rayon);
 printf("%f\n",sphere_ptn->rgb.r);
 printf("%f\n",sphere_ptn->rgb.g);
 printf("%f\n",sphere_ptn->rgb.b);
-printf("\n\n ---------\n");*/
+printf("\n\n ---------\n");
+}
+tmp = tmp->next;
+}
+
+*/
 
     return(scene);
 }
