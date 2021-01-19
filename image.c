@@ -22,21 +22,19 @@ void ft_put_color_pixel(t_palette *color, t_scene *scene)
 
 }
 
-void ft_send_camera_rays(t_scene *scene, int i, int j, t_palette *color_f)
+void ft_send_camera_rays(t_scene *scene, int i, int j, t_palette *color_f, int *nb_rebond)
 {
-    int nb_rebond;
     double x;
     double y;
     double z;
 
-    nb_rebond = 3;
     ft_coord(i-(scene->r_y/2),-j+(scene->r_x/2),-(scene->r_x/(2*tan(scene->fov/2))), &scene->camera.ray.direction);
     x = (scene->camera.right.x * scene->camera.ray.direction.x) + (scene->camera.right.y * scene->camera.ray.direction.y) + (scene->camera.right.z * scene->camera.ray.direction.z);
     y = (scene->camera.up.x * scene->camera.ray.direction.x) + (scene->camera.up.y * scene->camera.ray.direction.y) + (scene->camera.up.z * scene->camera.ray.direction.z);
     z =  (scene->camera.forward.x * scene->camera.ray.direction.x) + (scene->camera.forward.y * scene->camera.ray.direction.y) + (scene->camera.forward.z * scene->camera.ray.direction.z);
     ft_coord(x,y,z, &scene->camera.ray.direction);
     ft_normalize(&scene->camera.ray.direction);
-     ft_color_intensity(color_f,scene, &scene->camera.ray, &nb_rebond); 
+     ft_color_intensity(color_f,scene, &scene->camera.ray, nb_rebond); 
 
 }
 
@@ -51,7 +49,7 @@ int main_function(void)
 ft_initialize_img(&vars, &img, scene);
 t_ray *ray_reflect= malloc(sizeof(t_ray));
 
-int nb_rebond = 3;
+int nb_rebond = 4;
 int k;
 double x;
 double y;
@@ -77,7 +75,7 @@ while (i < scene->r_y)
                 dx = 0;
                 dy=0;
             }
-            ft_send_camera_rays(scene, i, j, &color_f);
+            ft_send_camera_rays(scene, i, j, &color_f, &nb_rebond);
         k++;
         }
         ft_put_color_pixel(&color_f, scene);
@@ -85,14 +83,13 @@ while (i < scene->r_y)
         color_f.rgb.r =0;
         color_f.rgb.g =0;
         color_f.rgb.b =0;
+         nb_rebond = 4;
         color_f.intensity  = 0;
         j++;
     }
-  printf("ok");
          j = 0;
         i++;
     }
-    printf("OK");
     mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
     mlx_loop(vars.mlx);
     return(1);

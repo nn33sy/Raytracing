@@ -7,12 +7,16 @@ int ft_r(char *line, t_scene *scene)
         line++;
     else 
         return(-1);
-    if ((scene->r_x= ft_atoi_rt(line)) == 0)
-        return(-1);
+    scene->r_x= ft_atoi_rt(line);
     while (*line >= '0' && *line <= '9')
         line++;
-    if ((scene->r_y= ft_atoi_rt(line)) == 0)
+    scene->r_y= ft_atoi_rt(line);
         return(-1);
+    if (scene->r_x < 0 || scene->r_y < 0)
+    {
+        scene->r_x = 400;
+        scene->r_y = 400;
+    }
     scene->ratio = scene->r_x / scene->r_y;
     return(1);
 }
@@ -21,12 +25,14 @@ char *ft_parsing_position(char *line, t_coord *coord)
     coord->x = ft_atoi_rt(line);
     while (*line && *line != ',')
         line++;
-    line++;
+    if (*line)
+        line++;
     coord->y = ft_atoi_rt(line);
     while (*line && *line != ',')
         line++;
-    line++;
-     coord->z = ft_atoi_rt(line);
+    if (*line)
+        line++;
+    coord->z = ft_atoi_rt(line);
     while (*line && (((*line >= '0') && (*line <= '9')) || (*line == '.') || (*line == '-')))
         line++;
     return(line);
@@ -43,7 +49,7 @@ char *ft_parsing_rgb(t_rgb *rgb, char *line)
         line++;
     if (*line)
         line++;
-     rgb->b = ft_atoi_rt(line);
+    rgb->b = ft_atoi_rt(line);
     while (*line && ((*line >= '0') && (*line <= '9')))
         line++;
     return(line);
@@ -58,6 +64,8 @@ int ft_c(char *line, t_scene *scene)
     line = ft_parsing_position(line, &scene->camera.ray.origin);
     line = ft_parsing_position(line, &scene->camera.direction);
     line = ft_parsing_double(line, &scene->fov);
+    if (scene->fov < 0)
+        scene->fov *= -1;
     scene->fov = (scene->fov * 3.14)/180;
     return(1);
 }
@@ -100,7 +108,7 @@ int ft_sp(char *line, t_scene *scene)
     line = ft_parsing_double(line, &sphere->rayon);
     sphere->rayon /=2;
     line = ft_parsing_rgb( &sphere->rgb,line);
-    ft_lstadd_front(scene->list,ft_lstnew((void *)sphere, 0));
+    ft_lstadd_front(scene->list,ft_lstnew((void *)sphere, 0, ft_atoi_rt(line)));
     return(1);
 }
 int ft_p(char *line, t_scene *scene)
@@ -115,7 +123,7 @@ int ft_p(char *line, t_scene *scene)
     line = ft_parsing_position(line,&plan->center);
     line = ft_parsing_position(line,&plan->direction);
     line = ft_parsing_rgb( &plan->rgb,line);
-    ft_lstadd_front(scene->list,ft_lstnew((void *)plan, 1));
+    ft_lstadd_front(scene->list,ft_lstnew((void *)plan, 1, ft_atoi_rt(line)));
     return(1);
 }
 int ft_sq(char *line, t_scene *scene)
@@ -131,7 +139,7 @@ int ft_sq(char *line, t_scene *scene)
     line = ft_parsing_position(line,&square->direction);
     line = ft_parsing_double(line, &square->side_size);
     line = ft_parsing_rgb( &square->rgb,line);
-    ft_lstadd_front(scene->list,ft_lstnew((void *)square, 2));
+    ft_lstadd_front(scene->list,ft_lstnew((void *)square, 2,  ft_atoi_rt(line)));
     return (1);
 }
 int ft_tr(char *line, t_scene *scene)
@@ -147,7 +155,7 @@ int ft_tr(char *line, t_scene *scene)
     line = ft_parsing_position(line,&triangle->second);
     line = ft_parsing_position(line,&triangle->third);
     line = ft_parsing_rgb(&triangle->rgb,line);
-    ft_lstadd_front(scene->list,ft_lstnew((void *)triangle, 3));
+    ft_lstadd_front(scene->list,ft_lstnew((void *)triangle, 3,  ft_atoi_rt(line)));
     return (1);
 }
 
@@ -175,54 +183,49 @@ int ft_cy(char *line, t_scene *scene)
     line = ft_parsing_rgb(&cylinder->rgb, line);
     line = ft_parsing_double(line, &cylinder->diameter);
     line = ft_parsing_double(line, &cylinder->height);
-    ft_lstadd_front(scene->list,ft_lstnew((void *)cylinder, 4));
+    ft_lstadd_front(scene->list,ft_lstnew((void *)cylinder, 4,  ft_atoi_rt(line)));
     return(1);
 }
+
+void ft_parsing_line(char *line, t_scene *scene)
+{
+    if (line[0] == 'R')
+        ft_r(line,scene);
+     if (line[0] == 's' && line[1] == 'p')
+        ft_sp(line,scene);
+    if (line[0] == 's' && line[1] == 'q')
+        ft_sq(line,scene); 
+    if (line[0] == 'p')
+        ft_p(line,scene);
+    if (line[0] == 't' && line[1] == 'r')
+        ft_tr(line,scene);
+    if (line[0] == 'c' && line[1] == 'y')
+        ft_cy(line,scene);
+    if (line[0] == 'A')
+        ft_a(line,scene);
+    if (line[0] == 'c')
+        ft_c(line,scene);
+    if (line[0] == 'l')
+       ft_l(line,scene->light);
+}
+
 t_scene *main_parsing(void)
 {
-    char *line[3000];
+    char *line;
     int i;
     int nb;
     i = 0;
 int fd;
 fd=open("scenes/scene3.rt",O_RDONLY);
-while (get_next_line(fd, &line[i]) > 0)
-    i++;
-nb = ++i ;
-i = 0;
-
 t_scene *scene;
 scene = malloc(sizeof(t_scene));
 scene->light = malloc(sizeof(t_light *));
-ft_r(line[0],scene);
-ft_a(line[1],scene);
-ft_c(line[3],scene);
-ft_l(line[4],scene->light);
-ft_l(line[5],scene->light);
 scene->list = malloc(sizeof(t_list *));
-
 t_light *tmp = *(scene->light);
-while (tmp != NULL)
-{
-printf("%f", tmp->i);
-tmp = tmp->next;
-}
 
-i = 6;
-while (i < nb)
-{
-    if (line[i][0] == 's' && line[i][1] == 'p')
-        ft_sp(line[i],scene);
-    if (line[i][0] == 's' && line[i][1] == 'q')
-        ft_sq(line[i],scene); 
-    if (*line[i] == 'p')
-        ft_p(line[i],scene);
-    if (line[i][0] == 't' && line[i][1] == 'r')
-           ft_tr(line[i],scene);
-    if (line[i][0] == 'c' && line[i][1] == 'y')
-        ft_cy(line[i],scene);  
-    i++;
-}
+while (get_next_line(fd, &line) > 0)
+    ft_parsing_line(line, scene);
+ft_parsing_line(line, scene);
 /*
 
 printf("ok");

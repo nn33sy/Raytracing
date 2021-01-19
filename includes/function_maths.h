@@ -146,7 +146,7 @@ double intersection_sphere(t_sphere *s, t_ray *r, t_point *base, double *t_min);
 int ft_visibilite(t_sphere *s, t_ray *r, double *t);
 void    ft_vectors_add_const(t_coord *a, double b, t_coord *res);
 int main_function(void);
-int ft_intersection_cylinder(t_cylinder *cy, t_ray *ray,t_coord *pos,t_coord *normal,double *t_min);
+
 char *ft_parsing_double(char *line, double *nb);
 void ft_scaling_one_value(double *value);
 double ft_determinant_matrix(t_matrix_two *matrix);
@@ -164,6 +164,6 @@ void		rz(t_coord *vect, double z);
 void		rot(t_coord *vect, t_coord *angle);
 void		anti_rot(t_coord *vect, t_coord *angle);
 double ft_abs(double x);
-
+int ft_intersection_cylinder(t_cylinder *cy, t_ray *ray,t_point *base,double *t_min);
 double intersection_basic(t_ray *ray, t_coord *direction, t_coord *center);
 #endif

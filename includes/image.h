@@ -29,6 +29,6 @@ t_list *ft_color_intensity_2(t_scene *scene, t_ray *ray, t_point *base);
 double ft_color_intensity(t_palette *color, t_scene *scene, t_ray *ray, int *nb_rebond);
 void ft_put_color_pixel(t_palette *color, t_scene *scene);
 t_list *ft_color_intensity_2(t_scene *scene, t_ray *ray, t_point *base);
-void ft_send_camera_rays(t_scene *scene, int i, int j, t_palette *color_f);
+void ft_send_camera_rays(t_scene *scene, int i, int j, t_palette *color_f, int *nb_rebond);
 
 #endif

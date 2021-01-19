@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void *content, int type)
+t_list	*ft_lstnew(void *content, int type, double magic)
 {
 	t_list *new;
 
@@ -21,6 +21,7 @@ t_list	*ft_lstnew(void *content, int type)
 		return (NULL);
 	new->type = type;
 	new->next = NULL;
+	new->magic = magic;
 	new->object = content;
 	return (new);
 }

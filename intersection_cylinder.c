@@ -1,7 +1,7 @@
 #include <math.h>
 #include "function_maths.h"
 
-int ft_intersection_cylinder(t_cylinder *cy, t_ray *ray,t_coord *pos,t_coord *normal,double *t_min)
+int ft_intersection_cylinder(t_cylinder *cy, t_ray *ray,t_point *base,double *t_min)
 {
     t_coord tmp;
     double delt[6];
@@ -9,7 +9,7 @@ int ft_intersection_cylinder(t_cylinder *cy, t_ray *ray,t_coord *pos,t_coord *no
     t_coord direc;
 
     ft_coord(ray->direction.x,ray->direction.y,ray->direction.z,&direc);
-    ry(&direc,3.14 * 10/ 180);
+    //ry(&direc,3.14 * 10/ 180);
     ft_vectors_substract(&cy->base, &ray->origin, &tmp);
     delt[0] = pow(direc.x, 2) + pow(direc.z, 2);
     delt[1] = (direc.x * tmp.x)+ (direc.z * tmp.z);
@@ -37,15 +37,15 @@ int ft_intersection_cylinder(t_cylinder *cy, t_ray *ray,t_coord *pos,t_coord *no
         return(-1);
     ft_coord(direc.x,direc.y,direc.z,&direc);
     *t_min = t;
-    if (pos == NULL)
+    if (base == NULL)
         return(0);
-    ft_coord(pos_bis.x, pos_bis.y, pos_bis.z, pos);
+    ft_coord(pos_bis.x, pos_bis.y, pos_bis.z, &base->pos);
      //rx(pos,-3.14 * 90/ 180 );
      t_coord tmmp;
-     ft_coord(cy->base.x, pos->y,cy->base.z, &tmmp);
-    ft_vectors_substract(&tmmp,pos,normal);
+     ft_coord(cy->base.x, base->pos.y,cy->base.z, &tmmp);
+    ft_vectors_substract(&tmmp,&base->pos,&base->normal);
   // rx(pos,3.14 * 90/ 180 );
    //rx(normal,3.14 * 90/ 180 );
-    ft_normalize(normal);
+    ft_normalize(&base->normal);
     return(1);
 }
