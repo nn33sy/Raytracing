@@ -14,14 +14,9 @@ void ft_put_color_pixel(t_palette *color, t_scene *scene)
 {
         if (!(color->rgb.r == 0 && color->rgb.g == 0 && color->rgb.b == 0))
         {
-        color->rgb.r = (color->rgb.r / nrays) + scene->light->rgb.r;
-        color->rgb.g = (color->rgb.g / nrays) + scene->light->rgb.g;
-        color->rgb.b = (color->rgb.b / nrays) + scene->light->rgb.b;
-        color->intensity /= nrays;
-        color->intensity += scene->amb_light.ratio * 0.3;
-        color->rgb.r = (color->rgb.r *color->intensity) + (scene->amb_light.ratio * scene->amb_light.rgb.r * 0.1);
-        color->rgb.g = (color->rgb.g *color->intensity) + (scene->amb_light.ratio * scene->amb_light.rgb.g * 0.1);
-       color->rgb.b = (color->rgb.b *color->intensity) + (scene->amb_light.ratio * scene->amb_light.rgb.b * 0.1);
+        color->rgb.r = (color->rgb.r / nrays) ;
+        color->rgb.g = (color->rgb.g / nrays) ;
+        color->rgb.b = (color->rgb.b / nrays) ;
         ft_scale_rgb(&color->rgb);
         }
 
@@ -93,10 +88,11 @@ while (i < scene->r_y)
         color_f.intensity  = 0;
         j++;
     }
-  
+  printf("ok");
          j = 0;
         i++;
     }
+    printf("OK");
     mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
     mlx_loop(vars.mlx);
     return(1);

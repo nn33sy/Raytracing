@@ -38,14 +38,13 @@ double ft_ombre_2(t_scene *scene, double dist, t_ray ray_reflect)
     return(1);
 }
 
-float ft_ombre(t_point *base, double dist, t_scene *scene)
+float ft_ombre(t_point *base, double dist, t_scene *scene, t_light *light)
 {
         t_ray ray_reflect;
-       
-        ft_vectors_substract(&base->pos, &scene->light->pos, &ray_reflect.direction);
-        ft_normalize(&ray_reflect.direction);
-        ft_vectors_mult(&base->normal, 0.001, &ray_reflect.origin);
-        ft_vectors_add(&ray_reflect.origin,&base->pos,&ray_reflect.origin);
+
+            ft_vectors_substract(&base->pos, &light->pos, &ray_reflect.direction);
+            ft_normalize(&ray_reflect.direction);
+            ft_vectors_mult(&base->normal, 0.001, &ray_reflect.origin);
+            ft_vectors_add(&ray_reflect.origin,&base->pos,&ray_reflect.origin);
         return(ft_ombre_2(scene, dist, ray_reflect));
-        
 }

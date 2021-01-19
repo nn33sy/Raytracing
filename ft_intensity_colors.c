@@ -42,19 +42,23 @@ double ft_color_intensity(t_palette *color, t_scene *scene, t_ray *ray, int *nb_
     double dist;
     t_point base;  
     t_coord l;
+    t_light *tmp;
             if (ft_color_intensity_2(scene, ray,&base) != NULL)
             {
-    
-                ft_vectors_substract(&base.pos,&scene->light->pos, &l);
-                dist = ft_norm2(&l);
-                ft_normalize(&l);
-                V = ft_ombre(&base, dist, scene);
-                color->intensity += V * (ft_scal_produce(&l,&base.normal) / dist) * scene->light->i * 100000;
-                if (V == 1)
-                    color->intensity += ft_specular(&base, &l, &scene->camera);
-                color->rgb.r+= base.rgb.r;
-                color->rgb.g+=  base.rgb.g;
-                color->rgb.b += base.rgb.b;
+                tmp = *(scene->light);
+                while (tmp != NULL)
+                {
+                    ft_vectors_substract(&base.pos,&tmp->pos, &l);
+                    dist = ft_norm2(&l);
+                    ft_normalize(&l);
+                    V = ft_ombre(&base, dist, scene, tmp);
+                    color->intensity +=( V * (ft_scal_produce(&l,&base.normal) + ft_specular(&base, &l, &scene->camera)) / dist) * tmp->i * 1000;
+
+                    color->rgb.r += ((base.rgb.r * 0.5) + (tmp->rgb.r * 0.4) + (scene->amb_light.rgb.r * 0.1)) * (color->intensity + (scene->amb_light.ratio * 0.1));
+                    color->rgb.g +=  ((base.rgb.g * 0.5) + (tmp->rgb.g * 0.4) + (scene->amb_light.rgb.g * 0.1)) * (color->intensity + (scene->amb_light.ratio * 0.1));
+                    color->rgb.b += ((base.rgb.b * 0.5 )+ (tmp->rgb.b * 0.4) + (scene->amb_light.rgb.b * 0.1)) * (color->intensity  + (scene->amb_light.ratio * 0.1));
+                    tmp = tmp->next;
+                }
                 return (color->intensity);
                 }
         return (1);

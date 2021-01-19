@@ -72,17 +72,21 @@ int ft_a(char *line, t_scene *scene)
     ft_parsing_rgb(&scene->amb_light.rgb,line);
     return(1);
 }
-int ft_l(char *line,t_light *light)
+int ft_l(char *line,t_light **light)
 {
+    t_light *l;
     if (*line != 'l')
         return (-1);
     line++;
-    line = ft_parsing_position(line,&light->pos);
-    line = ft_parsing_double(line, &light->i);
-    ft_parsing_rgb(&light->rgb,line);
+    l = (t_light *)malloc(sizeof(t_light));
+    line = ft_parsing_position(line,&l->pos);
+    line = ft_parsing_double(line, &l->i);
+    ft_parsing_rgb(&l->rgb,line);
+    l->next = *light;
+    *light = l;
     return(1);
-
 }
+
 int ft_sp(char *line, t_scene *scene)
 {
     if (*line != 's')
@@ -176,7 +180,7 @@ int ft_cy(char *line, t_scene *scene)
 }
 t_scene *main_parsing(void)
 {
-    char *line[2000];
+    char *line[3000];
     int i;
     int nb;
     i = 0;
@@ -189,14 +193,20 @@ i = 0;
 
 t_scene *scene;
 scene = malloc(sizeof(t_scene));
-
-t_light *light = malloc(sizeof(t_light));
-scene->light = light;
+scene->light = malloc(sizeof(t_light *));
 ft_r(line[0],scene);
 ft_a(line[1],scene);
 ft_c(line[3],scene);
-ft_l(line[4],light);
+ft_l(line[4],scene->light);
+ft_l(line[5],scene->light);
 scene->list = malloc(sizeof(t_list *));
+
+t_light *tmp = *(scene->light);
+while (tmp != NULL)
+{
+printf("%f", tmp->i);
+tmp = tmp->next;
+}
 
 i = 6;
 while (i < nb)
@@ -297,8 +307,8 @@ printf("\n\n ---------\n");
 }
 tmp = tmp->next;
 }
-
 */
+
 
     return(scene);
 }

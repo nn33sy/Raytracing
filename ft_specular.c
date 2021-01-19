@@ -33,7 +33,7 @@ double ft_specular(t_point *base, t_coord *light, t_camera *cam)
     ft_vectors_mult(light, -1, light);
     if (specular > 0)
     {
-        specular = 0.6*pow(specular, 2);
+        specular = pow(specular, 10);
         return(specular);
     }
         return(0);

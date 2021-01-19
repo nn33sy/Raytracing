@@ -110,7 +110,7 @@ typedef struct s_camera
 
 typedef struct s_scene
 {
-    t_light *light;
+    t_light **light;
     t_camera   camera;
     int     r_x;
     int     r_y;
