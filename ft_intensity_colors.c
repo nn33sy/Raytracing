@@ -118,9 +118,9 @@ double ft_color_intensity(t_palette *color, t_scene *scene, t_ray *ray, int *nb_
                     ft_vectors_substract(&base.pos,&tmp->pos, &l);
                     dist = ft_norm2(&l);
                     ft_normalize(&l);
-                    V = ft_ombre(&base, dist, scene, tmp);
+                   V = ft_ombre(&base, dist, scene, tmp);
+                    
                     color->intensity +=( V * (ft_scal_produce(&l,&base.normal) + ft_specular(&base, &l, &scene->camera)) / dist) * tmp->i * 1000;
-
                     color->rgb.r += ((base.rgb.r * 0.5) + (tmp->rgb.r * 0.4) + (scene->amb_light.rgb.r * 0.1)) * (color->intensity + (scene->amb_light.ratio * 0.1));
                     color->rgb.g +=  ((base.rgb.g * 0.5) + (tmp->rgb.g * 0.4) + (scene->amb_light.rgb.g * 0.1)) * (color->intensity + (scene->amb_light.ratio * 0.1));
                     color->rgb.b += ((base.rgb.b * 0.5 )+ (tmp->rgb.b * 0.4) + (scene->amb_light.rgb.b * 0.1)) * (color->intensity  + (scene->amb_light.ratio * 0.1));

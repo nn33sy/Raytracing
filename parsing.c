@@ -62,6 +62,7 @@ int ft_c(char *line, t_scene *scene)
     else 
         return(-1);
     line = ft_parsing_position(line, &scene->camera.ray.origin);
+    printf("|%f|",scene->camera.ray.origin.z);
     line = ft_parsing_position(line, &scene->camera.direction);
     line = ft_parsing_double(line, &scene->fov);
     if (scene->fov < 0)
@@ -203,7 +204,7 @@ void ft_parsing_line(char *line, t_scene *scene)
         ft_cy(line,scene);
     if (line[0] == 'A')
         ft_a(line,scene);
-    if (line[0] == 'c')
+    if (line[0] == 'c' && line[1] == ' ')
         ft_c(line,scene);
     if (line[0] == 'l')
        ft_l(line,scene->light);
@@ -221,19 +222,17 @@ t_scene *scene;
 scene = malloc(sizeof(t_scene));
 scene->light = malloc(sizeof(t_light *));
 scene->list = malloc(sizeof(t_list *));
-t_light *tmp = *(scene->light);
+
 
 while (get_next_line(fd, &line) > 0)
     ft_parsing_line(line, scene);
 ft_parsing_line(line, scene);
-/*
 
-printf("ok");
 t_list *tmp= *(scene->list);
 while (tmp != NULL)
 {
 
-
+/*
 if (tmp->type == 2)
 {
     t_square *square= (t_square *)tmp->object;
@@ -307,10 +306,10 @@ printf("%f\n",sphere_ptn->rgb.r);
 printf("%f\n",sphere_ptn->rgb.g);
 printf("%f\n",sphere_ptn->rgb.b);
 printf("\n\n ---------\n");
-}
+}*/
 tmp = tmp->next;
 }
-*/
+
 
 
     return(scene);

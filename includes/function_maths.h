@@ -124,7 +124,6 @@ typedef struct s_scene
 typedef struct  s_point {
     t_coord normal;
     t_coord pos;
-    t_ray   ray;
     t_rgb   rgb;
 }               t_point;
 

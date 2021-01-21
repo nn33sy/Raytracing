@@ -89,7 +89,9 @@ while (i < scene->r_y)
     }
          j = 0;
         i++;
+        printf("ok");
     }
+    printf("oK");
     mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
     mlx_loop(vars.mlx);
     return(1);
