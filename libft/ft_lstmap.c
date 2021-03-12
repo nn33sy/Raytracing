@@ -18,7 +18,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 
 	if (lst == NULL || f == NULL)
 		return (NULL);
-	new = ft_lstnew(f(lst->object),0, 0);
+	new = ft_lstnew(f(lst->object), 0, 0);
 	if (new == 0)
 	{
 		del(&(new->object));

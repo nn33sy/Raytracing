@@ -19,9 +19,9 @@
 typedef	struct	s_list
 {
 	void			*object;
-	int				type; 
+	int				type;
 	struct s_list	*next;
-	double				magic;
+	double			magic;
 }				t_list;
 
 void			*ft_memset(void *b, int c, size_t len);

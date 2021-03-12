@@ -12,23 +12,25 @@
 
 #include <math.h>
 
-static int	ft_space(char c)
+static int			ft_space(char c)
 {
 	if (c == '\t' || c == '\v' || c == '\f' || c == '\r'
 		|| c == '\n' || c == ' ')
 		return (1);
 	return (0);
 }
-static double 		count_nb(const char *str)
+
+static double		count_nb(const char *str)
 {
 	int i;
+
 	i = 0;
-	while ((str[i] >= '0')&& (str[i] <= '9'))
+	while ((str[i] >= '0') && (str[i] <= '9'))
 		i++;
-	return((double)i);
+	return ((double)i);
 }
 
-double		ft_atoi_rt(const char *str)
+double				ft_atoi_rt(const char *str)
 {
 	int			sign;
 	double		res;
@@ -49,9 +51,9 @@ double		ft_atoi_rt(const char *str)
 		str++;
 	}
 	if (*str == '.')
-		{
-			str++;
-			res += ft_atoi_rt(str) * pow(10,-count_nb(str));
-		}
+	{
+		str++;
+		res += ft_atoi_rt(str) * pow(10, -count_nb(str));
+	}
 	return (sign * res);
 }

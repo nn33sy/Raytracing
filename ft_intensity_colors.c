@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_intensity_colors.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/10 15:30:22 by user42            #+#    #+#             */
+/*   Updated: 2021/03/11 11:57:03 by user42           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -9,125 +21,115 @@
 #include "parsing.h"
 #include "image.h"
 
-t_list *ft_color_intensity_2(t_scene *scene, t_ray *ray, t_point *base)
+static t_list	*ft_initialize_color_2(t_scene *scene, double *t_min)
 {
-    t_list *tmp; 
-    double t_min;
-    t_list *min;
-
-    tmp = *(scene->list);
-    min = NULL;
-    t_min = -1;
-           while (tmp != NULL)
-            {
-                
-                 if (tmp->type == 0 && intersection_sphere((t_sphere *)tmp->object ,ray,base ,&t_min) == 1 )
-                     min = tmp;
-                 if (tmp->type == 1 && intersection_plan((t_plan *)tmp->object, ray, base,&t_min) == 1)
-                    min = tmp;
-                if (tmp->type == 2 && intersection_square((t_square *)tmp->object, ray,base,&t_min) == 1)
-                    min = tmp;
-                if (tmp->type == 3 && ft_intersection_triangle((t_triangle *)tmp->object, ray,base ,&t_min) == 1)
-                    min = tmp;
-                if (tmp->type == 4 && ft_intersection_cylinder((t_cylinder*)tmp->object, ray,base ,&t_min) == 1)
-                    min = tmp;
-                 tmp = tmp->next;
-            }
-    return(min);
+	*t_min = -1;
+	return (*(scene->list));
 }
 
-void ft_mirror(t_palette *color,t_ray *ray, t_point *base, int *nb_rebond, t_scene *scene)
+t_list			*ft_color_intensity_2(t_scene *scene, t_ray *ray, t_point *base)
 {
-    t_ray mirror;
-    t_coord res;
+	t_list	*tmp;
+	double	t_min;
+	t_list	*min;
 
-    ft_vectors_mult(&base->normal,0.001, &mirror.origin);
-    ft_vectors_add(&mirror.origin,&base->pos, &mirror.origin);
-    ft_vectors_mult(&base->normal,2 * ft_scal_produce(&ray->direction,&base->normal),&res);
-    ft_vectors_substract(&res,&ray->direction, &mirror.direction); 
-    *nb_rebond -= 1;
-    ft_color_intensity(color, scene, &mirror, nb_rebond);
-}
-void ft_glass(t_palette *color,t_ray *ray, t_point *base, int *nb_rebond, t_scene *scene)
-{
-    t_ray refract_glass;
-        double n1;
-    double n2;
-
-
-        if (ft_scal_produce(&ray->direction, &base->normal) > 0)
-        {// Sort de la sphere 
-            n1 = GLASS;
-            n2 = AIR;
-        }
-        else
-        {//Rrentre dans la sphere
-            n1 = AIR;
-            n2 = GLASS;
-            ft_vectors_mult(&base->normal, -1,&base->normal);
-        }
-        ft_vectors_mult(&base->normal,0.001,&refract_glass.origin);
-        ft_vectors_substract(&refract_glass.origin,&base->pos,&refract_glass.origin);
-        t_coord tn;
-                        ft_vectors_mult(&base->normal, ft_scal_produce(&ray->direction,&base->normal),&tn);
-                        ft_vectors_substract(&tn,&ray->direction,&tn);
-                        ft_vectors_mult(&tn, n1/n2,&tn);
-                        t_coord t_t;
-                        double delta;
-                        delta = 1-(pow((n1/n2),2)*pow((1-ft_scal_produce(&ray->direction,&base->normal)),2));
-                        if (delta < 0)
-                        {
-                                 base->rgb.r = 1;
-                                base->rgb.g = 1;
-                                base->rgb.b = 1;
-                                return;
-                        }
-                        ft_vectors_mult(&base->normal,-sqrt(delta),&t_t);
-                        ft_vectors_add(&t_t,&tn,&refract_glass.direction)  ;
-    
-                        *nb_rebond -= 1;
-                        ft_color_intensity(color, scene, &refract_glass, nb_rebond);
+	tmp = ft_initialize_color_2(scene, &t_min);
+	while (tmp != NULL)
+	{
+		if (tmp->type == 0 &&
+intersection_sphere((t_sphere *)tmp->object, ray, base, &t_min) == 1)
+			min = tmp;
+		if (tmp->type == 1 &&
+intersection_plan((t_plan *)tmp->object, ray, base, &t_min) == 1)
+			min = tmp;
+		if (tmp->type == 2 &&
+intersection_square((t_square *)tmp->object, ray, base, &t_min) == 1)
+			min = tmp;
+		if (tmp->type == 3 &&
+ft_intersection_triangle((t_triangle *)tmp->object, ray, base, &t_min) == 1)
+			min = tmp;
+		if (tmp->type == 4 &&
+ft_intersection_cylinder((t_cylinder*)tmp->object, ray, base, &t_min) == 1)
+			min = tmp;
+		tmp = tmp->next;
+	}
+	return (min);
 }
 
-
-
-double ft_color_intensity(t_palette *color, t_scene *scene, t_ray *ray, int *nb_rebond)
+void			ft_mirror(t_palette *color, t_ray *ray, t_point *base,
+t_scene *scene)
 {
-    float V ;
-    double dist;
-    t_point base;
-    t_list *obj;
-    t_coord l;
-    t_light *tmp;
-    if (*nb_rebond == 0)
-        return(0);
+	t_ray	mirror;
+	t_coord	res;
 
-            if ((obj = ft_color_intensity_2(scene, ray,&base)) != NULL)
-            {
-                if (obj->magic == 1)
-                    ft_mirror(color, ray, &base, nb_rebond, scene);
-                else
-                    if (obj->magic == 2)
-                        ft_glass(color, ray, &base, nb_rebond, scene);
-                else
-                {
-                tmp = *(scene->light);
+	ft_vectors_mult(&base->normal, 0.001, &mirror.origin);
+	ft_vectors_add(&mirror.origin, &base->pos, &mirror.origin);
+	ft_vectors_mult(&base->normal, 2 * ft_scal_produce(&ray->direction,
+&base->normal), &res);
+	ft_vectors_substract(&res, &ray->direction, &mirror.direction);
+	scene->nb_rebond -= 1;
+	ft_color_intensity(color, scene, &mirror);
+}
 
-                while (tmp != NULL)
-                {
-                    ft_vectors_substract(&base.pos,&tmp->pos, &l);
-                    dist = ft_norm2(&l);
-                    ft_normalize(&l);
-                   V = ft_ombre(&base, dist, scene, tmp);
-                    
-                    color->intensity +=( V * (ft_scal_produce(&l,&base.normal) + ft_specular(&base, &l, &scene->camera)) / dist) * tmp->i * 1000;
-                    color->rgb.r += ((base.rgb.r * 0.5) + (tmp->rgb.r * 0.4) + (scene->amb_light.rgb.r * 0.1)) * (color->intensity + (scene->amb_light.ratio * 0.1));
-                    color->rgb.g +=  ((base.rgb.g * 0.5) + (tmp->rgb.g * 0.4) + (scene->amb_light.rgb.g * 0.1)) * (color->intensity + (scene->amb_light.ratio * 0.1));
-                    color->rgb.b += ((base.rgb.b * 0.5 )+ (tmp->rgb.b * 0.4) + (scene->amb_light.rgb.b * 0.1)) * (color->intensity  + (scene->amb_light.ratio * 0.1));
-                    tmp = tmp->next;
-                }
-                return (color->intensity);
-                }
-            }
-        return (1);
+static void		ft_calculate_color(t_palette *color
+, t_scene *scene, t_point base, t_light *tmp)
+{
+	double red;
+	double green;
+	double blue;
+
+	red = (base.rgb.r * 0.2) + (tmp->rgb.r * 0.9);
+	red += (scene->amb_light.rgb.r * 0.1);
+	color->rgb.r += red * (color->intensity + (scene->amb_light.ratio * 0.1));
+	green = ((base.rgb.g * 0.2) + (tmp->rgb.g * 0.9));
+	green += (scene->amb_light.rgb.g * 0.1);
+	color->rgb.g += green * (color->intensity + (scene->amb_light.ratio * 0.1));
+	blue = ((base.rgb.b * 0.2) + (tmp->rgb.b * 0.9));
+	blue += (scene->amb_light.rgb.b * 0.1);
+	color->rgb.b += blue * (color->intensity + (scene->amb_light.ratio * 0.1));
+}
+
+static void		ft_color_intensity_3(t_palette *color
+, t_scene *scene, t_point base, t_light *tmp)
+{
+	double	dist;
+	t_coord	l;
+
+	ft_vectors_substract(&base.pos, &tmp->pos, &l);
+	dist = ft_norm2(&l);
+	ft_normalize(&l);
+	color->intensity += (ft_ombre(&base, dist, scene, tmp) *
+	(ft_scal_produce(&l, &base.normal) + ft_specular(&base, &l, *(scene->camera)))
+	/ dist) * tmp->i * 1000;
+	ft_calculate_color(color, scene, base, tmp);
+}
+
+double			ft_color_intensity(t_palette *color, t_scene *scene,
+t_ray *ray)
+{
+	t_point	base;
+	t_list	*obj;
+	t_light	*tmp;
+
+	if (scene->nb_rebond != 0 &&
+(obj = ft_color_intensity_2(scene, ray, &base)) != NULL)
+	{
+		if (obj->magic == 1)
+			ft_mirror(color, ray, &base, scene);
+		else
+		{
+			tmp = *(scene->light);
+			while (tmp != NULL)
+			{
+				if (obj->magic == 3)
+					color->magic = 3;
+				else
+					color->magic = 0;
+				ft_color_intensity_3(color, scene, base, tmp);
+				tmp = tmp->next;
+			}
+			return (color->intensity);
+		}
+	}
+	return (-1);
 }

@@ -23,6 +23,7 @@ typedef struct s_rgb
 typedef struct s_palette{
     t_rgb   rgb;
     double intensity;
+    int magic;
 }t_palette;
 
 typedef struct s_ray
@@ -106,18 +107,22 @@ typedef struct s_camera
     t_coord forward;
     t_coord right;
     t_coord up;
+    double  fov;
+    struct s_camera *next;
+    struct s_camera *before;
 }t_camera;
 
 typedef struct s_scene
 {
     t_light **light;
-    t_camera   camera;
+    t_camera   **camera;
+    t_camera *cam_actual;
     int     r_x;
     int     r_y;
-    double  fov;
     t_amb_lig amb_light;
     t_list **list;
     double ratio;
+    int     nb_rebond;
 
 }t_scene;
 
@@ -144,7 +149,7 @@ void    ft_vectors_substract(t_coord *a, t_coord *b, t_coord *res);
 double intersection_sphere(t_sphere *s, t_ray *r, t_point *base, double *t_min);
 int ft_visibilite(t_sphere *s, t_ray *r, double *t);
 void    ft_vectors_add_const(t_coord *a, double b, t_coord *res);
-int main_function(void);
+int main_function(char *file_src);
 
 char *ft_parsing_double(char *line, double *nb);
 void ft_scaling_one_value(double *value);
