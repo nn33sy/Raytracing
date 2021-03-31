@@ -101,38 +101,13 @@ static void ft_write_header(int fd, t_vars *vars)
 
 }
 
-static void ft_body_bmp(char *file, t_vars *vars)
-{
-    int i;
-	int j;
-	int x;
-	int y;
-    char *dst = vars->img.addr;
-
-	i = SIZE_HEADER;
- 
-    y = vars->scene->r_y;
-	while (y--)
-	{
-		x = -1;
-		while (++x < vars->scene->r_x)
-		{
-			j = (x * (vars->img.bits_per_pixel / 8)) + (y * vars->img.line_length);
-            printf("%c" , file[i]);
-            
-	        file[i++] = *(vars->img.addr + j++);
-			file[i++] = *(vars->img.addr + j++);
-			file[i++] = *(vars->img.addr + j);
-		}
-	}
-}
 static void	write_bmpdata(t_vars *vars, int fd)
 {
 	int		x;
 	int		y;
 	int		*pixel;
 	int		i;
-	int		progress;
+
 
 	y = vars->scene->r_y - 1;
 	while (y > -1)
@@ -146,7 +121,6 @@ static void	write_bmpdata(t_vars *vars, int fd)
 				exit(EXIT_FAILURE);
 			x++;
 		}
-
 		y--;
 	}
 
@@ -157,8 +131,6 @@ static void	write_bmpdata(t_vars *vars, int fd)
 void	ft_export_bmp(char *filename, t_vars *vars)
 {
 	int				fd;
-	unsigned int	size;
-	unsigned int	i;
 
    fd = open(filename, O_CREAT | O_TRUNC | O_RDWR, 0644);
     ft_write_header(fd, vars);

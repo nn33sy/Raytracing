@@ -51,8 +51,6 @@ typedef struct s_sphere
 {
     t_coord origin;
     double  rayon;
-    int mirror ; //1 oui 0 non
-    int clear ; // 1 transparant, 0 non;
     t_rgb rgb;
     int multicolor;
     struct s_sphere *next;

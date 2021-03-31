@@ -1,6 +1,6 @@
 NAME = minirt.a
 CC=gcc
-CFLAGS= -lmlx -lXext -lX11 -lm
+CFLAGS= -Wall -Wextra -Werror -lmlx -lXext -lX11 -lm
 OBJ = ${SRCS:.c=.o}
 
 SRCS = gnl/get_next_line.c \
@@ -49,8 +49,7 @@ $(NAME): $(OBJ)
 	@echo "Compiling & indexing" [ $(NAME) ] $(SUCCESS)
 
 test :
-	gcc -Iincludes  main.c $(CFLAGS) $(NAME)
-	./a.out
+	gcc -Iincludes  main.c $(CFLAGS) $(NAME) -o minirt
 
 clean:
 	@make clean -C libft/

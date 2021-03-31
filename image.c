@@ -14,8 +14,8 @@ int             key_hook(int keycode, t_vars *vars)
 {
     if (keycode == 65307)
     {
-
-         exit(EXIT_FAILURE);
+        //ft_clean(vars);
+        exit(EXIT_FAILURE);
     }
     if (keycode == 65363 && vars->scene->cam_actual->next != NULL)
     {
@@ -26,10 +26,11 @@ int             key_hook(int keycode, t_vars *vars)
     {
         vars->scene->cam_actual = vars->scene->cam_actual->before;
         ft_create_image(vars, vars->scene->cam_actual ,vars->scene);
-
     }
+    return(0);
 }
-void ft_put_color_pixel(t_palette *color, t_scene *scene)
+
+void ft_put_color_pixel(t_palette *color)
 {
         if (!(color->rgb.r == 0 && color->rgb.g == 0 && color->rgb.b == 0))
         {
@@ -41,7 +42,6 @@ void ft_put_color_pixel(t_palette *color, t_scene *scene)
         ft_scale_rgb(&color->rgb);
         }
         }
-
 }
 
 
@@ -73,9 +73,7 @@ void ft_create_image(t_vars *vars, t_camera *cam, t_scene *scene)
 {
         int     i= 0;
     int     j = 0;
-    int nb_rebond = 4;
     t_palette color_f;
-    double k;
 
     camera_matrice(cam);
     while (i < scene->r_y)
@@ -83,25 +81,8 @@ void ft_create_image(t_vars *vars, t_camera *cam, t_scene *scene)
     while (j < scene->r_x)
     {
 
-       k = 0;
-         double r1 = 0.5;
-            double r2 = 0.5;
-        while (k < nrays)
-        {
-            r1 +=0.05;
-            r2-= 0.05;
-            double R = sqrt(-2 *log(r1));
-            double dx = R*cos(2 * PI *log(r2));
-            double dy = R*sin(2 * PI*log(r2));
-            if (nrays ==1)
-            {
-                dx = 0;
-                dy=0;
-            }
             ft_send_camera_rays(scene, i, j, &color_f, cam);
-        k++;
-        }
-        ft_put_color_pixel(&color_f, scene);
+        ft_put_color_pixel(&color_f);
         my_mlx_pixel_put(&vars->img, i, j,create_trgb(1,color_f.rgb.r,color_f.rgb.g,color_f.rgb.b));
        
         color_f.rgb.r =0;
@@ -114,7 +95,6 @@ void ft_create_image(t_vars *vars, t_camera *cam, t_scene *scene)
     }
          j = 0;
         i++;
-     
     }
     char *chain;
     chain = ft_strdup("hello");
@@ -129,21 +109,13 @@ void ft_create_image(t_vars *vars, t_camera *cam, t_scene *scene)
 int main_function(char *file_src)
 {
     t_vars   vars;
-   t_data  *img;
-   
-
     t_scene *scene = main_parsing(file_src);
 
 scene->nb_rebond = 4;
 vars.scene= scene;
-
 scene->cam_actual = *(scene->camera);
-
 ft_initialize_window(&vars, scene);
 ft_initialize_img(&vars, &vars.img, scene);
 ft_create_image(&vars, scene->cam_actual, scene);
-
-
-
     return(1);
 }

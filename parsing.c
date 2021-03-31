@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 13:31:46 by user42            #+#    #+#             */
-/*   Updated: 2021/03/11 20:37:27 by user42           ###   ########.fr       */
+/*   Updated: 2021/03/31 20:08:28 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -265,12 +265,9 @@ void	ft_parsing_line(char *line, t_scene *scene)
 t_scene	*main_parsing(char *file_scene)
 {
 	char	*line;
-	int		i;
-	int		nb;
 	int		fd;
 	t_scene	*scene;
 
-	i = 0;
 	fd = open(file_scene, O_RDONLY);
 	scene = malloc(sizeof(t_scene));
 	scene->light = malloc(sizeof(t_light *));
