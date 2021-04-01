@@ -24,6 +24,7 @@ SRCS =  gnl/get_next_line.c \
 		srcs/ft_intensity_colors.c\
 		srcs/ft_bitmap.c\
 		srcs/ft_mirror.c\
+		srcs/ft_clean.c\
 		
 
 # COLORS
@@ -53,7 +54,7 @@ $(NAME): $(OBJ)
 	@$(CC) -Iincludes  $(OBJ) $(CFLAGS) main.c $(NAME) libft/libft.a minilibx-linux/libmlx.a -o minirt
 
 test :
-	@$(CC) -Iincludes  $(OBJ) $(CFLAGS) main.c $(NAME) libft/libft.a minilibx-linux/libmlx.a -o minirt
+	@$(CC) -Iincludes  $(OBJ) $(CFLAGS)  main.c  $(NAME) libft/libft.a minilibx-linux/libmlx.a -o minirt
 
 clean:
 	@make clean -C libft/

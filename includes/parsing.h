@@ -13,6 +13,6 @@ int ft_l(char *line,t_light **light);
 int ft_sp(char *line, t_scene *scene);
 int ft_p(char *line, t_scene *scene);
 t_scene	*main_parsing(char *file_scene);
-void ft_parsing_line(char *line, t_scene *scene);
+int ft_parsing_line(char *line, t_scene *scene);
 
 #endif

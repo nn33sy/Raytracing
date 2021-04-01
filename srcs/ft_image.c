@@ -4,7 +4,10 @@
 int		key_hook(int keycode, t_vars *vars)
 {
 	if (keycode == 65307)
+	{
+		ft_clean(vars);
 		exit(EXIT_FAILURE);
+	}
 	if (keycode == 65363 && vars->scene->cam_actual->next != NULL)
 	{
 		vars->scene->cam_actual = vars->scene->cam_actual->next;
@@ -107,6 +110,8 @@ int		main_function(char *file_src)
 	t_scene	*scene;
 
 	scene = main_parsing(file_src);
+	if (scene == NULL)
+		exit(EXIT_FAILURE);
 	scene->nb_rebond = 4;
 	vars.scene = scene;
 	scene->cam_actual = *(scene->camera);

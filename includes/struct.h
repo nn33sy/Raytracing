@@ -75,7 +75,6 @@ typedef struct s_sphere
     double  rayon;
     t_rgb rgb;
     int multicolor;
-    struct s_sphere *next;
 
 }t_sphere;
 
