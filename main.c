@@ -5,16 +5,11 @@
 
 int main(int argc, char *argv[])
 {
-
- //main_parsing(argv[1]);
- if (argc == 2)
- {
+  if (argc == 2)
     main_function(argv[1]);
-    
- }
   else 
   {
-    printf("Error\n");
+    ft_putstr_fd("Error\n",1);
     exit(EXIT_FAILURE);
   }
 }

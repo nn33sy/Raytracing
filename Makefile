@@ -3,26 +3,27 @@ CC=gcc
 CFLAGS= -Wall -Wextra -Werror -lmlx -lXext -lX11 -lm
 OBJ = ${SRCS:.c=.o}
 
-SRCS = gnl/get_next_line.c \
+SRCS =  gnl/get_next_line.c \
 		gnl/get_next_line_utils.c \
-		ft_atoi_rt.c \
-		function_maths.c \
-		image.c \
-		parsing.c \
-		intersection_cylinder.c \
-		rotation.c \
-		sphere.c\
-		triangle.c\
-		square_plan.c \
-		initialize.c\
-		function_maths_2.c \
-		function_maths_3.c \
-		ft_ombre.c \
-		ft_specular.c\
-		ft_scale_color.c\
-		ft_camera.c\
-		ft_intensity_colors.c\
-		bitmap.c\
+		srcs/ft_atoi_rt.c \
+		srcs/ft_function_maths.c \
+		srcs/ft_image.c \
+		srcs/ft_parsing.c \
+		srcs/ft_intersection_cylinder.c \
+		srcs/ft_rotation.c \
+		srcs/ft_sphere.c\
+		srcs/ft_triangle.c\
+		srcs/ft_square_plan.c \
+		srcs/ft_initialize.c\
+		srcs/ft_function_maths_2.c \
+		srcs/ft_function_maths_3.c \
+		srcs/ft_ombre.c \
+		srcs/ft_specular.c\
+		srcs/ft_scale_color.c\
+		srcs/ft_camera.c\
+		srcs/ft_intensity_colors.c\
+		srcs/ft_bitmap.c\
+		srcs/ft_mirror.c\
 		
 
 # COLORS
