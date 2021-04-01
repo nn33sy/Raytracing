@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initialize.c                                       :+:      :+:    :+:   */
+/*   ft_initialize.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: how-choongines <how-choongines@student.    +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 11:22:16 by user42            #+#    #+#             */
-/*   Updated: 2021/03/31 23:33:36 by how-choongi      ###   ########.fr       */
+/*   Updated: 2021/04/01 12:07:47 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
-#include "minilibx-linux/mlx.h"
+#include "mlx.h"
 #include "function_maths.h"
 #include "get_next_line.h"
 #include "libft.h"

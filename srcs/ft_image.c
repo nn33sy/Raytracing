@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
-#include "minilibx-linux/mlx.h"
+#include "mlx.h"
 #include "function_maths.h"
 #include "get_next_line.h"
 #include "libft.h"
@@ -52,7 +52,7 @@ void	ft_send_camera_rays(t_scene *scene
 	x = (ptn->right.x * ptn->ray.direction.x)
 	+ (ptn->right.y * ptn->ray.direction.y)
 	+ (ptn->right.z * ptn->ray.direction.z);
-	y = (ptn->up.x * ptn->ray.direction.x)git
+	y = (ptn->up.x * ptn->ray.direction.x)
 	+ (ptn->up.y * ptn->ray.direction.y) +
 	(ptn->up.z * ptn->ray.direction.z);
 	z = (ptn->forward.x * ptn->ray.direction.x)
@@ -84,6 +84,8 @@ void	ft_create_image(t_vars *vars, t_camera *cam, t_scene *scene)
 	int			j;
 	t_palette	color_f;
 
+	i = 0;
+	j = 0;
 	camera_matrice(cam);
 	while (i < scene->r_y)
 	{
@@ -93,7 +95,7 @@ void	ft_create_image(t_vars *vars, t_camera *cam, t_scene *scene)
 			ft_put_color_pixel(&color_f);
 			my_mlx_pixel_put(&vars->img, i, j
 			, create_trgb(1, color_f.rgb.r, color_f.rgb.g, color_f.rgb.b));
-			t_clean_rgb(&color_f);
+			ft_clean_rgb(&color_f);
 			scene->nb_rebond = 4;
 			j++;
 		}

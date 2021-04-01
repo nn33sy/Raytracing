@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
-#include "minilibx-linux/mlx.h"
+#include "mlx.h"
 #include "function_maths.h"
 #include "get_next_line.h"
 #include "libft.h"

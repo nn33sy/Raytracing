@@ -45,12 +45,14 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make re -C libft/
+	@make re -C minilibx-linux/
 	@cp libft/libft.a ./$(NAME)
+	@cp minilibx-linux/libmlx.a ./$(NAME)
 	@ar rc $@ $^
 	@echo "Compiling & indexing" [ $(NAME) ] $(SUCCESS)
 
 test :
-	gcc -Iincludes  main.c $(CFLAGS) $(NAME) -o minirt
+	@$(CC) -Iincludes  $(OBJ) $(CFLAGS) main.c $(NAME) libft/libft.a minilibx-linux/libmlx.a
 
 clean:
 	@make clean -C libft/

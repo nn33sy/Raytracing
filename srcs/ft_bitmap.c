@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bitmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: how-choongines <how-choongines@student.    +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 23:52:02 by how-choongi       #+#    #+#             */
-/*   Updated: 2021/03/31 23:52:56 by how-choongi      ###   ########.fr       */
+/*   Updated: 2021/04/01 11:54:12 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "bitmap.h"
 
 static void		ft_bmpheader(t_bmpheader *header, t_vars *vars)
 {
@@ -24,22 +26,22 @@ static void		ft_bmpheader(t_bmpheader *header, t_vars *vars)
 
 static void		ft_bmpinfoheader(t_bmpinfoheader *infoheader, t_vars *vars)
 {
-	infoHeader->sizeOfThisHeader = SIZE_INFO_HEADER;
-	infoHeader->width = vars->scene->r_x;
-	infoHeader->height = vars->scene->r_y;
-	infoHeader->numberOfColorPlanes = 1;
-	infoHeader->colorDepth = 24;
-	infoHeader->compressionMethod = 0;
-	infoHeader->rawBitmapDataSize = 0;
-	infoHeader->horizontalResolution = 3780;
-	infoHeader->verticalResolution = 3780;
-	infoHeader->colorTableEntries = 0;
-	infoHeader->importantColors = 0;
+	infoheader->sizeOfThisHeader = SIZE_INFO_HEADER;
+	infoheader->width = vars->scene->r_x;
+	infoheader->height = vars->scene->r_y;
+	infoheader->numberOfColorPlanes = 1;
+	infoheader->colorDepth = 24;
+	infoheader->compressionMethod = 0;
+	infoheader->rawBitmapDataSize = 0;
+	infoheader->horizontalResolution = 3780;
+	infoheader->verticalResolution = 3780;
+	infoheader->colorTableEntries = 0;
+	infoheader->importantColors = 0;
 }
 
 static void		ft_write_header(int fd, t_vars *vars)
 {
-	t_bmpgeader		header_one;
+	t_bmpheader		header_one;
 	t_bmpinfoheader	header_two;
 
 	ft_bmpheader(&header_one, vars);

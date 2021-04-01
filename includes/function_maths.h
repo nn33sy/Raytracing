@@ -6,8 +6,8 @@
 # define GLASS 1.3
 # define AIR 1.0
 #include <stdio.h>
-#include <time.h>
 #include <stdlib.h>
+#include <math.h>
 typedef  struct s_coord
 {
     double x;
