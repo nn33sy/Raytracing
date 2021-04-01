@@ -3,26 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: how-choongines <marvin@42.fr>              +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 14:39:59 by how-choon         #+#    #+#             */
-/*   Updated: 2020/12/10 14:40:02 by how-choon        ###   ########.fr       */
+/*   Updated: 2021/04/01 16:49:17 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 # define BUFFER_SIZE 50
-# include <unistd.h>
-# include <stdlib.h>
 
-typedef struct	s_list_gnl
-{
-	int				fd;
-	char			*chain;
-	struct s_list_gnl	*next;
-	struct s_list_gnl	*prec;
-}				t_list_gnl;
+#include "minirt.h"
+
 
 t_list_gnl			*ft_new(t_list_gnl **list, int fd);
 t_list_gnl			*ft_list(t_list_gnl **list, int fd);

@@ -1,20 +1,7 @@
 #ifndef IMAGE_H
 # define IMAGE_H
-typedef struct  s_data {
-    void        *img;
-    char        *addr;
-    int         bits_per_pixel;
-    int         line_length;
-    int         endian;
-}               t_data;
+#include "minirt.h"
 
-typedef struct    s_vars
-{
-    void          *mlx;
-    void          *win;
-    t_data         img;
-    t_scene        *scene;
-}                 t_vars;
 
 void ft_create_image(t_vars *vars, t_camera *cam, t_scene *scene);
 

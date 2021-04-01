@@ -6,20 +6,12 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 11:22:16 by user42            #+#    #+#             */
-/*   Updated: 2021/04/01 12:07:47 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/01 16:40:01 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <math.h>
-#include "mlx.h"
-#include "function_maths.h"
-#include "get_next_line.h"
-#include "libft.h"
-#include "parsing.h"
-#include "image.h"
+#include "minirt.h"
+
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {

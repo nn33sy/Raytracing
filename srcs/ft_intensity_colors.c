@@ -6,20 +6,12 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 15:30:22 by user42            #+#    #+#             */
-/*   Updated: 2021/04/01 11:49:08 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/01 16:40:08 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <math.h>
-#include "mlx.h"
-#include "function_maths.h"
-#include "get_next_line.h"
-#include "libft.h"
-#include "parsing.h"
-#include "image.h"
+#include "minirt.h"
+
 
 static t_list	*ft_initialize_color_2(t_scene *scene, double *t_min)
 {

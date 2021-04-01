@@ -6,11 +6,12 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 23:31:50 by how-choongi       #+#    #+#             */
-/*   Updated: 2021/04/01 11:47:45 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/01 16:39:40 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "function_maths.h"
+#include "minirt.h"
+
 
 double	ft_scal_produce(t_coord *a, t_coord *b)
 {

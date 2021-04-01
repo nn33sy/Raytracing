@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_triangle.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: how-choongines <how-choongines@student.    +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 14:00:17 by user42            #+#    #+#             */
-/*   Updated: 2021/03/31 23:39:14 by how-choongi      ###   ########.fr       */
+/*   Updated: 2021/04/01 16:40:56 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <math.h>
-#include "function_maths.h"
+#include "minirt.h"
+
 
 int		ft_barycentric_triangle(t_coord *pos, t_triangle *tri)
 {

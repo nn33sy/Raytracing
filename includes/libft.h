@@ -3,26 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: how-choongines <marvin@42.fr>              +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 14:03:09 by how-choon         #+#    #+#             */
-/*   Updated: 2020/11/25 13:25:32 by how-choon        ###   ########.fr       */
+/*   Updated: 2021/04/01 16:50:23 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# include <unistd.h>
-# include <string.h>
-# include <stdlib.h>
 
-typedef	struct	s_list
-{
-	void			*object;
-	int				type; 
-	struct s_list	*next;
-	double				magic;
-}				t_list;
+#include "minirt.h"
+
 
 void			*ft_memset(void *b, int c, size_t len);
 void			ft_bzero(void *s, size_t n);

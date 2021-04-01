@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   square_plan.c                                      :+:      :+:    :+:   */
+/*   ft_square_plan.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 13:40:58 by user42            #+#    #+#             */
-/*   Updated: 2021/03/10 13:41:01 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/01 16:40:53 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <math.h>
-#include "function_maths.h"
+#include "minirt.h"
+
 
 double	intersection_basic(t_ray *ray, t_coord *direction, t_coord *center)
 {

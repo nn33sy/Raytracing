@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   function_maths.c                                   :+:      :+:    :+:   */
+/*   ft_function_maths.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 11:16:00 by user42            #+#    #+#             */
-/*   Updated: 2021/03/10 11:16:04 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/01 16:39:44 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <math.h>
-#include "function_maths.h"
+#include "minirt.h"
+
 
 void	ft_coord(double x, double y, double z, t_coord *pt)
 {

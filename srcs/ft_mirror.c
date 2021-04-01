@@ -6,20 +6,12 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 23:22:48 by how-choongi       #+#    #+#             */
-/*   Updated: 2021/04/01 11:54:33 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/01 16:40:16 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <math.h>
-#include "mlx.h"
-#include "function_maths.h"
-#include "get_next_line.h"
-#include "libft.h"
-#include "parsing.h"
-#include "image.h"
+#include "minirt.h"
+
 
 void			ft_mirror(t_palette *color, t_ray *ray, t_point *base,
 t_scene *scene)

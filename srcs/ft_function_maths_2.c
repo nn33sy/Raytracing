@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   function_maths_2.c                                 :+:      :+:    :+:   */
+/*   ft_function_maths_2.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: how-choongines <how-choongines@student.    +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 23:26:00 by how-choongi       #+#    #+#             */
-/*   Updated: 2021/03/31 23:31:26 by how-choongi      ###   ########.fr       */
+/*   Updated: 2021/04/01 16:39:36 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <math.h>
-#include "function_maths.h"
+#include "minirt.h"
+
 
 void	ft_vectors_translate(t_coord *a, t_coord *b)
 {

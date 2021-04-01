@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_scale_color.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: how-choongines <how-choongines@student.    +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 23:24:51 by how-choongi       #+#    #+#             */
-/*   Updated: 2021/03/31 23:25:20 by how-choongi      ###   ########.fr       */
+/*   Updated: 2021/04/01 16:40:38 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
-#include "image.h"
+#include "minirt.h"
+
 
 void	ft_scale_rgb(t_rgb *rgb)
 {

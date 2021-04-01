@@ -1,9 +1,6 @@
 #ifndef PARSING_H
 # define PARSING_H
-#include "libft.h"
-#include "get_next_line.h"
-#include <fcntl.h>
-#include "function_maths.h"
+#include "minirt.h"
 
 
 double		ft_atoi_rt(const char *str);

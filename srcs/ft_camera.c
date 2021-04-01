@@ -3,18 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_camera.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: how-choongines <how-choongines@student.    +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 23:20:03 by how-choongi       #+#    #+#             */
-/*   Updated: 2021/03/31 23:20:33 by how-choongi      ###   ########.fr       */
+/*   Updated: 2021/04/01 16:39:28 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "function_maths.h"
-#include "get_next_line.h"
-#include "libft.h"
-#include "parsing.h"
-#include "image.h"
+#include "minirt.h"
+
 
 void	camera_matrice(t_camera *cam)
 {
