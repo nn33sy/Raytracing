@@ -54,8 +54,10 @@ $(NAME): $(OBJ)
 	@$(CC) -Iincludes  $(OBJ) $(CFLAGS) main.c $(NAME) libft/libft.a minilibx-linux/libmlx.a -o minirt
 
 test :
-	@$(CC) -Iincludes  $(OBJ) $(CFLAGS)  main.c  $(NAME) libft/libft.a minilibx-linux/libmlx.a -o minirt
+	@$(CC) -Iincludes  $(OBJ) $(CFLAGS)  main.c  $(NAME) libft/libft.a minilibx-linux/libmlx.a  -o  minirt
 
+leak : 
+	@$(CC) -Iincludes  $(OBJ) $(CFLAGS)  main.c  $(NAME) libft/libft.a minilibx-linux/libmlx.a -fsanitize=leak -fsanitize=address -fno-omit-frame-pointer -o  minirt
 clean:
 	@make clean -C libft/
 	@/bin/rm -f $(OBJ)

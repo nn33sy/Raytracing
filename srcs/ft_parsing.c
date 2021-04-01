@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 13:31:46 by user42            #+#    #+#             */
-/*   Updated: 2021/04/01 18:17:21 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/01 19:09:14 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,20 +101,22 @@ int		ft_c(char *line, t_camera **camera)
 {
 	t_camera *c;
 
-	if (*line == 'c')
-		line++;
-	else
-		return (-1);
+	line++;
 	c = (t_camera *)malloc(sizeof(t_camera));
+	if (c == NULL)
+		return (-1);
 	line = ft_parsing_position(line, &c->ray.origin);
 	line = ft_parsing_position(line, &c->direction);
 	line = ft_parsing_double(line, &c->fov);
 	if (c->fov < 0)
 		c->fov *= -1;
 	c->fov = (c->fov * 3.14) / 180;
-	c->next = *camera;
-	if(*camera != NULL)
+	c->next = NULL;
+	if (*camera != NULL)
+	{
 		(*camera)->before = c;
+		c->next = *camera;
+	}
 	c->before = NULL;
 	*camera = c;
 	return (1);
@@ -286,8 +288,11 @@ t_scene	*main_parsing(char *file_scene)
 	if (!scene)
 		return (NULL);
 	scene->light = malloc(sizeof(t_light *));
+	*(scene->light) = NULL;
 	scene->list = malloc(sizeof(t_list *));
-	scene->camera = malloc(sizeof(t_list *));
+	*(scene->list) = NULL;
+	scene->camera = malloc(sizeof(t_camera *));
+	*(scene->camera) = NULL;
 	if (!scene || !(scene->light) || !(scene->list) || !(scene->camera))
 	{
 		ft_close_error(scene, fd);
