@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_function_maths.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: how-choongines <how-choongines@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 11:16:00 by user42            #+#    #+#             */
-/*   Updated: 2021/04/01 16:39:44 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/03 19:24:46 by how-choongi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
 
 void	ft_coord(double x, double y, double z, t_coord *pt)
 {

@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_function_maths_3.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: how-choongines <how-choongines@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 23:31:50 by how-choongi       #+#    #+#             */
-/*   Updated: 2021/04/01 16:39:40 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/03 19:24:36 by how-choongi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
 
 double	ft_scal_produce(t_coord *a, t_coord *b)
 {

@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bitmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: how-choongines <how-choongines@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/31 23:52:02 by how-choongi       #+#    #+#             */
-/*   Updated: 2021/04/01 16:39:23 by user42           ###   ########.fr       */
+/*   Created: 2020/11/16 18:11:43 by how-choon         #+#    #+#             */
+/*   Updated: 2021/04/03 19:21:18 by how-choongi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
 
 static void		ft_bmpheader(t_bmpheader *header, t_vars *vars)
 {

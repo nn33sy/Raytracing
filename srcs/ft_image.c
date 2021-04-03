@@ -1,6 +1,5 @@
 #include "minirt.h"
 
-
 int		key_hook(int keycode, t_vars *vars)
 {
 	if (keycode == 32)
@@ -38,7 +37,7 @@ void	ft_put_color_pixel(t_palette *color)
 }
 
 void	ft_send_camera_rays(t_scene *scene
-, int i, int j, t_palette *color_f, t_camera *ptn)
+, int i, int j, t_camera *ptn)
 {
 	double x;
 	double y;
@@ -57,7 +56,7 @@ void	ft_send_camera_rays(t_scene *scene
 	+ (ptn->forward.z * ptn->ray.direction.z);
 	ft_coord(x, y, z, &ptn->ray.direction);
 	ft_normalize(&ptn->ray.direction);
-	ft_color_intensity(color_f, scene, &ptn->ray);
+	ft_color_intensity(&scene->color_f, scene, &ptn->ray);
 }
 
 void	ft_initialize_img(t_vars *vars, t_data *img, t_scene *scene)
@@ -79,7 +78,6 @@ void	ft_create_image(t_vars *vars, t_camera *cam, t_scene *scene)
 {
 	int			i;
 	int			j;
-	t_palette	color_f;
 
 	i = 0;
 	j = 0;
@@ -88,11 +86,12 @@ void	ft_create_image(t_vars *vars, t_camera *cam, t_scene *scene)
 	{
 		while (j < scene->r_x)
 		{
-			ft_send_camera_rays(scene, i, j, &color_f, cam);
-			ft_put_color_pixel(&color_f);
+			ft_send_camera_rays(scene, i, j, cam);
+			ft_put_color_pixel(&scene->color_f);
 			my_mlx_pixel_put(&vars->img, i, j
-			, create_trgb(1, color_f.rgb.r, color_f.rgb.g, color_f.rgb.b));
-			ft_clean_rgb(&color_f);
+			, create_trgb(1, scene.color_f.rgb.r
+			, scene.color_f.rgb.g, scene.color_f.rgb.b));
+			ft_clean_rgb(&scene->color_f);
 			scene->nb_rebond = 4;
 			j++;
 		}
