@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_intensity_colors.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: how-choongines <how-choongines@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 15:30:22 by user42            #+#    #+#             */
-/*   Updated: 2021/04/01 16:40:08 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/03 19:49:09 by how-choongi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
 
 static t_list	*ft_initialize_color_2(t_scene *scene, double *t_min)
 {

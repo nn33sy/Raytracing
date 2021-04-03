@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_rotation.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: how-choongines <how-choongines@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 13:32:29 by user42            #+#    #+#             */
-/*   Updated: 2021/04/01 16:40:33 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/03 19:54:21 by how-choongi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
 
 void		rx(t_coord *vect, double x)
 {

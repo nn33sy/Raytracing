@@ -1,27 +1,5 @@
 #include "minirt.h"
 
-int		key_hook(int keycode, t_vars *vars)
-{
-	if (keycode == 32)
-		ft_export_bmp("hello", vars);
-	if (keycode == 65307)
-	{
-		ft_clean(vars);
-		exit(EXIT_FAILURE);
-	}
-	if (keycode == 65363 && vars->scene->cam_actual->next != NULL)
-	{
-		vars->scene->cam_actual = vars->scene->cam_actual->next;
-		ft_create_image(vars, vars->scene->cam_actual, vars->scene);
-	}
-	if (keycode == 65361 && vars->scene->cam_actual->before != NULL)
-	{
-		vars->scene->cam_actual = vars->scene->cam_actual->before;
-		ft_create_image(vars, vars->scene->cam_actual, vars->scene);
-	}
-	return (0);
-}
-
 void	ft_put_color_pixel(t_palette *color)
 {
 	if (!(color->rgb.r == 0 && color->rgb.g == 0 && color->rgb.b == 0))
@@ -59,19 +37,12 @@ void	ft_send_camera_rays(t_scene *scene
 	ft_color_intensity(&scene->color_f, scene, &ptn->ray);
 }
 
-void	ft_initialize_img(t_vars *vars, t_data *img, t_scene *scene)
+void	ft_create_image_2(t_vars *vars)
 {
-	img->img = mlx_new_image(vars->mlx, scene->r_y, scene->r_x);
-	img->addr = mlx_get_data_addr(img->img,
-&(img->bits_per_pixel), &(img->line_length), &(img->endian));
-}
-
-void	ft_clean_rgb(t_palette *color_f)
-{
-	color_f->rgb.r = 0;
-	color_f->rgb.g = 0;
-	color_f->rgb.b = 0;
-	color_f->intensity = 0;
+	mlx_clear_window(vars->mlx, vars->win);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->img.img, 0, 0);
+	mlx_key_hook(vars->win, key_hook, vars);
+	mlx_loop(vars->mlx);
 }
 
 void	ft_create_image(t_vars *vars, t_camera *cam, t_scene *scene)
@@ -98,10 +69,7 @@ void	ft_create_image(t_vars *vars, t_camera *cam, t_scene *scene)
 		j = 0;
 		i++;
 	}
-	mlx_clear_window(vars->mlx, vars->win);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->img.img, 0, 0);
-	mlx_key_hook(vars->win, key_hook, vars);
-	mlx_loop(vars->mlx);
+	ft_create_image_2(vars);
 }
 
 int		main_function(char *file_src)

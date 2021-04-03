@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sphere.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: how-choongines <how-choongines@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 14:21:25 by user42            #+#    #+#             */
-/*   Updated: 2021/04/01 16:40:50 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/03 19:55:17 by how-choongi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
 
 static double	calculate_t(t_sphere *s, t_ray *r)
 {

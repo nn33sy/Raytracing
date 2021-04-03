@@ -3,6 +3,7 @@
         "get_next_line.h": "c",
         "function_maths.h": "c",
         "stdlib.h": "c",
-        "math.h": "c"
+        "math.h": "c",
+        "ft_image2.C": "cpp"
     }
 }

@@ -1,66 +1,68 @@
 #ifndef STRUCT_H
 # define STRUCT_H
 
-typedef struct s_bmpheader
+typedef struct	s_bmpheader
 {
-    char signaturebytes[2];
-    unsigned int sizeOfBitmapFile;
-    unsigned int reservedBytes;
-    unsigned int pixelDataOffset;
-}   t_bmpheader;
+	char			signaturebytes[2];
+	unsigned int	sizeofbitmapfile;
+	unsigned int	reservedbytes;
+	unsigned int	pixeldataoffset;
+}				t_bmpheader;
 
-typedef  struct s_bmpinfoheader{
-    unsigned int sizeOfThisHeader;
-    unsigned int width;
-    unsigned int height;
-    unsigned short numberOfColorPlanes;
-    unsigned short colorDepth;
-    unsigned int compressionMethod;
-    unsigned int rawBitmapDataSize;
-    unsigned int horizontalResolution;
-    unsigned int verticalResolution;
-    unsigned int colorTableEntries;
-    unsigned int importantColors;
-}t_bmpinfoheader;
+typedef struct	s_bmpinfoheader{
+	unsigned int	sizeOfThisHeader;
+    unsigned int	width;
+    unsigned int	height;
+    unsigned short	numberOfColorPlanes;
+    unsigned short	colorDepth;
+	unsigned int	compressionMethod;
+    unsigned int	rawBitmapDataSize;
+    unsigned int	horizontalResolution;
+    unsigned int	verticalResolution;
+    unsigned int	colorTableEntries;
+    unsigned int	importantColors;
+}				t_bmpinfoheader;
 
 typedef	struct	s_list
 {
 	void			*object;
 	int				type; 
 	struct s_list	*next;
-	double				magic;
+	double			magic;
 }				t_list;
-typedef  struct s_coord
-{
-    double x;
-    double y;
-    double z;
-}t_coord;
-typedef struct s_rgb
-{
-    double r;
-    double g;
-    double b;
-}t_rgb;
-typedef struct s_palette{
-    t_rgb   rgb;
-    double intensity;
-    int magic;
-}t_palette;
 
-typedef struct s_ray
+typedef struct	s_coord
 {
-    t_coord origin;
-    t_coord direction;
-}t_ray;
+    double			x;
+    double			y;
+    double			z;
+}				t_coord;
 
-
-typedef struct s_light
+typedef struct	s_rgb
 {
-    t_coord pos;
-    double     i;
-    t_rgb   rgb;
-    struct s_light *next;
+    double		r;
+    double		g;
+    double		b;
+}				t_rgb;
+
+typedef struct	s_palette{
+	t_rgb		rgb;
+	double		intensity;
+	int			magic;
+}				t_palette;
+
+typedef struct	s_ray
+{
+	t_coord		origin;
+	t_coord		direction;
+}				t_ray;
+
+typedef struct	s_light
+{
+	t_coord			pos;
+	double			i;
+	t_rgb			rgb;
+	struct s_light	*next;
 }t_light;
 
 typedef struct s_amb_light

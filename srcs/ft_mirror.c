@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_mirror.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: how-choongines <how-choongines@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 23:22:48 by how-choongi       #+#    #+#             */
-/*   Updated: 2021/04/01 16:40:16 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/03 19:51:07 by how-choongi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
 
 void			ft_mirror(t_palette *color, t_ray *ray, t_point *base,
 t_scene *scene)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parsing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: how-choongines <how-choongines@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 13:31:46 by user42            #+#    #+#             */
-/*   Updated: 2021/04/03 15:08:12 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/03 19:53:02 by how-choongi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -275,6 +275,7 @@ static void ft_close_error(t_scene *scene, int fd)
 	free(scene);
 	close(fd);
 }
+
 t_scene	*main_parsing(char *file_scene)
 {
 	char	**line;
@@ -297,21 +298,21 @@ t_scene	*main_parsing(char *file_scene)
 	if (!scene || !(scene->light) || !(scene->list) || !(scene->camera))
 	{
 		ft_close_error(scene, fd);
-		return(NULL);
+		return (NULL);
 	}
 	while (get_next_line(fd, line) > 0)
 	{
 		if (ft_parsing_line(*line, scene) == -1)
 		{
 			ft_close_error(scene, fd);
-			return(NULL);
+			return (NULL);
 		}
 		free (*line);
 	}
 	if (ft_parsing_line(*line, scene) == -1)
 		{
 			ft_close_error(scene, fd);
-			return(NULL);
+			return (NULL);
 		}
 	free(*line);
 	free(line);

@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_intersection_cylinder.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: how-choongines <how-choongines@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:24:01 by user42            #+#    #+#             */
-/*   Updated: 2021/04/01 16:40:12 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/03 19:50:21 by how-choongi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
 
 static double	ft_intersection_cylinder_3(t_cylinder *cy,
 t_ray *ray, double *t0, double *t1)

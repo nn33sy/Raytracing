@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_triangle.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: how-choongines <how-choongines@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 14:00:17 by user42            #+#    #+#             */
-/*   Updated: 2021/04/01 16:40:56 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/03 19:56:22 by how-choongi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
 
 int		ft_barycentric_triangle(t_coord *pos, t_triangle *tri)
 {
@@ -25,11 +24,6 @@ int		ft_barycentric_triangle(t_coord *pos, t_triangle *tri)
 	if (beta < 0 || sigma < 0 || alpha < 0)
 		return (-1);
 	return (1);
-}
-
-double	ft_determinant_matrix(t_matrix_two *matrix)
-{
-	return ((matrix->x1 * matrix->y2) - (matrix->x2 * matrix->y1));
 }
 
 double	ft_calculate_beta(t_triangle *tri, t_coord *pos)
