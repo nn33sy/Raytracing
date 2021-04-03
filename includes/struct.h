@@ -142,6 +142,7 @@ typedef struct s_scene
     t_list **list;
     double ratio;
     int     nb_rebond;
+    t_palette color_f;
 
 }t_scene;
 

@@ -89,8 +89,8 @@ void	ft_create_image(t_vars *vars, t_camera *cam, t_scene *scene)
 			ft_send_camera_rays(scene, i, j, cam);
 			ft_put_color_pixel(&scene->color_f);
 			my_mlx_pixel_put(&vars->img, i, j
-			, create_trgb(1, scene.color_f.rgb.r
-			, scene.color_f.rgb.g, scene.color_f.rgb.b));
+			, create_trgb(1, scene->color_f.rgb.r
+			, scene->color_f.rgb.g, scene->color_f.rgb.b));
 			ft_clean_rgb(&scene->color_f);
 			scene->nb_rebond = 4;
 			j++;

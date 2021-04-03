@@ -23,7 +23,7 @@ t_scene *scene);
 double ft_color_intensity(t_palette *color, t_scene *scene, t_ray *ray);
 void ft_put_color_pixel(t_palette *color);
 t_list *ft_color_intensity_2(t_scene *scene, t_ray *ray, t_point *base);
-void ft_send_camera_rays(t_scene *scene, int i, int j, t_palette *color_f, t_camera *ptn);
+void ft_send_camera_rays(t_scene *scene, int i, int j, t_camera *ptn);
 void			ft_mirror(t_palette *color, t_ray *ray, t_point *base,
 t_scene *scene);
 void	ft_export_bmp(char *filename, t_vars *vars);
