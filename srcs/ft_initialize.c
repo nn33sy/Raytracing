@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 11:22:16 by user42            #+#    #+#             */
-/*   Updated: 2021/04/01 16:40:01 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/03 16:05:12 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,15 @@ int		create_trgb(int t, int r, int g, int b)
 
 void	ft_initialize_window(t_vars *vars, t_scene *scene)
 {
+	int rx;
+	int ry;
+
 	vars->mlx = mlx_init();
+	mlx_get_screen_size(vars->mlx,&rx, &ry);
+	if (scene->r_x > rx)
+		scene->r_x = rx;
+	if (scene->r_y > ry)
+		scene->r_y = ry;
 	vars->win = mlx_new_window(vars->mlx, scene->r_y,
 scene->r_x, "Hello world!");
 }
