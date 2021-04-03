@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 13:31:46 by user42            #+#    #+#             */
-/*   Updated: 2021/04/01 19:09:14 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/03 15:08:12 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ int		ft_c(char *line, t_camera **camera)
 
 	line++;
 	c = (t_camera *)malloc(sizeof(t_camera));
+	(void)camera;
 	if (c == NULL)
 		return (-1);
 	line = ft_parsing_position(line, &c->ray.origin);

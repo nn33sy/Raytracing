@@ -3,6 +3,8 @@
 
 int		key_hook(int keycode, t_vars *vars)
 {
+	if (keycode == 32)
+		ft_export_bmp("hello", vars);
 	if (keycode == 65307)
 	{
 		ft_clean(vars);
@@ -97,7 +99,6 @@ void	ft_create_image(t_vars *vars, t_camera *cam, t_scene *scene)
 		j = 0;
 		i++;
 	}
-	ft_export_bmp("hello", vars);
 	mlx_clear_window(vars->mlx, vars->win);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img.img, 0, 0);
 	mlx_key_hook(vars->win, key_hook, vars);
