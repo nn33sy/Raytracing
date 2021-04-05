@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bitmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: how-choongines <how-choongines@student.    +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 18:11:43 by how-choon         #+#    #+#             */
-/*   Updated: 2021/04/03 19:21:18 by how-choongi      ###   ########.fr       */
+/*   Updated: 2021/04/05 12:04:33 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,24 @@ static void		ft_bmpheader(t_bmpheader *header, t_vars *vars)
 	size = vars->scene->r_x * vars->scene->r_y * 3;
 	header->signaturebytes[0] = 'B';
 	header->signaturebytes[1] = 'M';
-	header->sizeOfBitmapFile = SIZE_HEADER + size;
-	header->reservedBytes = 0;
-	header->pixelDataOffset = SIZE_HEADER;
+	header->sizeofbitmapfile = SIZE_HEADER + size;
+	header->reservedbytes = 0;
+	header->pixeldataoffset = SIZE_HEADER;
 }
 
 static void		ft_bmpinfoheader(t_bmpinfoheader *infoheader, t_vars *vars)
 {
-	infoheader->sizeOfThisHeader = SIZE_INFO_HEADER;
+	infoheader->sizeofthisheader = SIZE_INFO_HEADER;
 	infoheader->width = vars->scene->r_x;
 	infoheader->height = vars->scene->r_y;
-	infoheader->numberOfColorPlanes = 1;
-	infoheader->colorDepth = 24;
-	infoheader->compressionMethod = 0;
-	infoheader->rawBitmapDataSize = 0;
-	infoheader->horizontalResolution = 3780;
-	infoheader->verticalResolution = 3780;
-	infoheader->colorTableEntries = 0;
-	infoheader->importantColors = 0;
+	infoheader->numberofcolorplanes = 1;
+	infoheader->colordepth = 24;
+	infoheader->compressionmethod = 0;
+	infoheader->rawbitmapdatasize = 0;
+	infoheader->horizontalresolution = 3780;
+	infoheader->verticalresolution = 3780;
+	infoheader->colortableentries = 0;
+	infoheader->importantcolors = 0;
 }
 
 static void		ft_write_header(int fd, t_vars *vars)
@@ -47,20 +47,20 @@ static void		ft_write_header(int fd, t_vars *vars)
 	ft_bmpheader(&header_one, vars);
 	ft_bmpinfoheader(&header_two, vars);
 	write(fd, &(header_one.signaturebytes), 2);
-	write(fd, &(header_one.sizeOfBitmapFile), 4);
-	write(fd, &(header_one.reservedBytes), 4);
-	write(fd, &(header_one.pixelDataOffset), 4);
-	write(fd, &(header_two.sizeOfThisHeader), 4);
+	write(fd, &(header_one.sizeofbitmapfile), 4);
+	write(fd, &(header_one.reservedbytes), 4);
+	write(fd, &(header_one.pixeldataoffset), 4);
+	write(fd, &(header_two.sizeofthisheader), 4);
 	write(fd, &(header_two.width), 4);
 	write(fd, &(header_two.height), 4);
-	write(fd, &(header_two.numberOfColorPlanes), 2);
-	write(fd, &(header_two.colorDepth), 2);
-	write(fd, &(header_two.compressionMethod), 4);
-	write(fd, &(header_two.rawBitmapDataSize), 4);
-	write(fd, &(header_two.horizontalResolution), 4);
-	write(fd, &(header_two.verticalResolution), 4);
-	write(fd, &(header_two.colorTableEntries), 4);
-	write(fd, &(header_two.importantColors), 4);
+	write(fd, &(header_two.numberofcolorplanes), 2);
+	write(fd, &(header_two.colordepth), 2);
+	write(fd, &(header_two.compressionmethod), 4);
+	write(fd, &(header_two.rawbitmapdatasize), 4);
+	write(fd, &(header_two.horizontalresolution), 4);
+	write(fd, &(header_two.verticalresolution), 4);
+	write(fd, &(header_two.colortableentries), 4);
+	write(fd, &(header_two.importantcolors), 4);
 }
 
 static void		write_bmpdata(t_vars *vars, int fd)

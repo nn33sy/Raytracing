@@ -26,4 +26,8 @@ t_scene *scene);
 void	ft_export_bmp(char *filename, t_vars *vars);
 void	ft_clean(t_vars *vars);
 void	ft_clean_scene(t_scene *scene);
+double  ft_determinant_matrix(t_matrix_two *matrix);
+void	ft_clean_rgb(t_palette *color_f);
+int     ft_exit(t_vars *vars);
+int		key_hook(int keycode, t_vars *vars);
 #endif

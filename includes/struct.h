@@ -10,17 +10,17 @@ typedef struct	s_bmpheader
 }				t_bmpheader;
 
 typedef struct	s_bmpinfoheader{
-	unsigned int	sizeOfThisHeader;
+	unsigned int	sizeofthisheader;
     unsigned int	width;
     unsigned int	height;
-    unsigned short	numberOfColorPlanes;
-    unsigned short	colorDepth;
-	unsigned int	compressionMethod;
-    unsigned int	rawBitmapDataSize;
-    unsigned int	horizontalResolution;
-    unsigned int	verticalResolution;
-    unsigned int	colorTableEntries;
-    unsigned int	importantColors;
+    unsigned short	numberofcolorplanes;
+    unsigned short	colordepth;
+	unsigned int	compressionmethod;
+    unsigned int	rawbitmapdatasize;
+    unsigned int	horizontalresolution;
+    unsigned int	verticalresolution;
+    unsigned int	colortableentries;
+    unsigned int	importantcolors;
 }				t_bmpinfoheader;
 
 typedef	struct	s_list

@@ -6,9 +6,9 @@ void	ft_put_color_pixel(t_palette *color)
 	{
 		if (color->magic == 0)
 		{
-			color->rgb.r = (color->rgb.r / nrays);
-			color->rgb.g = (color->rgb.g / nrays);
-			color->rgb.b = (color->rgb.b / nrays);
+			color->rgb.r = (color->rgb.r / 1);
+			color->rgb.g = (color->rgb.g / 1);
+			color->rgb.b = (color->rgb.b / 1);
 			ft_scale_rgb(&color->rgb);
 		}
 	}
@@ -41,6 +41,7 @@ void	ft_create_image_2(t_vars *vars)
 {
 	mlx_clear_window(vars->mlx, vars->win);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img.img, 0, 0);
+	mlx_hook(vars->win, 33, 0, ft_exit, vars);
 	mlx_key_hook(vars->win, key_hook, vars);
 	mlx_loop(vars->mlx);
 }

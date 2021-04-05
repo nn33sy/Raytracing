@@ -21,3 +21,9 @@ int		key_hook(int keycode, t_vars *vars)
 	}
 	return (0);
 }
+
+int	ft_exit(t_vars *vars)
+{
+	ft_clean(vars);
+	exit(EXIT_FAILURE);
+}

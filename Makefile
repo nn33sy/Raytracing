@@ -25,6 +25,8 @@ SRCS =  gnl/get_next_line.c \
 		srcs/ft_bitmap.c\
 		srcs/ft_mirror.c\
 		srcs/ft_clean.c\
+		srcs/ft_utils.c\
+		srcs/ft_key.c\
 		
 
 # COLORS
@@ -51,7 +53,6 @@ $(NAME): $(OBJ)
 	@cp minilibx-linux/libmlx.a ./$(NAME)
 	@ar rc $@ $^
 	@echo "Compiling & indexing" [ $(NAME) ] $(SUCCESS)
-	@$(CC) -Iincludes  $(OBJ) $(CFLAGS) main.c $(NAME) libft/libft.a minilibx-linux/libmlx.a -o minirt
 
 test :
 	@$(CC) -Iincludes  $(OBJ) $(CFLAGS)  main.c  $(NAME) libft/libft.a minilibx-linux/libmlx.a  -o  minirt
@@ -67,6 +68,7 @@ fclean: clean
 	@/bin/rm -f $(NAME)
 	@/bin/rm -f leak
 	@make fclean -C libft/
+	@make clean -C minilibx-linux/
 	@echo "Cleaning" [ $(NAME) ] $(OK)
 
 re: fclean all 
