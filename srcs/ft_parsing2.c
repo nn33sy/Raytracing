@@ -2,14 +2,20 @@
 
 int		ft_r(char *line, t_scene *scene)
 {
+	if (line == NULL)
+		return (NULL);
 	if (*line == 'R')
 		line++;
 	else
 		return (-1);
 	scene->r_x = ft_atoi_rt(line);
+	if (scene->r_x == -999)
+		return (-1);
 	while (*line >= '0' && *line <= '9')
 		line++;
 	scene->r_y = ft_atoi_rt(line);
+	if (scene->r_y == -999)
+		return (-1);
 	if (scene->r_x < 0 || scene->r_y < 0)
 	{
 		scene->r_x = 400;
@@ -21,6 +27,8 @@ int		ft_r(char *line, t_scene *scene)
 
 char	*ft_parsing_position(char *line, t_coord *coord)
 {
+	if (line == NULL)
+		return (NULL);
 	coord->x = ft_atoi_rt(line);
 	while (*line && *line != ',')
 		line++;
@@ -35,6 +43,9 @@ char	*ft_parsing_position(char *line, t_coord *coord)
 	while (*line && (((*line >= '0') && (*line <= '9'))
 	|| (*line == '.') || (*line == '-')))
 		line++;
+	if (coord->x == -999 || coord->y == -999 
+	|| coord->z == -999)
+		return (NULL);
 	return (line);
 }
 
@@ -53,6 +64,8 @@ char	*ft_parsing_rgb(t_rgb *rgb, char *line)
 	rgb->b = ft_atoi_rt(line);
 	while (*line && ((*line >= '0') && (*line <= '9')))
 		line++;
+	if (rgb->r == -999 || rgb->g == -999 || rgb->b == -999)
+		return (NULL);
 	return (line);
 }
 
@@ -63,7 +76,11 @@ int		ft_a(char *line, t_scene *scene)
 	else
 		return (-1);
 	line = ft_parsing_double(line, &scene->amb_light.ratio);
-	ft_parsing_rgb(&scene->amb_light.rgb, line);
+	if (line == NULL)
+		return (-1);
+	line = ft_parsing_rgb(&scene->amb_light.rgb, line);
+	if (line == NULL)
+		return (-1);
 	return (1);
 }
 
@@ -78,8 +95,14 @@ int		ft_l(char *line, t_light **light)
 	if (l == NULL)
 		return (-1);
 	line = ft_parsing_position(line, &l->pos);
+	if (line == NULL)
+		return (-1);
 	line = ft_parsing_double(line, &l->i);
-	ft_parsing_rgb(&l->rgb, line);
+	if (line == NULL)
+		return (-1);
+	line = ft_parsing_rgb(&l->rgb, line);
+	if (line == NULL)
+		return (-1);
 	l->next = *light;
 	*light = l;
 	return (1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi_rt.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By:  user42 <user42@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 18:11:43 by how-choon         #+#    #+#             */
-/*   Updated: 2021/04/01 16:39:20 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/05 16:27:42 by  user42          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ double				ft_atoi_rt(const char *str)
 			sign *= -1;
 		str++;
 	}
+	if (ft_isdigit(*str) == 0)
+		return (-999);
 	while (*str && *str >= '0' && *str <= '9')
 	{
 		res = res * 10 + (*str - '0');

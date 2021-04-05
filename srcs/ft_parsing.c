@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parsing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By:  user42 <user42@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 13:31:46 by user42            #+#    #+#             */
-/*   Updated: 2021/04/05 13:02:10 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/05 16:30:59 by  user42          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,32 +17,11 @@ char		*ft_parsing_double(char *line, double *nb)
 	while (*line && (*line == ' '))
 		line++;
 	*nb = ft_atoi_rt(line);
+	if (*nb == -999)
+		return (NULL);
 	while (*line && ((*line >= '0' && *line <= '9') || (*line == '.')))
 		line++;
 	return (line);
-}
-
-int			ft_cy(char *line, t_scene *scene)
-{
-	t_cylinder *cylinder;
-
-	if (*line != 'c')
-		return (-1);
-	line++;
-	if (*line != 'y')
-		return (-1);
-	line++;
-	cylinder = malloc(sizeof(t_cylinder));
-	if (cylinder == NULL)
-		return (-1);
-	line = ft_parsing_position(line, &cylinder->base);
-	line = ft_parsing_position(line, &cylinder->direction);
-	line = ft_parsing_rgb(&cylinder->rgb, line);
-	line = ft_parsing_double(line, &cylinder->diameter);
-	line = ft_parsing_double(line, &cylinder->height);
-	ft_lstadd_front(scene->list, ft_lstnew((void *)cylinder
-	, 4, ft_atoi_rt(line)));
-	return (1);
 }
 
 int			ft_parsing_line(char *line, t_scene *scene)

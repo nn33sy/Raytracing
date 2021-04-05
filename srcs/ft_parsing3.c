@@ -12,6 +12,8 @@ int		ft_c(char *line, t_camera **camera)
 	line = ft_parsing_position(line, &c->ray.origin);
 	line = ft_parsing_position(line, &c->direction);
 	line = ft_parsing_double(line, &c->fov);
+	if (line == NULL)
+		return (-1);
 	if (c->fov < 0)
 		c->fov *= -1;
 	c->fov = (c->fov * 3.14) / 180;
@@ -45,6 +47,8 @@ int		ft_sp(char *line, t_scene *scene)
 	line = ft_parsing_rgb(&sphere->rgb, line);
 	ft_lstadd_front(scene->list, ft_lstnew((void *)sphere, 0,
 	ft_atoi_rt(line)));
+	if (line == NULL)
+		return (-1);
 	return (1);
 }
 
@@ -65,6 +69,8 @@ int		ft_p(char *line, t_scene *scene)
 	line = ft_parsing_position(line, &plan->direction);
 	line = ft_parsing_rgb(&plan->rgb, line);
 	ft_lstadd_front(scene->list, ft_lstnew((void *)plan, 1, ft_atoi_rt(line)));
+	if (line == NULL)
+		return (-1);
 	return (1);
 }
 
@@ -87,6 +93,8 @@ int		ft_sq(char *line, t_scene *scene)
 	line = ft_parsing_rgb(&square->rgb, line);
 	ft_lstadd_front(scene->list, ft_lstnew((void *)square
 	, 2, ft_atoi_rt(line)));
+	if (line == NULL)
+		return (-1);
 	return (1);
 }
 
@@ -109,5 +117,7 @@ int		ft_tr(char *line, t_scene *scene)
 	line = ft_parsing_rgb(&triangle->rgb, line);
 	ft_lstadd_front(scene->list, ft_lstnew((void *)triangle
 	, 3, ft_atoi_rt(line)));
+	if (line == NULL)
+		return (-1);
 	return (1);
 }
