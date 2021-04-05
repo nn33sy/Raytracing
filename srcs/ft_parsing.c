@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parsing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: how-choongines <how-choongines@student.    +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 13:31:46 by user42            #+#    #+#             */
-/*   Updated: 2021/04/05 14:57:21 by how-choongi      ###   ########.fr       */
+/*   Updated: 2021/04/05 13:02:10 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,6 @@ t_scene		*main_parsing(char *file_scene)
 	res = gnl_parsing(scene, fd);
 	close(fd);
 	if (res == 0)
-		return (NULL)
+		return (NULL);
 	return (scene);
 }
