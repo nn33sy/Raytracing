@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_intensity_colors.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: how-choongines <how-choongines@student.    +#+  +:+       +#+        */
+/*   By:  user42 <user42@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 15:30:22 by user42            #+#    #+#             */
-/*   Updated: 2021/04/03 19:49:09 by how-choongi      ###   ########.fr       */
+/*   Updated: 2021/04/06 10:11:35 by  user42          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,15 @@ static void		ft_calculate_color(t_palette *color
 	double green;
 	double blue;
 
-	red = (base.rgb.r * 0.2) + (tmp->rgb.r * 0.9);
+	red = (base.rgb.r * 0.1) + (tmp->rgb.r * 0.8);
 	red += (scene->amb_light.rgb.r * 0.1);
-	color->rgb.r += red * (color->intensity + (scene->amb_light.ratio * 0.1));
-	green = ((base.rgb.g * 0.2) + (tmp->rgb.g * 0.9));
+	color->rgb.r += red * (color->intensity * 0.9 + (scene->amb_light.ratio * 0.1));
+	green = ((base.rgb.g * 0.1) + (tmp->rgb.g * 0.8));
 	green += (scene->amb_light.rgb.g * 0.1);
-	color->rgb.g += green * (color->intensity + (scene->amb_light.ratio * 0.1));
-	blue = ((base.rgb.b * 0.2) + (tmp->rgb.b * 0.9));
+	color->rgb.g += green * (color->intensity * 0.9 + (scene->amb_light.ratio * 0.1));
+	blue = ((base.rgb.b * 0.1) + (tmp->rgb.b * 0.8));
 	blue += (scene->amb_light.rgb.b * 0.1);
-	color->rgb.b += blue * (color->intensity + (scene->amb_light.ratio * 0.1));
+	color->rgb.b += blue * (color->intensity  * 0.9 + (scene->amb_light.ratio * 0.1));
 }
 
 static void		ft_color_intensity_3(t_palette *color

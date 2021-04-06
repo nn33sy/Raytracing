@@ -6,7 +6,7 @@
 /*   By:  user42 <user42@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 18:11:43 by how-choon         #+#    #+#             */
-/*   Updated: 2021/04/06 09:17:33 by  user42          ###   ########.fr       */
+/*   Updated: 2021/04/06 09:45:07 by  user42          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,18 @@ static double		count_nb(const char *str)
 	return ((double)i);
 }
 
+static void			ft_initialize(int *sign, double *res)
+{
+	*sign = 1;
+	*res = 0;
+}
+
 double				ft_atoi_rt(const char *str)
 {
 	int			sign;
 	double		res;
 
-	sign = 1;
-	res = 0;
+	ft_initialize(&sign, &res);
 	while (*str && ft_space(*str) == 1)
 		str++;
 	if (*str == '-' || *str == '+')

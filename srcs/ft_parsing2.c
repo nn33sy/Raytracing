@@ -27,14 +27,16 @@ char	*ft_parsing_position(char *line, t_coord *coord)
 		return (NULL);
 	while (*line && *line != ',')
 		line++;
-	if (*line)
-		line++;
+	if (!(*line))
+		return (NULL);
+	line++;
 	if ((coord->y = ft_atoi_rt(line)) == -999)
 		return (NULL);
 	while (*line && *line != ',')
 		line++;
-	if (*line)
-		line++;
+	if (!(*line))
+		return (NULL);
+	line++;
 	if ((coord->z = ft_atoi_rt(line)) == -999)
 		return (NULL);
 	while (*line && (((*line >= '0') && (*line <= '9'))
@@ -51,14 +53,16 @@ char	*ft_parsing_rgb(t_rgb *rgb, char *line)
 		return (NULL);
 	while (*line && (*line != ','))
 		line++;
-	if (*line)
-		line++;
+	if (!(*line))
+		return (NULL);
+	line++;
 	if ((rgb->g = ft_atoi_rt(line)) == -999)
 		return (NULL);
 	while (*line && (*line != ','))
 		line++;
-	if (*line)
-		line++;
+	if (!(*line))
+		return (NULL);
+	line++;
 	if ((rgb->b = ft_atoi_rt(line)) == -999)
 		return (NULL);
 	while (*line && ((*line >= '0') && (*line <= '9')))

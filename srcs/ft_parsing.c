@@ -6,7 +6,7 @@
 /*   By:  user42 <user42@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 13:31:46 by user42            #+#    #+#             */
-/*   Updated: 2021/04/06 09:14:39 by  user42          ###   ########.fr       */
+/*   Updated: 2021/04/06 09:36:47 by  user42          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	ft_close_error(t_scene *scene, int fd, char **line)
 	if (line != NULL)
 	{
 		free(*line);
-		free(line);	
+		free(line);
 	}
 	ft_clean_scene(scene);
 	ft_putstr_fd("Error in the file or doesn't allocate", 1);

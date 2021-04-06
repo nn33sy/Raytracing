@@ -56,6 +56,7 @@ $(NAME): $(OBJ)
 	@cp minilibx-linux/libmlx.a ./$(NAME)
 	@ar rc $@ $^
 	@echo "Compiling & indexing" [ $(NAME) ] $(SUCCESS)
+	@$(CC) -Iincludes  $(OBJ) $(CFLAGS)  main.c  $(NAME) libft/libft.a minilibx-linux/libmlx.a  -o  minirt
 
 test :
 	@$(CC) -Iincludes  $(OBJ) $(CFLAGS)  main.c  $(NAME) libft/libft.a minilibx-linux/libmlx.a  -o  minirt
