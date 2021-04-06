@@ -6,7 +6,7 @@
 /*   By:  user42 <user42@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 18:11:43 by how-choon         #+#    #+#             */
-/*   Updated: 2021/04/05 16:27:42 by  user42          ###   ########.fr       */
+/*   Updated: 2021/04/06 09:17:33 by  user42          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int			ft_space(char c)
 {
 	if (c == '\t' || c == '\v' || c == '\f' || c == '\r'
-		|| c == '\n' || c == ' ')
+		|| c == '\n' || c == ' ' || c == ',' || c == '.')
 		return (1);
 	return (0);
 }
@@ -45,10 +45,10 @@ double				ft_atoi_rt(const char *str)
 			sign *= -1;
 		str++;
 	}
-	if (ft_isdigit(*str) == 0)
-		return (-999);
-	while (*str && *str >= '0' && *str <= '9')
+	while (*str && ft_space(*str) == 0)
 	{
+		if (ft_isdigit(*str) == 0)
+			return (-999);
 		res = res * 10 + (*str - '0');
 		str++;
 	}

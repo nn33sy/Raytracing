@@ -6,7 +6,7 @@
 /*   By:  user42 <user42@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 13:31:46 by user42            #+#    #+#             */
-/*   Updated: 2021/04/05 16:30:59 by  user42          ###   ########.fr       */
+/*   Updated: 2021/04/06 09:14:39 by  user42          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,28 +30,33 @@ int			ft_parsing_line(char *line, t_scene *scene)
 
 	res = 0;
 	if (line[0] == 'R')
-		res = ft_r(line, scene);
+		res = ft_r(&line[1], scene);
 	if (line[0] == 's' && line[1] == 'p')
-		res = ft_sp(line, scene);
+		res = ft_sp(&line[2], scene);
 	if (line[0] == 's' && line[1] == 'q')
-		res = ft_sq(line, scene);
-	if (line[0] == 'p')
-		res = ft_p(line, scene);
+		res = ft_sq(&line[2], scene);
+	if (line[0] == 'p' && line[1] == 'l')
+		res = ft_p(&line[2], scene);
 	if (line[0] == 't' && line[1] == 'r')
-		res = ft_tr(line, scene);
+		res = ft_tr(&line[2], scene);
 	if (line[0] == 'c' && line[1] == 'y')
-		res = ft_cy(line, scene);
+		res = ft_cy(&line[2], scene);
 	if (line[0] == 'A')
-		res = ft_a(line, scene);
+		res = ft_a(&line[1], scene);
 	if (line[0] == 'c' && line[1] == ' ')
-		res = ft_c(line, scene->camera);
+		res = ft_c(&line[1], scene->camera);
 	if (line[0] == 'l')
-		res = ft_l(line, scene->light);
+		res = ft_l(&line[1], scene->light);
 	return (res);
 }
 
-static void	ft_close_error(t_scene *scene, int fd)
+static void	ft_close_error(t_scene *scene, int fd, char **line)
 {
+	if (line != NULL)
+	{
+		free(*line);
+		free(line);	
+	}
 	ft_clean_scene(scene);
 	ft_putstr_fd("Error in the file or doesn't allocate", 1);
 	free(scene);
@@ -69,14 +74,14 @@ int			gnl_parsing(t_scene *scene, int fd)
 	{
 		if (ft_parsing_line(*line, scene) == -1)
 		{
-			ft_close_error(scene, fd);
+			ft_close_error(scene, fd, line);
 			return (0);
 		}
 		free(*line);
 	}
 	if (ft_parsing_line(*line, scene) == -1)
 	{
-		ft_close_error(scene, fd);
+		ft_close_error(scene, fd, line);
 		return (0);
 	}
 	free(*line);
@@ -102,7 +107,7 @@ t_scene		*main_parsing(char *file_scene)
 	*(scene->camera) = NULL;
 	if (!scene || !(scene->light) || !(scene->list) || !(scene->camera))
 	{
-		ft_close_error(scene, fd);
+		ft_close_error(scene, fd, NULL);
 		return (NULL);
 	}
 	res = gnl_parsing(scene, fd);

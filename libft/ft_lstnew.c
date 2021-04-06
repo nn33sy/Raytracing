@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: how-choongines <marvin@42.fr>              +#+  +:+       +#+        */
+/*   By:  user42 <user42@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 19:20:45 by how-choon         #+#    #+#             */
-/*   Updated: 2020/11/18 21:04:03 by how-choon        ###   ########.fr       */
+/*   Updated: 2021/04/06 08:46:17 by  user42          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void *content, int type, double magic)
+t_list	*ft_lstnew(void *content, int type)
 {
 	t_list *new;
 
@@ -21,7 +21,7 @@ t_list	*ft_lstnew(void *content, int type, double magic)
 		return (NULL);
 	new->type = type;
 	new->next = NULL;
-	new->magic = magic;
+	new->magic = 0;
 	new->object = content;
 	return (new);
 }

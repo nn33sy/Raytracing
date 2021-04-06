@@ -9,6 +9,9 @@ SRCS =  gnl/get_next_line.c \
 		srcs/ft_function_maths.c \
 		srcs/ft_image.c \
 		srcs/ft_parsing.c \
+		srcs/ft_parsing2.c \
+		srcs/ft_parsing3.c \
+		srcs/ft_parsing4.c \
 		srcs/ft_intersection_cylinder.c \
 		srcs/ft_rotation.c \
 		srcs/ft_sphere.c\
@@ -71,6 +74,6 @@ fclean: clean
 	@make clean -C minilibx-linux/
 	@echo "Cleaning" [ $(NAME) ] $(OK)
 
-re: fclean all 
+re: fclean all test
 
 .PHONY: all clean fclean re test
