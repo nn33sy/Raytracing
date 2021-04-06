@@ -22,6 +22,11 @@ int		key_hook(int keycode, t_vars *vars)
 	return (0);
 }
 
+int		ft_imagewin(t_vars *vars)
+{
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->img.img, 0, 0);
+}
+
 int		ft_exit(t_vars *vars)
 {
 	ft_clean(vars);

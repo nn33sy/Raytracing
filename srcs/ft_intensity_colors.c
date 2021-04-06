@@ -6,7 +6,7 @@
 /*   By:  user42 <user42@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 15:30:22 by user42            #+#    #+#             */
-/*   Updated: 2021/04/06 13:04:51 by  user42          ###   ########.fr       */
+/*   Updated: 2021/04/06 15:43:28 by  user42          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ t_ray *ray)
 			ft_mirror(color, ray, &base, scene);
 		else
 		{
-			printf("%d",obj->magic);
 			tmp = *(scene->light);
 			while (tmp != NULL)
 			{

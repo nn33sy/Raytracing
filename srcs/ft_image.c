@@ -42,6 +42,7 @@ void	ft_create_image_2(t_vars *vars)
 	mlx_clear_window(vars->mlx, vars->win);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img.img, 0, 0);
 	mlx_hook(vars->win, 33, 0, ft_exit, vars);
+	mlx_hook(vars->win, 12, (1L << 15), ft_imagewin, vars);
 	mlx_key_hook(vars->win, key_hook, vars);
 	mlx_loop(vars->mlx);
 }
