@@ -1,6 +1,6 @@
 NAME = minirt.a
 CC=gcc
-CFLAGS= -Wall -Wextra -Werror -lmlx -lXext -lX11 -lm
+CFLAGS=  -lmlx -lXext -lX11 -lm
 OBJ = ${SRCS:.c=.o}
 
 SRCS =  gnl/get_next_line.c \

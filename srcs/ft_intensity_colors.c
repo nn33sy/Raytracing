@@ -6,7 +6,7 @@
 /*   By:  user42 <user42@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 15:30:22 by user42            #+#    #+#             */
-/*   Updated: 2021/04/06 10:11:35 by  user42          ###   ########.fr       */
+/*   Updated: 2021/04/06 13:04:51 by  user42          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_list			*ft_color_intensity_2(t_scene *scene, t_ray *ray, t_point *base)
 	t_list	*min;
 
 	tmp = ft_initialize_color_2(scene, &t_min);
+	min = NULL;
 	while (tmp != NULL)
 	{
 		if (tmp->type == 0 &&
@@ -95,6 +96,7 @@ t_ray *ray)
 			ft_mirror(color, ray, &base, scene);
 		else
 		{
+			printf("%d",obj->magic);
 			tmp = *(scene->light);
 			while (tmp != NULL)
 			{
