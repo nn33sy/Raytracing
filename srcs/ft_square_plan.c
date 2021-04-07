@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_square_plan.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: how-choongines <how-choongines@student.    +#+  +:+       +#+        */
+/*   By:  user42 <user42@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 13:40:58 by user42            #+#    #+#             */
-/*   Updated: 2021/04/03 19:55:38 by how-choongi      ###   ########.fr       */
+/*   Updated: 2021/04/07 15:46:24 by  user42          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,13 @@ int		intersection_plan(t_plan *plan, t_ray *ray
 	return (1);
 }
 
+void	replace_color_square(t_point *base, t_square *square)
+{
+	base->rgb.r = square->rgb.r;
+	base->rgb.g = square->rgb.g;
+	base->rgb.b = square->rgb.b;
+}
+
 int		intersection_square(t_square *square, t_ray *ray
 , t_point *base, double *t_min)
 {
@@ -61,7 +68,9 @@ int		intersection_square(t_square *square, t_ray *ray
 	t_coord	proj;
 
 	t = intersection_basic(ray, &(square->direction), &(square->center));
-	if (t == -1 && *t_min != -1 && t > *t_min)
+	if (t == -1)
+		return (-1);
+	if (*t_min != -1 && t > *t_min)
 		return (-1);
 	ft_vectors_mult(&(ray->direction), t, &proj);
 	ft_vectors_add(&proj, &(ray->origin), &proj);
@@ -77,8 +86,6 @@ int		intersection_square(t_square *square, t_ray *ray
 	ft_coord(square->direction.x, square->direction.y
 	, square->direction.z, &base->normal);
 	ft_coord(proj.x, proj.y, proj.z, &base->pos);
-	base->rgb.r = square->rgb.r;
-	base->rgb.g = square->rgb.g;
-	base->rgb.b = square->rgb.b;
+	replace_color_square(base, square);
 	return (1);
 }

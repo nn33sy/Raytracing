@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_initialize.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: how-choongines <how-choongines@student.    +#+  +:+       +#+        */
+/*   By:  user42 <user42@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 11:22:16 by user42            #+#    #+#             */
-/*   Updated: 2021/04/03 19:49:39 by how-choongi      ###   ########.fr       */
+/*   Updated: 2021/04/07 15:58:14 by  user42          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	ft_initialize_window(t_vars *vars, t_scene *scene)
 		scene->r_x = rx;
 	if (scene->r_y > ry)
 		scene->r_y = ry;
-	vars->win = mlx_new_window(vars->mlx, scene->r_y,
+	if (vars->photo == 0)
+		vars->win = mlx_new_window(vars->mlx, scene->r_y,
 scene->r_x, "Hello world!");
 }

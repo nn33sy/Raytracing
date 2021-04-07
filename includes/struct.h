@@ -175,5 +175,6 @@ typedef struct	s_vars
 	void			*win;
 	t_data			img;
 	t_scene			*scene;
+	int				photo;
 }				t_vars;
 #endif

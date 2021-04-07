@@ -39,12 +39,17 @@ void	ft_send_camera_rays(t_scene *scene
 
 void	ft_create_image_2(t_vars *vars)
 {
-	mlx_clear_window(vars->mlx, vars->win);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->img.img, 0, 0);
-	mlx_hook(vars->win, 33, 0, ft_exit, vars);
-	mlx_hook(vars->win, 12, (1L << 15), ft_imagewin, vars);
-	mlx_key_hook(vars->win, key_hook, vars);
-	mlx_loop(vars->mlx);
+	if (vars->photo == 0)
+	{
+		mlx_clear_window(vars->mlx, vars->win);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->img.img, 0, 0);
+		mlx_hook(vars->win, 33, 0, ft_exit, vars);
+		mlx_hook(vars->win, 12, (1L << 15), ft_imagewin, vars);
+		mlx_key_hook(vars->win, key_hook, vars);
+		mlx_loop(vars->mlx);
+	}
+	else
+		ft_export_bmp("photoo", vars);
 }
 
 void	ft_create_image(t_vars *vars, t_camera *cam, t_scene *scene)
@@ -74,7 +79,7 @@ void	ft_create_image(t_vars *vars, t_camera *cam, t_scene *scene)
 	ft_create_image_2(vars);
 }
 
-int		main_function(char *file_src)
+int		main_function(char *file_src, int photo)
 {
 	t_vars	vars;
 	t_scene	*scene;
@@ -84,6 +89,7 @@ int		main_function(char *file_src)
 		exit(EXIT_FAILURE);
 	scene->nb_rebond = 4;
 	vars.scene = scene;
+	vars.photo = photo;
 	scene->cam_actual = *(scene->camera);
 	ft_initialize_window(&vars, scene);
 	ft_initialize_img(&vars, &vars.img, scene);

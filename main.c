@@ -13,18 +13,18 @@ int	check_arg(char *arg)
 
 int	main(int argc, char *argv[])
 {
-	if (argc == 2 || (argc == 3
-	&& ft_strncmp(argv[2], "--save", ft_strlen("--save"))))
-		if (check_arg(argv[1]) == 1)
-			main_function(argv[1]);
-		else
-		{
-			ft_putstr_fd("Error\n", 1);
-			exit(EXIT_FAILURE);
-		}
-	else
+	if (argc == 2 && check_arg(argv[1]) == 1)
 	{
-		ft_putstr_fd("Error\n", 1);
-		exit(EXIT_FAILURE);
+		main_function(argv[1], 0);
+		return (0);
 	}
+	if (argc == 3 &&
+	ft_strncmp(argv[2], "--save", 5) == 0
+	&& check_arg(argv[1]) == 1)
+	{
+		main_function(argv[1], 1);
+		return (0);
+	}
+	ft_putstr_fd("Error", 1);
+	return (0);
 }

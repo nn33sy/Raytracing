@@ -3,7 +3,7 @@
 int		key_hook(int keycode, t_vars *vars)
 {
 	if (keycode == 32)
-		ft_export_bmp("hello", vars);
+		ft_export_bmp("photoo", vars);
 	if (keycode == 65307)
 	{
 		ft_clean(vars);
