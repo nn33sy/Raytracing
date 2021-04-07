@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_scale_color.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: how-choongines <how-choongines@student.    +#+  +:+       +#+        */
+/*   By: how-choongines <marvin@42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 23:24:51 by how-choongi       #+#    #+#             */
-/*   Updated: 2021/04/03 19:54:46 by how-choongi      ###   ########.fr       */
+/*   Updated: 2021/04/07 19:03:35 by how-choongi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

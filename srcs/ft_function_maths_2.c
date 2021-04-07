@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_function_maths_2.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: how-choongines <how-choongines@student.    +#+  +:+       +#+        */
+/*   By: how-choongines <marvin@42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 23:26:00 by how-choongi       #+#    #+#             */
-/*   Updated: 2021/04/03 19:24:11 by how-choongi      ###   ########.fr       */
+/*   Updated: 2021/04/07 19:02:33 by how-choongi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
