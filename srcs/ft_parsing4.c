@@ -12,11 +12,11 @@ int			ft_cy(char *line, t_scene *scene)
 		return (-1);
 	if ((line = ft_parsing_position(line, &cylinder->direction)) == NULL)
 		return (-1);
-	if ((line = ft_parsing_rgb(&cylinder->rgb, line)) == NULL)
-		return (-1);
 	if ((line = ft_parsing_double(line, &cylinder->diameter)) == NULL)
 		return (-1);
 	if ((line = ft_parsing_double(line, &cylinder->height)) == NULL)
+		return (-1);
+	if ((line = ft_parsing_rgb(&cylinder->rgb, line)) == NULL)
 		return (-1);
 	(*(scene->list))->magic = ft_atoi_rt(line);
 	return (1);
