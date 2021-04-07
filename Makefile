@@ -70,6 +70,7 @@ clean:
 
 fclean: clean
 	@/bin/rm -f $(NAME)
+	@/bin/rm -f minirt
 	@/bin/rm -f leak
 	@make fclean -C libft/
 	@make clean -C minilibx-linux/

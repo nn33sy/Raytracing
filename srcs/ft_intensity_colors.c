@@ -6,14 +6,15 @@
 /*   By:  user42 <user42@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 15:30:22 by user42            #+#    #+#             */
-/*   Updated: 2021/04/06 15:43:28 by  user42          ###   ########.fr       */
+/*   Updated: 2021/04/07 11:37:50 by  user42          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static t_list	*ft_initialize_color_2(t_scene *scene, double *t_min)
+static t_list	*ft_initialize_color_2(t_scene *scene, double *t_min, t_list **min)
 {
+	*min = NULL;
 	*t_min = -1;
 	return (*(scene->list));
 }
@@ -24,8 +25,7 @@ t_list			*ft_color_intensity_2(t_scene *scene, t_ray *ray, t_point *base)
 	double	t_min;
 	t_list	*min;
 
-	tmp = ft_initialize_color_2(scene, &t_min);
-	min = NULL;
+	tmp = ft_initialize_color_2(scene, &t_min, &min);
 	while (tmp != NULL)
 	{
 		if (tmp->type == 0 &&
@@ -57,13 +57,16 @@ static void		ft_calculate_color(t_palette *color
 
 	red = (base.rgb.r * 0.1) + (tmp->rgb.r * 0.8);
 	red += (scene->amb_light.rgb.r * 0.1);
-	color->rgb.r += red * (color->intensity * 0.9 + (scene->amb_light.ratio * 0.1));
+	color->rgb.r += red * (color->intensity * 0.9 
+	+ (scene->amb_light.ratio * 0.1));
 	green = ((base.rgb.g * 0.1) + (tmp->rgb.g * 0.8));
 	green += (scene->amb_light.rgb.g * 0.1);
-	color->rgb.g += green * (color->intensity * 0.9 + (scene->amb_light.ratio * 0.1));
+	color->rgb.g += green * (color->intensity * 0.9 
+	+ (scene->amb_light.ratio * 0.1));
 	blue = ((base.rgb.b * 0.1) + (tmp->rgb.b * 0.8));
 	blue += (scene->amb_light.rgb.b * 0.1);
-	color->rgb.b += blue * (color->intensity  * 0.9 + (scene->amb_light.ratio * 0.1));
+	color->rgb.b += blue * (color->intensity  * 0.9 
+	+ (scene->amb_light.ratio * 0.1));
 }
 
 static void		ft_color_intensity_3(t_palette *color
