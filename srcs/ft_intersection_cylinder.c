@@ -6,7 +6,7 @@
 /*   By:  user42 <user42@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:24:01 by user42            #+#    #+#             */
-/*   Updated: 2021/04/07 12:43:05 by  user42          ###   ########.fr       */
+/*   Updated: 2021/04/07 14:27:33 by  user42          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ t_ray *ray, double *t0, double *t1)
 	delta[3] = pow(delta[1], 2) - (4 * delta[0] * delta[2]);
 	if (delta[3] <= 0)
 		return (-1);
-	*t0 = (-delta[1] - delta[3]) / (2 * delta[0]);
-	*t1 = (-delta[1] + delta[3]) / (2 * delta[0]);
+	*t0 = (-delta[1] - sqrt(delta[3])) / (2 * delta[0]);
+	*t1 = (-delta[1] + sqrt(delta[3])) / (2 * delta[0]);
 	if (*t0 <= 0 && *t1 <= 0)
 		return (-1);
 	return (1);
