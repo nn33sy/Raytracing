@@ -6,7 +6,7 @@
 /*   By: how-choongines <marvin@42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 11:22:16 by user42            #+#    #+#             */
-/*   Updated: 2021/04/07 19:02:49 by how-choongi      ###   ########.fr       */
+/*   Updated: 2021/04/08 11:16:20 by how-choongi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,5 @@ void	ft_initialize_window(t_vars *vars, t_scene *scene)
 		scene->r_y = ry;
 	if (vars->photo == 0)
 		vars->win = mlx_new_window(vars->mlx, scene->r_y,
-scene->r_x, "Hello world!");
+scene->r_x, "Hello Minirt!");
 }

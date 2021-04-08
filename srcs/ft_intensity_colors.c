@@ -6,7 +6,7 @@
 /*   By: how-choongines <marvin@42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 15:30:22 by user42            #+#    #+#             */
-/*   Updated: 2021/04/07 19:02:53 by how-choongi      ###   ########.fr       */
+/*   Updated: 2021/04/07 17:42:09 by how-choongi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,15 @@ static void		ft_calculate_color(t_palette *color
 	double green;
 	double blue;
 
-	red = (base.rgb.r * 0.1) + (tmp->rgb.r * 0.8);
+	red = (base.rgb.r * 0.3) + (tmp->rgb.r * 0.7);
 	red += (scene->amb_light.rgb.r * 0.1);
 	color->rgb.r += red * (color->intensity * 0.9
 	+ (scene->amb_light.ratio * 0.1));
-	green = ((base.rgb.g * 0.1) + (tmp->rgb.g * 0.8));
+	green = ((base.rgb.g * 0.3) + (tmp->rgb.g * 0.7));
 	green += (scene->amb_light.rgb.g * 0.1);
 	color->rgb.g += green * (color->intensity * 0.9
 	+ (scene->amb_light.ratio * 0.1));
-	blue = ((base.rgb.b * 0.1) + (tmp->rgb.b * 0.8));
+	blue = ((base.rgb.b * 0.3) + (tmp->rgb.b * 0.7));
 	blue += (scene->amb_light.rgb.b * 0.1);
 	color->rgb.b += blue * (color->intensity * 0.9
 	+ (scene->amb_light.ratio * 0.1));
