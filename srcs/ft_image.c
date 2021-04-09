@@ -6,7 +6,7 @@
 /*   By: how-choongines <marvin@42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 19:02:44 by how-choongi       #+#    #+#             */
-/*   Updated: 2021/04/07 19:02:46 by how-choongi      ###   ########.fr       */
+/*   Updated: 2021/04/08 21:05:23 by how-choongi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,15 @@ void	ft_send_camera_rays(t_scene *scene
 	ft_coord(i - (scene->r_y / 2), -j + (scene->r_x / 2)
 	, -(scene->r_x / (2 * tan(ptn->fov / 2))), &ptn->ray.direction);
 	x = (ptn->right.x * ptn->ray.direction.x)
-	+ (ptn->right.y * ptn->ray.direction.y)
-	+ (ptn->right.z * ptn->ray.direction.z);
-	y = (ptn->up.x * ptn->ray.direction.x)
+	+ (ptn->up.x * ptn->ray.direction.y)
+	+ (ptn->forward.x * ptn->ray.direction.z);
+	y = (ptn->right.y * ptn->ray.direction.x)
 	+ (ptn->up.y * ptn->ray.direction.y) +
-	(ptn->up.z * ptn->ray.direction.z);
-	z = (ptn->forward.x * ptn->ray.direction.x)
-	+ (ptn->forward.y * ptn->ray.direction.y)
+	(ptn->forward.y * ptn->ray.direction.z);
+	z = (ptn->right.z * ptn->ray.direction.x)
+	+ (ptn->up.z* ptn->ray.direction.y)
 	+ (ptn->forward.z * ptn->ray.direction.z);
-	ft_coord(x, y, z, &ptn->ray.direction);
+	ft_coord(-x, y, z, &ptn->ray.direction);
 	ft_normalize(&ptn->ray.direction);
 	ft_color_intensity(&scene->color_f, scene, &ptn->ray);
 }

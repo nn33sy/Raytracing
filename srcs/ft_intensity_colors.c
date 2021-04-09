@@ -6,7 +6,7 @@
 /*   By: how-choongines <marvin@42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 15:30:22 by user42            #+#    #+#             */
-/*   Updated: 2021/04/07 17:42:09 by how-choongi      ###   ########.fr       */
+/*   Updated: 2021/04/09 13:42:09 by how-choongi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void		ft_calculate_color(t_palette *color
 	red += (scene->amb_light.rgb.r * 0.1);
 	color->rgb.r += red * (color->intensity * 0.9
 	+ (scene->amb_light.ratio * 0.1));
-	green = ((base.rgb.g * 0.3) + (tmp->rgb.g * 0.7));
+	green = (base.rgb.g * 0.1) + (tmp->rgb.g * 0.9);
 	green += (scene->amb_light.rgb.g * 0.1);
 	color->rgb.g += green * (color->intensity * 0.9
 	+ (scene->amb_light.ratio * 0.1));
@@ -85,6 +85,30 @@ static void		ft_color_intensity_3(t_palette *color
 	/ dist) * tmp->i * 1000;
 	ft_calculate_color(color, scene, base, tmp);
 }
+static void 	ft_color_intensity_4(t_palette *color
+, t_scene *scene, t_point base, t_light *tmp)
+{
+	double	dist;
+	t_coord	l;
+
+	ft_vectors_substract(&base.pos, &tmp->pos, &l);
+	dist = ft_norm2(&l);
+	ft_normalize(&l);
+	color->intensity += (ft_ombre(&base, dist, scene, tmp) *
+	(ft_scal_produce(&l, &base.normal) +
+	ft_specular(&base, &l, *(scene->camera)))
+	/ dist) * tmp->i * 1000;
+	if (color->intensity == 0)
+	{
+		ft_vectors_mult(&base.normal, -1, &base.normal);
+			color->intensity += (ft_ombre(&base, dist, scene, tmp) *
+	(ft_scal_produce(&l, &base.normal) +
+	ft_specular(&base, &l, *(scene->camera)))
+	/ dist) * tmp->i * 1000;
+	}
+
+	ft_calculate_color(color, scene, base, tmp);
+}
 
 double			ft_color_intensity(t_palette *color, t_scene *scene,
 t_ray *ray)
@@ -107,7 +131,10 @@ t_ray *ray)
 					color->magic = 3;
 				else
 					color->magic = 0;
-				ft_color_intensity_3(color, scene, base, tmp);
+				if (obj->type == 2 || obj->type == 3 || obj->type == 1 )
+					ft_color_intensity_4(color, scene, base, tmp);
+				else 
+					ft_color_intensity_3(color, scene, base, tmp);
 				tmp = tmp->next;
 			}
 			return (color->intensity);
