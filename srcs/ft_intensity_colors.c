@@ -6,7 +6,7 @@
 /*   By: how-choongines <marvin@42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 15:30:22 by user42            #+#    #+#             */
-/*   Updated: 2021/04/09 13:42:09 by how-choongi      ###   ########.fr       */
+/*   Updated: 2021/04/09 14:27:45 by how-choongi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ ft_intersection_cylinder((t_cylinder*)tmp->object, ray, base, &t_min) == 1)
 	return (min);
 }
 
-static void		ft_calculate_color(t_palette *color
+void			ft_calculate_color(t_palette *color
 , t_scene *scene, t_point base, t_light *tmp)
 {
 	double red;
@@ -85,30 +85,6 @@ static void		ft_color_intensity_3(t_palette *color
 	/ dist) * tmp->i * 1000;
 	ft_calculate_color(color, scene, base, tmp);
 }
-static void 	ft_color_intensity_4(t_palette *color
-, t_scene *scene, t_point base, t_light *tmp)
-{
-	double	dist;
-	t_coord	l;
-
-	ft_vectors_substract(&base.pos, &tmp->pos, &l);
-	dist = ft_norm2(&l);
-	ft_normalize(&l);
-	color->intensity += (ft_ombre(&base, dist, scene, tmp) *
-	(ft_scal_produce(&l, &base.normal) +
-	ft_specular(&base, &l, *(scene->camera)))
-	/ dist) * tmp->i * 1000;
-	if (color->intensity == 0)
-	{
-		ft_vectors_mult(&base.normal, -1, &base.normal);
-			color->intensity += (ft_ombre(&base, dist, scene, tmp) *
-	(ft_scal_produce(&l, &base.normal) +
-	ft_specular(&base, &l, *(scene->camera)))
-	/ dist) * tmp->i * 1000;
-	}
-
-	ft_calculate_color(color, scene, base, tmp);
-}
 
 double			ft_color_intensity(t_palette *color, t_scene *scene,
 t_ray *ray)
@@ -127,13 +103,10 @@ t_ray *ray)
 			tmp = *(scene->light);
 			while (tmp != NULL)
 			{
-				if (obj->magic == 3)
-					color->magic = 3;
-				else
-					color->magic = 0;
-				if (obj->type == 2 || obj->type == 3 || obj->type == 1 )
+				ft_check_magic(obj, color);
+				if (obj->type == 2 || obj->type == 3 || obj->type == 1)
 					ft_color_intensity_4(color, scene, base, tmp);
-				else 
+				else
 					ft_color_intensity_3(color, scene, base, tmp);
 				tmp = tmp->next;
 			}

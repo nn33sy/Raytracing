@@ -6,7 +6,7 @@
 /*   By: how-choongines <marvin@42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 19:02:44 by how-choongi       #+#    #+#             */
-/*   Updated: 2021/04/08 21:05:23 by how-choongi      ###   ########.fr       */
+/*   Updated: 2021/04/09 14:19:58 by how-choongi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ft_send_camera_rays(t_scene *scene
 	+ (ptn->up.y * ptn->ray.direction.y) +
 	(ptn->forward.y * ptn->ray.direction.z);
 	z = (ptn->right.z * ptn->ray.direction.x)
-	+ (ptn->up.z* ptn->ray.direction.y)
+	+ (ptn->up.z * ptn->ray.direction.y)
 	+ (ptn->forward.z * ptn->ray.direction.z);
 	ft_coord(-x, y, z, &ptn->ray.direction);
 	ft_normalize(&ptn->ray.direction);

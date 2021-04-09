@@ -25,6 +25,7 @@ SRCS =  gnl/get_next_line.c \
 		srcs/ft_scale_color.c\
 		srcs/ft_camera.c\
 		srcs/ft_intensity_colors.c\
+		srcs/ft_intensity_colors2.c\
 		srcs/ft_bitmap.c\
 		srcs/ft_mirror.c\
 		srcs/ft_clean.c\

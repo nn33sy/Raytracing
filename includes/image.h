@@ -6,7 +6,7 @@
 /*   By: how-choongines <marvin@42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 19:06:03 by how-choongi       #+#    #+#             */
-/*   Updated: 2021/04/07 19:06:04 by how-choongi      ###   ########.fr       */
+/*   Updated: 2021/04/09 14:32:36 by how-choongi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 # include "minirt.h"
 
 void	ft_create_image(t_vars *vars, t_camera *cam, t_scene *scene);
+void	ft_color_intensity_4(t_palette *color, t_scene *scene, t_point base
+, t_light *tmp);
+void	ft_check_magic(t_list *obj, t_palette *color);
+void	ft_calculate_color(t_palette *color
+, t_scene *scene, t_point base, t_light *tmp);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int		create_trgb(int t, int r, int g, int b);
 void	ft_initialize_img(t_vars *vars, t_data *img, t_scene *scene);

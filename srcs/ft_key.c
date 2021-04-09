@@ -6,7 +6,7 @@
 /*   By: how-choongines <marvin@42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 19:52:42 by how-choon         #+#    #+#             */
-/*   Updated: 2021/04/07 19:03:01 by how-choongi      ###   ########.fr       */
+/*   Updated: 2021/04/09 14:26:21 by how-choongi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		key_hook(int keycode, t_vars *vars)
 int		ft_imagewin(t_vars *vars)
 {
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img.img, 0, 0);
-	return(0);
+	return (0);
 }
 
 int		ft_exit(t_vars *vars)

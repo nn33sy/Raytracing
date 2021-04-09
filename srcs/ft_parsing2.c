@@ -6,7 +6,7 @@
 /*   By: how-choongines <marvin@42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 19:52:42 by how-choon         #+#    #+#             */
-/*   Updated: 2021/04/07 19:03:17 by how-choongi      ###   ########.fr       */
+/*   Updated: 2021/04/09 14:29:37 by how-choongi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ int		ft_r(char *line, t_scene *scene)
 		scene->r_x = 400;
 		scene->r_y = 400;
 	}
+	if (scene->r_x % 2 == 1)
+		scene->r_x += 1;
+	if (scene->r_y % 2 == 1)
+		scene->r_y += 1;
 	scene->ratio = scene->r_x / scene->r_y;
 	return (1);
 }
