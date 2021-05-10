@@ -1,6 +1,7 @@
 NAME = minirt.a
 CC=gcc
-CFLAGS=  -Wall -Wextra -Werror -lmlx -lXext -lX11 -lm 
+LFLAGS=  -lft -lmlx_Linux -lXext -lX11 -lm -Llibft -Lminilibx-linux
+CFLAGS=  -Wall -Wextra -Werror
 OBJ = ${SRCS:.c=.o}
 
 SRCS =  gnl/get_next_line.c \
@@ -57,13 +58,13 @@ $(NAME): $(OBJ)
 	@cp minilibx-linux/libmlx.a ./$(NAME)
 	@ar rc $@ $^
 	@echo "Compiling & indexing" [ $(NAME) ] $(SUCCESS)
-	@$(CC) -Iincludes  $(OBJ) $(CFLAGS)  main.c  $(NAME) libft/libft.a minilibx-linux/libmlx.a  -o  minirt
+	@$(CC) -Iincludes  $(OBJ)  $(LFLAGS) $(CFLAGS)  main.c  $(NAME) libft/libft.a minilibx-linux/libmlx.a  -o  minirt
 
 test :
-	@$(CC) -Iincludes  $(OBJ) $(CFLAGS)  main.c  $(NAME) libft/libft.a minilibx-linux/libmlx.a  -o  minirt
+	@$(CC) -Iincludes  $(OBJ) $(LFLAGS) $(CFLAGS)  main.c  $(NAME) libft/libft.a minilibx-linux/libmlx.a  -o  minirt
 
 leak : 
-	@$(CC) -Iincludes  $(OBJ) $(CFLAGS)  main.c  $(NAME) libft/libft.a minilibx-linux/libmlx.a -fsanitize=leak -fsanitize=address -fno-omit-frame-pointer -o  leak
+	@$(CC) -Iincludes  $(OBJ) $(LFLAGS) $(CFLAGS)  main.c  $(NAME) libft/libft.a minilibx-linux/libmlx.a -fsanitize=leak -fsanitize=address -fno-omit-frame-pointer -o  leak
 clean:
 	@make clean -C libft/
 	@/bin/rm -f $(OBJ)
