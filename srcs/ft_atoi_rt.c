@@ -12,7 +12,7 @@
 
 #include "minirt.h"
 
-static int			ft_space(char c)
+static int	ft_space(char c)
 {
 	if (c == '\t' || c == '\v' || c == '\f' || c == '\r'
 		|| c == '\n' || c == ' ' || c == ',' || c == '.')
@@ -20,9 +20,9 @@ static int			ft_space(char c)
 	return (0);
 }
 
-static double		count_nb(const char *str)
+static double	count_nb(const char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while ((str[i] >= '0') && (str[i] <= '9'))
@@ -30,13 +30,13 @@ static double		count_nb(const char *str)
 	return ((double)i);
 }
 
-static void			ft_initialize(int *sign, double *res)
+static void	ft_initialize(int *sign, double *res)
 {
 	*sign = 1;
 	*res = 0;
 }
 
-double				ft_atoi_rt(const char *str)
+double	ft_atoi_rt(const char *str)
 {
 	int			sign;
 	double		res;

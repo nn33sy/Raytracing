@@ -29,21 +29,21 @@ void	ft_put_color_pixel(t_palette *color)
 void	ft_send_camera_rays(t_scene *scene
 , int i, int j, t_camera *ptn)
 {
-	double x;
-	double y;
-	double z;
+	double	x;
+	double	y;
+	double	z;
 
-	ft_coord(i - (scene->r_y / 2), -j + (scene->r_x / 2)
-	, -(scene->r_x / (2 * tan(ptn->fov / 2))), &ptn->ray.direction);
+	ft_coord(i - (scene->r_y / 2), -j + (scene->r_x / 2),
+		-(scene->r_x / (2 * tan(ptn->fov / 2))), &ptn->ray.direction);
 	x = (ptn->right.x * ptn->ray.direction.x)
-	+ (ptn->up.x * ptn->ray.direction.y)
-	+ (ptn->forward.x * ptn->ray.direction.z);
+		+ (ptn->up.x * ptn->ray.direction.y)
+		+ (ptn->forward.x * ptn->ray.direction.z);
 	y = (ptn->right.y * ptn->ray.direction.x)
-	+ (ptn->up.y * ptn->ray.direction.y) +
-	(ptn->forward.y * ptn->ray.direction.z);
+		+ (ptn->up.y * ptn->ray.direction.y)
+		+ (ptn->forward.y * ptn->ray.direction.z);
 	z = (ptn->right.z * ptn->ray.direction.x)
-	+ (ptn->up.z * ptn->ray.direction.y)
-	+ (ptn->forward.z * ptn->ray.direction.z);
+		+ (ptn->up.z * ptn->ray.direction.y)
+		+ (ptn->forward.z * ptn->ray.direction.z);
 	ft_coord(-x, y, z, &ptn->ray.direction);
 	ft_normalize(&ptn->ray.direction);
 	ft_color_intensity(&scene->color_f, scene, &ptn->ray);
@@ -78,9 +78,9 @@ void	ft_create_image(t_vars *vars, t_camera *cam, t_scene *scene)
 		{
 			ft_send_camera_rays(scene, i, j, cam);
 			ft_put_color_pixel(&scene->color_f);
-			my_mlx_pixel_put(&vars->img, i, j
-			, create_trgb(1, scene->color_f.rgb.r
-			, scene->color_f.rgb.g, scene->color_f.rgb.b));
+			my_mlx_pixel_put(&vars->img, i, j,
+				create_trgb(1, scene->color_f.rgb.r,
+					scene->color_f.rgb.g, scene->color_f.rgb.b));
 			ft_clean_rgb(&scene->color_f);
 			scene->nb_rebond = 4;
 			j++;
@@ -91,7 +91,7 @@ void	ft_create_image(t_vars *vars, t_camera *cam, t_scene *scene)
 	ft_create_image_2(vars);
 }
 
-int		main_function(char *file_src, int photo)
+int	main_function(char *file_src, int photo)
 {
 	t_vars	vars;
 	t_scene	*scene;

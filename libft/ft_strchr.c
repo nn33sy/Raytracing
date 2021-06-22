@@ -18,7 +18,7 @@ char	*ft_strchr(const char *s, int c)
 	char	*chain;
 
 	i = 0;
-	chain = (char*)s;
+	chain = (char *)s;
 	while (chain[i] != '\0')
 	{
 		if (chain[i] == c)

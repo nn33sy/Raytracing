@@ -13,7 +13,7 @@
 #ifndef STRUCT_H
 # define STRUCT_H
 
-typedef struct	s_bmpheader
+typedef struct s_bmpheader
 {
 	char			signaturebytes[2];
 	unsigned int	sizeofbitmapfile;
@@ -21,7 +21,7 @@ typedef struct	s_bmpheader
 	unsigned int	pixeldataoffset;
 }				t_bmpheader;
 
-typedef struct	s_bmpinfoheader{
+typedef struct s_bmpinfoheader{
 	unsigned int	sizeofthisheader;
 	unsigned int	width;
 	unsigned int	height;
@@ -35,7 +35,7 @@ typedef struct	s_bmpinfoheader{
 	unsigned int	importantcolors;
 }				t_bmpinfoheader;
 
-typedef	struct	s_list
+typedef struct s_list
 {
 	void			*object;
 	int				type;
@@ -43,33 +43,33 @@ typedef	struct	s_list
 	double			magic;
 }				t_list;
 
-typedef struct	s_coord
+typedef struct s_coord
 {
 	double			x;
 	double			y;
 	double			z;
 }				t_coord;
 
-typedef struct	s_rgb
+typedef struct s_rgb
 {
 	double		r;
 	double		g;
 	double		b;
 }				t_rgb;
 
-typedef struct	s_palette{
+typedef struct s_palette{
 	t_rgb		rgb;
 	double		intensity;
 	int			magic;
 }				t_palette;
 
-typedef struct	s_ray
+typedef struct s_ray
 {
 	t_coord		origin;
 	t_coord		direction;
 }				t_ray;
 
-typedef struct	s_light
+typedef struct s_light
 {
 	t_coord			pos;
 	double			i;
@@ -77,13 +77,13 @@ typedef struct	s_light
 	struct s_light	*next;
 }				t_light;
 
-typedef struct	s_amb_light
+typedef struct s_amb_light
 {
 	double			ratio;
 	t_rgb			rgb;
 }				t_amb_lig;
 
-typedef struct	s_sphere
+typedef struct s_sphere
 {
 	t_coord			origin;
 	double			rayon;
@@ -92,14 +92,14 @@ typedef struct	s_sphere
 
 }				t_sphere;
 
-typedef struct	s_plan
+typedef struct s_plan
 {
 	t_coord			center;
 	t_coord			direction;
 	t_rgb			rgb;
 }				t_plan;
 
-typedef struct	s_square
+typedef struct s_square
 {
 	t_coord			center;
 	t_coord			direction;
@@ -107,7 +107,7 @@ typedef struct	s_square
 	t_rgb			rgb;
 }				t_square;
 
-typedef struct	s_triangle
+typedef struct s_triangle
 {
 	t_coord			first;
 	t_coord			second;
@@ -115,7 +115,7 @@ typedef struct	s_triangle
 	t_rgb			rgb;
 }				t_triangle;
 
-typedef struct	s_cylinder
+typedef struct s_cylinder
 {
 	t_coord			base;
 	t_coord			direction;
@@ -125,7 +125,7 @@ typedef struct	s_cylinder
 
 }				t_cylinder;
 
-typedef struct	s_matrix_two
+typedef struct s_matrix_two
 {
 	double			x1;
 	double			x2;
@@ -133,7 +133,7 @@ typedef struct	s_matrix_two
 	double			y2;
 }				t_matrix_two;
 
-typedef struct	s_camera
+typedef struct s_camera
 {
 	t_ray			ray;
 	t_coord			direction;
@@ -145,7 +145,7 @@ typedef struct	s_camera
 	struct s_camera	*before;
 }				t_camera;
 
-typedef struct	s_scene
+typedef struct s_scene
 {
 	t_light			**light;
 	t_camera		**camera;
@@ -159,13 +159,13 @@ typedef struct	s_scene
 	t_palette		color_f;
 }				t_scene;
 
-typedef struct	s_point {
+typedef struct s_point {
 	t_coord			normal;
 	t_coord			pos;
 	t_rgb			rgb;
 }				t_point;
 
-typedef struct	s_list_gnl
+typedef struct s_list_gnl
 {
 	int					fd;
 	char				*chain;
@@ -173,7 +173,7 @@ typedef struct	s_list_gnl
 	struct s_list_gnl	*prec;
 }				t_list_gnl;
 
-typedef struct	s_data {
+typedef struct s_data {
 	void		*img;
 	char		*addr;
 	int			bits_per_pixel;
@@ -181,7 +181,7 @@ typedef struct	s_data {
 	int			endian;
 }				t_data;
 
-typedef struct	s_vars
+typedef struct s_vars
 {
 	void			*mlx;
 	void			*win;

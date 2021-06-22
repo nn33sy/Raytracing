@@ -12,7 +12,7 @@
 
 #include "minirt.h"
 
-static void		ft_bmpheader(t_bmpheader *header, t_vars *vars)
+static void	ft_bmpheader(t_bmpheader *header, t_vars *vars)
 {
 	double	size;
 
@@ -24,7 +24,7 @@ static void		ft_bmpheader(t_bmpheader *header, t_vars *vars)
 	header->pixeldataoffset = SIZE_HEADER;
 }
 
-static void		ft_bmpinfoheader(t_bmpinfoheader *infoheader, t_vars *vars)
+static void	ft_bmpinfoheader(t_bmpinfoheader *infoheader, t_vars *vars)
 {
 	infoheader->sizeofthisheader = SIZE_INFO_HEADER;
 	infoheader->width = vars->scene->r_x;
@@ -39,7 +39,7 @@ static void		ft_bmpinfoheader(t_bmpinfoheader *infoheader, t_vars *vars)
 	infoheader->importantcolors = 0;
 }
 
-static void		ft_write_header(int fd, t_vars *vars)
+static void	ft_write_header(int fd, t_vars *vars)
 {
 	t_bmpheader		header_one;
 	t_bmpinfoheader	header_two;
@@ -63,7 +63,7 @@ static void		ft_write_header(int fd, t_vars *vars)
 	write(fd, &(header_two.importantcolors), 4);
 }
 
-static void		write_bmpdata(t_vars *vars, int fd)
+static void	write_bmpdata(t_vars *vars, int fd)
 {
 	int		x;
 	int		y;
@@ -86,7 +86,7 @@ static void		write_bmpdata(t_vars *vars, int fd)
 	}
 }
 
-void			ft_export_bmp(char *filename, t_vars *vars)
+void	ft_export_bmp(char *filename, t_vars *vars)
 {
 	int	fd;
 

@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-int		ft_strlen(char *s)
+int	ft_strlen(char *s)
 {
 	size_t	i;
 
@@ -24,6 +24,12 @@ int		ft_strlen(char *s)
 	return (i);
 }
 
+void	ft_len(char *s1, char *s2, int *l1, int *l2)
+{
+	*l1 = ft_strlen(s1);
+	*l2 = ft_strlen(s2);
+}
+
 char	*ft_strjoin(char *s1, char *s2)
 {
 	int		l1;
@@ -32,9 +38,9 @@ char	*ft_strjoin(char *s1, char *s2)
 	int		j;
 	char	*new;
 
-	l1 = ft_strlen(s1);
-	l2 = ft_strlen(s2);
-	if (!(new = (char*)malloc(sizeof(char) * (l1 + l2 + 1))))
+	ft_len(s1, s2, &l1, &l2);
+	new = (char *)malloc(sizeof(char) * (l1 + l2 + 1));
+	if (new == NULL)
 		return (NULL);
 	i = 0;
 	while (l1 != 0 && i < l1)
@@ -59,19 +65,19 @@ char	*ft_split_gnl(char **buffer, int stop)
 	char	*new_buffer;
 	int		i;
 	int		j;
-	int		len_new_buffer;
+	int		len_nb;
 
-	len_new_buffer = ft_strlen(*buffer) - stop - 1;
-	if (!(result = (char*)malloc(sizeof(char) * (stop + 1))))
-		return (NULL);
-	if (!(new_buffer = (char*)malloc(sizeof(char) * (len_new_buffer + 1))))
+	len_nb = ft_strlen(*buffer) - stop - 1;
+	result = (char *)malloc(sizeof(char) * (stop + 1));
+	new_buffer = (char *)malloc(sizeof(char) * (len_nb + 1));
+	if (result == NULL || new_buffer == NULL)
 		return (NULL);
 	i = -1;
 	while (++i < stop)
 		result[i] = buffer[0][i];
 	result[i++] = '\0';
 	j = -1;
-	while (++j < len_new_buffer)
+	while (++j < len_nb)
 	{
 		new_buffer[j] = buffer[0][i];
 		i++;
@@ -89,7 +95,7 @@ char	*ft_strdup(char *src)
 	char	*debut;
 
 	taille = ft_strlen(src);
-	new = (char*)malloc(sizeof(char) * (taille + 1));
+	new = (char *)malloc(sizeof(char) * (taille + 1));
 	if (new == 0)
 		return (0);
 	debut = new;

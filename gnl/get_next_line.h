@@ -15,7 +15,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # define BUFFER_SIZE 50
-typedef struct	s_list
+typedef struct s_list
 {
 	int				fd;
 	char			*chain;

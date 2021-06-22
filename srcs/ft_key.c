@@ -12,7 +12,7 @@
 
 #include "minirt.h"
 
-int		key_hook(int keycode, t_vars *vars)
+int	key_hook(int keycode, t_vars *vars)
 {
 	if (keycode == 32)
 		ft_export_bmp("photoo", vars);
@@ -34,13 +34,13 @@ int		key_hook(int keycode, t_vars *vars)
 	return (0);
 }
 
-int		ft_imagewin(t_vars *vars)
+int	ft_imagewin(t_vars *vars)
 {
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img.img, 0, 0);
 	return (0);
 }
 
-int		ft_exit(t_vars *vars)
+int	ft_exit(t_vars *vars)
 {
 	ft_clean(vars);
 	exit(EXIT_FAILURE);

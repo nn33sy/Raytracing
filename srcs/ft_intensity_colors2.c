@@ -12,7 +12,7 @@
 
 #include "minirt.h"
 
-void		ft_color_intensity_4(t_palette *color
+void	ft_color_intensity_4(t_palette *color
 , t_scene *scene, t_point base, t_light *tmp)
 {
 	double	dist;
@@ -21,22 +21,22 @@ void		ft_color_intensity_4(t_palette *color
 	ft_vectors_substract(&base.pos, &tmp->pos, &l);
 	dist = ft_norm2(&l);
 	ft_normalize(&l);
-	color->intensity += (ft_ombre(&base, dist, scene, tmp) *
-	(ft_scal_produce(&l, &base.normal) +
-	ft_specular(&base, &l, *(scene->camera)))
-	/ dist) * tmp->i * 1000;
+	color->intensity += (ft_ombre(&base, dist, scene, tmp)
+			* (ft_scal_produce(&l, &base.normal)
+				+ ft_specular(&base, &l, *(scene->camera)))
+			/ dist) * tmp->i * 1000;
 	if (color->intensity == 0)
 	{
 		ft_vectors_mult(&base.normal, -1, &base.normal);
-		color->intensity += (ft_ombre(&base, dist, scene, tmp) *
-	(ft_scal_produce(&l, &base.normal) +
-	ft_specular(&base, &l, *(scene->camera)))
-	/ dist) * tmp->i * 1000;
+		color->intensity += (ft_ombre(&base, dist, scene, tmp)
+				* (ft_scal_produce(&l, &base.normal)
+					+ ft_specular(&base, &l, *(scene->camera)))
+				/ dist) * tmp->i * 1000;
 	}
 	ft_calculate_color(color, scene, base, tmp);
 }
 
-void		ft_check_magic(t_list *obj, t_palette *color)
+void	ft_check_magic(t_list *obj, t_palette *color)
 {
 	if (obj->magic == 3)
 		color->magic = 3;

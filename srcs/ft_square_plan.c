@@ -15,13 +15,13 @@
 double	intersection_basic(t_ray *ray, t_coord *direction, t_coord *center)
 {
 	double	t;
-	t_coord a;
+	t_coord	a;
 	double	essai;
 
 	if (ft_scal_produce(&(ray->direction), direction) == 0)
 		return (-1);
-	essai = ft_scal_produce(&(ray->direction), direction) /
-	(sqrt(ft_norm2(&ray->direction)) * sqrt(ft_norm2(direction)));
+	essai = ft_scal_produce(&(ray->direction), direction)
+		/ (sqrt(ft_norm2(&ray->direction)) * sqrt(ft_norm2(direction)));
 	essai = acos(essai) * (180 / PI);
 	ft_vectors_substract(&(ray->origin), center, &a);
 	t = ft_scal_produce(&a, direction);
@@ -31,10 +31,10 @@ double	intersection_basic(t_ray *ray, t_coord *direction, t_coord *center)
 	return (-1);
 }
 
-int		intersection_plan(t_plan *plan, t_ray *ray
+int	intersection_plan(t_plan *plan, t_ray *ray
 , t_point *base, double *t_min)
 {
-	double t;
+	double	t;
 
 	t = intersection_basic(ray, &(plan->direction), &(plan->center));
 	if (t == -1)
@@ -44,8 +44,8 @@ int		intersection_plan(t_plan *plan, t_ray *ray
 	*t_min = t;
 	if (base == NULL)
 		return (0);
-	ft_coord(plan->direction.x, plan->direction.y
-	, plan->direction.z, &base->normal);
+	ft_coord(plan->direction.x, plan->direction.y,
+		plan->direction.z, &base->normal);
 	ft_vectors_mult(&(ray->direction), t, &base->pos);
 	ft_vectors_add(&base->pos, &(ray->origin), &base->pos);
 	base->rgb.r = plan->rgb.r;
@@ -61,7 +61,7 @@ void	replace_color_square(t_point *base, t_square *square)
 	base->rgb.b = square->rgb.b;
 }
 
-int		intersection_square(t_square *square, t_ray *ray
+int	intersection_square(t_square *square, t_ray *ray
 , t_point *base, double *t_min)
 {
 	double	t;
@@ -83,8 +83,8 @@ int		intersection_square(t_square *square, t_ray *ray
 	*t_min = t;
 	if (base == NULL)
 		return (0);
-	ft_coord(square->direction.x, square->direction.y
-	, square->direction.z, &base->normal);
+	ft_coord(square->direction.x, square->direction.y,
+		square->direction.z, &base->normal);
 	ft_coord(proj.x, proj.y, proj.z, &base->pos);
 	replace_color_square(base, square);
 	return (1);

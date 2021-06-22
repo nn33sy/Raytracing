@@ -15,7 +15,7 @@
 static double	calculate_t(t_sphere *s, t_ray *r)
 {
 	double	tab[6];
-	t_coord sub;
+	t_coord	sub;
 
 	ft_vectors_substract(&s->origin, &r->origin, &sub);
 	tab[0] = 2 * ft_scal_produce(&r->direction, &sub);
@@ -33,11 +33,11 @@ static double	calculate_t(t_sphere *s, t_ray *r)
 		return (tab[4]);
 }
 
-double			intersection_sphere(t_sphere *s, t_ray *r
+double	intersection_sphere(t_sphere *s, t_ray *r
 , t_point *base, double *t_min)
 {
 	double	t;
-	t_coord mult;
+	t_coord	mult;
 
 	t = calculate_t(s, r);
 	if (t == -1 || (*t_min != -1 && t > *t_min))

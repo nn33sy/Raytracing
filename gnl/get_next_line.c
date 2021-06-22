@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-int		find_char(char *str)
+int	find_char(char *str)
 {
 	int	i;
 
@@ -31,7 +31,8 @@ void	ft_read_line(t_list *ptn)
 	char	buf[BUFFER_SIZE + 1];
 	int		i;
 
-	while ((i = read(ptn->fd, buf, BUFFER_SIZE)) >= 0)
+	i = read(ptn->fd, buf, BUFFER_SIZE);
+	while (i >= 0)
 	{
 		buf[i] = 0;
 		ptn->chain = ft_strjoin(ptn->chain, buf);
@@ -54,7 +55,8 @@ t_list	*ft_list(t_list **list, int fd)
 		}
 		ptn = ptn->next;
 	}
-	if (!(ptn = (t_list *)malloc(sizeof(t_list))))
+	ptn = (t_list *)malloc(sizeof(t_list));
+	if (ptn == NULL)
 		return (NULL);
 	ptn->fd = fd;
 	ptn->chain = NULL;
@@ -73,15 +75,15 @@ void	ft_free(t_list *ptn)
 	free(ptn);
 }
 
-int		get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
 	char			buf[1];
 	static t_list	*list;
 	t_list			*ptn;
 	int				i;
 
-	if (fd < 0 || !line || (read(fd, buf, 0) < 0) ||
-!(ptn = ft_list(&list, fd)) || BUFFER_SIZE <= 0)
+	ptn = ft_list(&list, fd);
+	if (!line || (read(fd, buf, 0) < 0) || ptn != NULL)
 		return (-1);
 	i = 0;
 	while (ptn->chain[i] != '\0' && ptn->chain[i] != 10)
@@ -97,7 +99,7 @@ int		get_next_line(int fd, char **line)
 	if (ptn->next != NULL)
 		ptn->next->prec = ptn->prec;
 	if (list == ptn)
-		list = (ptn->next == 0) ? ptn->prec : ptn->next;
+		ptn = ptn->next;
 	ft_free(ptn);
 	return (0);
 }

@@ -16,17 +16,17 @@ static double	ft_intersection_cylinder_3(t_cylinder *cy,
 t_ray *ray, double *t0, double *t1)
 {
 	double	delta[4];
-	t_coord tmp;
+	t_coord	tmp;
 
 	ft_vectors_substract(&cy->base, &ray->origin, &tmp);
 	ft_normalize(&cy->direction);
-	delta[0] = ft_scal_produce(&ray->direction, &ray->direction) -
-	pow(ft_scal_produce(&ray->direction, &cy->direction), 2);
-	delta[1] = 2 * (ft_scal_produce(&ray->direction, &tmp) -
-	(ft_scal_produce(&ray->direction, &cy->direction)
-	* ft_scal_produce(&tmp, &cy->direction)));
+	delta[0] = ft_scal_produce(&ray->direction, &ray->direction)
+		- pow(ft_scal_produce(&ray->direction, &cy->direction), 2);
+	delta[1] = 2 * (ft_scal_produce(&ray->direction, &tmp)
+			- (ft_scal_produce(&ray->direction, &cy->direction)
+				* ft_scal_produce(&tmp, &cy->direction)));
 	delta[2] = ft_scal_produce(&tmp, &tmp) - pow(ft_scal_produce(&tmp,
-	&cy->direction), 2) - pow((cy->diameter / 2), 2);
+				&cy->direction), 2) - pow((cy->diameter / 2), 2);
 	delta[3] = pow(delta[1], 2) - (4 * delta[0] * delta[2]);
 	if (delta[3] <= 0)
 		return (-1);
@@ -48,9 +48,9 @@ static double	ft_intersection_cylinder_2(t_cylinder *cy
 	if (ft_intersection_cylinder_3(cy, ray, &t[0], &t[1]) == -1)
 		return (-1);
 	height[0] = ft_scal_produce(&ray->direction, &cy->direction)
-	* t[0] + ft_scal_produce(&tmp, &cy->direction);
+		* t[0] + ft_scal_produce(&tmp, &cy->direction);
 	height[1] = ft_scal_produce(&ray->direction, &cy->direction)
-	* t[1] + ft_scal_produce(&tmp, &cy->direction);
+		* t[1] + ft_scal_produce(&tmp, &cy->direction);
 	if (t[0] >= 0 && t[0] <= t[1] && height[0] >= 0 && height[0] <= cy->height)
 	{
 		*m_f = height[0];
@@ -66,7 +66,7 @@ static double	ft_intersection_cylinder_2(t_cylinder *cy
 	return (1);
 }
 
-int				ft_intersection_cylinder(t_cylinder *cy
+int	ft_intersection_cylinder(t_cylinder *cy
 , t_ray *ray, t_point *base, double *t_min)
 {
 	double	m;

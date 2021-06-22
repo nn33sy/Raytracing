@@ -14,7 +14,7 @@
 
 static int	ft_charcomp(char const *set, char c)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (set[i] != '\0')
@@ -40,7 +40,7 @@ static int	ft_lentrim(char const *s1, char const *set)
 	return (j - i + 1);
 }
 
-char		*ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char const *s1, char const *set)
 {
 	char	*s;
 	int		length;

@@ -12,7 +12,7 @@
 
 #include "minirt.h"
 
-void		rx(t_coord *vect, double x)
+void	rx(t_coord *vect, double x)
 {
 	t_coord	tmp;
 
@@ -23,7 +23,7 @@ void		rx(t_coord *vect, double x)
 	vect->z = tmp.y * sin(x) + tmp.z * cos(x);
 }
 
-void		ry(t_coord *vect, double y)
+void	ry(t_coord *vect, double y)
 {
 	t_coord	tmp;
 
@@ -34,7 +34,7 @@ void		ry(t_coord *vect, double y)
 	vect->z = tmp.x * -sin(y) + tmp.z * cos(y);
 }
 
-void		rz(t_coord *vect, double z)
+void	rz(t_coord *vect, double z)
 {
 	t_coord	tmp;
 
@@ -45,14 +45,14 @@ void		rz(t_coord *vect, double z)
 	vect->y = tmp.x * sin(z) + tmp.y * cos(z);
 }
 
-void		rot(t_coord *vect, t_coord *angle)
+void	rot(t_coord *vect, t_coord *angle)
 {
 	rx(vect, angle->x);
 	ry(vect, angle->y);
 	rz(vect, angle->z);
 }
 
-void		anti_rot(t_coord *vect, t_coord *angle)
+void	anti_rot(t_coord *vect, t_coord *angle)
 {
 	rz(vect, -angle->z);
 	ry(vect, -angle->y);

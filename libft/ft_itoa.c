@@ -14,7 +14,7 @@
 
 static int	ft_checklength(long n)
 {
-	int count;
+	int	count;
 
 	count = 0;
 	if (n < 0)
@@ -31,7 +31,7 @@ static int	ft_checklength(long n)
 
 static void	ft_swap_chain(char *chain, int length)
 {
-	char inter;
+	char	inter;
 
 	if (length >= 2)
 	{
@@ -64,7 +64,7 @@ static void	ft_ope(long n, char *chain)
 	}
 }
 
-char		*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	long	n2;
 	long	length;

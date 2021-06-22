@@ -19,7 +19,7 @@ char	*ft_strdup(const char *src)
 	char	*debut;
 
 	taille = ft_strlen(src);
-	new = (char*)malloc(sizeof(char) * (taille + 1));
+	new = (char *)malloc(sizeof(char) * (taille + 1));
 	if (new == 0)
 		return (0);
 	debut = new;

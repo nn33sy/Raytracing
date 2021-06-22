@@ -12,7 +12,7 @@
 
 #include "minirt.h"
 
-char		*ft_parsing_double(char *line, double *nb)
+char	*ft_parsing_double(char *line, double *nb)
 {
 	while (*line && (*line == ' '))
 		line++;
@@ -24,9 +24,9 @@ char		*ft_parsing_double(char *line, double *nb)
 	return (line);
 }
 
-int			ft_parsing_line(char *line, t_scene *scene)
+int	ft_parsing_line(char *line, t_scene *scene)
 {
-	int res;
+	int	res;
 
 	res = 0;
 	if (line[0] == 'R')
@@ -63,11 +63,11 @@ static void	ft_close_error(t_scene *scene, int fd, char **line)
 	close(fd);
 }
 
-int			gnl_parsing(t_scene *scene, int fd)
+int	gnl_parsing(t_scene *scene, int fd)
 {
 	char	**line;
 
-	line = (char**)malloc(sizeof(char *));
+	line = (char **)malloc(sizeof(char *));
 	if (line == NULL)
 		return (0);
 	while (get_next_line(fd, line) > 0)
@@ -89,7 +89,7 @@ int			gnl_parsing(t_scene *scene, int fd)
 	return (1);
 }
 
-t_scene		*main_parsing(char *file_scene)
+t_scene	*main_parsing(char *file_scene)
 {
 	int		fd;
 	t_scene	*scene;

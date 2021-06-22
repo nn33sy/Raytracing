@@ -37,8 +37,8 @@ static char	*find_chain(char *str, int *size, char c)
 
 static int	count_lines(char *str, char c)
 {
-	int i;
-	int count;
+	int	i;
+	int	count;
 
 	count = 0;
 	while (*str != '\0')
@@ -67,7 +67,8 @@ static char	*copy(char *str, int size)
 			i++;
 		size = i;
 	}
-	if (!(chain = (char*)malloc(sizeof(char) * (size + 1))))
+	chain = (char *)malloc(sizeof(char) * (size + 1));
+	if (chain == NULL)
 		return (NULL);
 	i = 0;
 	while (i < size)
@@ -87,13 +88,13 @@ static char	**ft_check(char *str, char c, int *lines)
 	if (str == NULL)
 		return (NULL);
 	*lines = count_lines(str, c);
-	tab = (char**)malloc(sizeof(char*) * (*lines + 1));
+	tab = (char **)malloc(sizeof(char *) * (*lines + 1));
 	if (tab == 0)
 		return (0);
 	return (tab);
 }
 
-char		**ft_split(const char *s, char c)
+char	**ft_split(const char *s, char c)
 {
 	char	**tab;
 	int		i;
@@ -102,7 +103,7 @@ char		**ft_split(const char *s, char c)
 	char	*str;
 
 	i = 0;
-	str = (char*)s;
+	str = (char *)s;
 	tab = ft_check(str, c, &lines);
 	if (tab == NULL)
 		return (NULL);

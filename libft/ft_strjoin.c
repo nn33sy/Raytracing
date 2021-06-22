@@ -26,7 +26,7 @@ static void	ft_check(const char *s1, const char *s2, int *l1, int *l2)
 	}
 }
 
-char		*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
 	int		l1;
 	int		l2;
@@ -35,7 +35,7 @@ char		*ft_strjoin(char const *s1, char const *s2)
 	char	*new;
 
 	ft_check(s1, s2, &l1, &l2);
-	new = (char*)malloc(sizeof(char) * (l1 + l2 + 1));
+	new = (char *)malloc(sizeof(char) * (l1 + l2 + 1));
 	if (new == 0)
 		return (0);
 	i = 0;

@@ -12,11 +12,11 @@
 
 #include "minirt.h"
 
-int		ft_barycentric_triangle(t_coord *pos, t_triangle *tri)
+int	ft_barycentric_triangle(t_coord *pos, t_triangle *tri)
 {
-	double beta;
-	double alpha;
-	double sigma;
+	double	beta;
+	double	alpha;
+	double	sigma;
 
 	beta = ft_calculate_beta(tri, pos);
 	sigma = ft_calculate_sigma(tri, pos);
@@ -71,7 +71,7 @@ double	ft_calculate_alpha(double sigma, double beta)
 	return (1 - sigma - beta);
 }
 
-int		ft_intersection_triangle(t_triangle *tri, t_ray *ray
+int	ft_intersection_triangle(t_triangle *tri, t_ray *ray
 , t_point *base, double *t_min)
 {
 	double	t;

@@ -12,36 +12,36 @@
 
 #include "minirt.h"
 
-double		ft_ombre_2(t_scene *scene, double dist, t_ray ray_reflect)
+double	ft_ombre_2(t_scene *scene, double dist, t_ray ray)
 {
-	double	t_inter;
+	double	ti;
 	t_list	*ptn;
 
-	t_inter = -1;
+	ti = -1;
 	ptn = *(scene->list);
 	while (ptn != NULL)
 	{
 		if (ptn->type == 0 && (intersection_sphere((t_sphere *)ptn->object,
-&ray_reflect, NULL, &t_inter) == 0) && (t_inter * t_inter < dist))
+					&ray, NULL, &ti) == 0) && (ti * ti < dist))
 			return (0);
 		if (ptn->type == 1 && (intersection_plan((t_plan *)ptn->object,
-&ray_reflect, NULL, &t_inter) == 0) && (t_inter * t_inter < dist))
+					&ray, NULL, &ti) == 0) && (ti * ti < dist))
 			return (0);
 		if (ptn->type == 2 && (intersection_square((t_square *)ptn->object,
-&ray_reflect, NULL, &t_inter) == 0) && (t_inter * t_inter < dist))
+					&ray, NULL, &ti) == 0) && (ti * ti < dist))
 			return (0);
 		if (ptn->type == 3 && (ft_intersection_triangle((t_triangle *)
-ptn->object, &ray_reflect, NULL, &t_inter) == 0) && (t_inter * t_inter < dist))
+					ptn->object, &ray, NULL, &ti) == 0) && (ti * ti < dist))
 			return (0);
 		if (ptn->type == 4 && (ft_intersection_cylinder((t_cylinder *)
-ptn->object, &ray_reflect, NULL, &t_inter) == 0) && (t_inter * t_inter < dist))
+					ptn->object, &ray, NULL, &ti) == 0) && (ti * ti < dist))
 			return (0);
 		ptn = ptn->next;
 	}
 	return (1);
 }
 
-float		ft_ombre(t_point *base, double dist, t_scene *scene, t_light *light)
+float	ft_ombre(t_point *base, double dist, t_scene *scene, t_light *light)
 {
 	t_ray	ray_reflect;
 
