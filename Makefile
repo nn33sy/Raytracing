@@ -6,6 +6,7 @@ OBJ = ${SRCS:.c=.o}
 
 SRCS =  gnl/get_next_line.c \
 		gnl/get_next_line_utils.c \
+		gnl/get_next_line_utilsbis.c \
 		srcs/ft_atoi_rt.c \
 		srcs/ft_function_maths.c \
 		srcs/ft_image.c \

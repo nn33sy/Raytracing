@@ -83,7 +83,8 @@ int	get_next_line(int fd, char **line)
 	int				i;
 
 	ptn = ft_list(&list, fd);
-	if (!line || (read(fd, buf, 0) < 0) || ptn != NULL)
+	if (fd < 0 || !line || (read(fd, buf, 0) < 0)
+		|| ptn != NULL || BUFFER_SIZE <= 0)
 		return (-1);
 	i = 0;
 	while (ptn->chain[i] != '\0' && ptn->chain[i] != 10)
@@ -94,12 +95,7 @@ int	get_next_line(int fd, char **line)
 		return (1);
 	}
 	*line = ft_strdup(ptn->chain);
-	if (ptn->prec != NULL)
-		ptn->prec->next = ptn->next;
-	if (ptn->next != NULL)
-		ptn->next->prec = ptn->prec;
-	if (list == ptn)
-		ptn = ptn->next;
+	get_next_line_two(ptn, list);
 	ft_free(ptn);
 	return (0);
 }

@@ -33,4 +33,5 @@ char			*ft_strdup(char *src);
 void			ft_free(t_list *ptn);
 int				get_next_line(int fd, char **line);
 int				find_char(char *str);
+void			get_next_line_two(t_list *ptn, t_list *list);
 #endif
