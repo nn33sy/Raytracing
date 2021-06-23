@@ -84,7 +84,7 @@ int	get_next_line(int fd, char **line)
 
 	ptn = ft_list(&list, fd);
 	if (fd < 0 || !line || (read(fd, buf, 0) < 0)
-		|| ptn != NULL || BUFFER_SIZE <= 0)
+		 || BUFFER_SIZE <= 0)
 		return (-1);
 	i = 0;
 	while (ptn->chain[i] != '\0' && ptn->chain[i] != 10)
