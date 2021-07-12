@@ -1,6 +1,6 @@
 NAME = minirt.a
 CC=gcc
-LFLAGS=  -lft -lmlx_Linux -lXext -lX11 -lm -Llibft -Lminilibx-linux
+LFLAGS= -lft -lmlx_Linux -lXext -lX11 -lm -Llibft -Lminilibx-linux
 CFLAGS=  -Wall -Wextra -Werror
 OBJ = ${SRCS:.c=.o}
 
