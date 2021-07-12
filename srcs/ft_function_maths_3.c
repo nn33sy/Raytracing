@@ -23,8 +23,10 @@ double	ft_scal_produce(t_coord *a, t_coord *b)
 }
 
 double	ft_norm2(t_coord *a)
-{
-	return (pow(a->x, 2) + pow(a->y, 2) + pow(a->z, 2));
+{	
+	if (a != NULL)
+		return (pow(a->x, 2) + pow(a->y, 2) + pow(a->z, 2));
+	return (0);
 }
 
 void	ft_normalize(t_coord *a)

@@ -64,8 +64,8 @@ void	ft_clean(t_vars *vars)
 		ft_clean_scene(vars->scene);
 		free(vars->scene);
 	}
-//	if (vars->img.img != NULL)
-//		mlx_destroy_image(vars->mlx, vars->img.img);
+	if (vars->img.img != NULL)
+		mlx_destroy_image(vars->mlx, vars->img.img);
 	/*if (vars->mlx != NULL)
 	{
 		mlx_destroy_display(vars->mlx);
@@ -73,13 +73,12 @@ void	ft_clean(t_vars *vars)
 	}*/
 	if (vars->win != NULL)
 	{
-	//	mlx_destroy_window(vars->mlx, vars->win);
-		free(vars->win);
+		mlx_destroy_window(vars->mlx, vars->win);
+	//	free(vars->win);
 	}
 	if(vars->mlx != NULL)
 	{	
 		mlx_destroy_display(vars->mlx);
 		free(vars->mlx);
-
 	}
 }

@@ -99,6 +99,7 @@ t_scene	*main_parsing(char *file_scene)
 	scene = malloc(sizeof(t_scene));
 	if (!scene)
 		return (NULL);
+	ft_memset(scene, 0, sizeof(t_scene));
 	scene->light = malloc(sizeof(t_light *));
 	*(scene->light) = NULL;
 	scene->list = malloc(sizeof(t_list *));
