@@ -53,8 +53,8 @@ all: $(NAME)
 		@echo "Linking" [ $< ] $(OK)
 
 $(NAME): $(OBJ)
-	@make  -C libft/
-	@make  -C minilibx-linux/
+	@make re -C libft/
+	@make re -C minilibx-linux/
 	@cp libft/libft.a ./$(NAME)
 	@cp minilibx-linux/libmlx.a ./$(NAME)
 	@ar rc $@ $^

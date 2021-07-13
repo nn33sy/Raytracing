@@ -66,11 +66,15 @@ int	ft_tr(char *line, t_scene *scene)
 
 int	ft_empty_line(char *chain)
 {
-	while (*chain != '\n' || *chain != '\0')
+	int	i;
+
+	i = 0;
+	while (chain[i] != '\n' && chain[i] != '\0')
 	{
-		if (ft_space(*chain) == 0 || *chain != '\n')
+		if (chain[i] != ' ' && chain[i] != '\t'
+				&& chain[i] != '\v' && chain[i] != '\f' && chain[i] != '\r')
 			return (0);
-		chain ++;
+		i++;
 	}
 	return (1);
 }

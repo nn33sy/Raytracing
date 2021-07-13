@@ -74,7 +74,7 @@ int	gnl_parsing(t_scene *scene, int fd)
 		return (0);
 	while (get_next_line(fd, line) > 0)
 	{
-		if (ft_parsing_line(*line, scene) == -1)
+		if (ft_parsing_line(*line, scene) != 1)
 		{
 			ft_close_error(scene, fd, line);
 			return (0);
