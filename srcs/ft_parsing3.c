@@ -66,8 +66,8 @@ int	ft_sp(char *line, t_scene *scene)
 	if (line == NULL)
 		return (-1);
 	(*(scene->list))->magic = ft_atoi_rt(line);
-	if ((*(scene->list))-> magic != -999)
-		return (0);
+	if ((*(scene->list))-> magic >= 1 && (*(scene->list))-> magic <= 3)
+		return (1);
 	return (1);
 }
 
@@ -89,6 +89,8 @@ int	ft_p(char *line, t_scene *scene)
 	if (line == NULL)
 		return (-1);
 	(*(scene->list))->magic = ft_atoi_rt(line);
+	if ((*(scene->list))-> magic != -999)
+		return (0);
 	return (1);
 }
 
@@ -114,5 +116,7 @@ int	ft_sq(char *line, t_scene *scene)
 	if (line == NULL)
 		return (-1);
 	(*(scene->list))->magic = ft_atoi_rt(line);
+	if ((*(scene->list))-> magic >= 1 && (*(scene->list))-> magic <= 3)
+		return (1);
 	return (1);
 }

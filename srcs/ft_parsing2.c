@@ -32,7 +32,9 @@ int	ft_r(char *line, t_scene *scene)
 	if (scene->r_y % 2 == 1)
 		scene->r_y += 1;
 	scene->ratio = scene->r_x / scene->r_y;
-	return (1);
+	while (*line >= '0' && *line <= '9')
+		line++;
+	return (ft_empty_line(line));
 }
 
 char	*ft_parsing_position(char *line, t_coord *coord)
