@@ -53,8 +53,8 @@ all: $(NAME)
 		@echo "Linking" [ $< ] $(OK)
 
 $(NAME): $(OBJ)
-	@make re -C libft/
-	@make re -C minilibx-linux/
+	@make  -C libft/
+	@make  -C minilibx-linux/
 	@cp libft/libft.a ./$(NAME)
 	@cp minilibx-linux/libmlx.a ./$(NAME)
 	@ar rc $@ $^
@@ -67,18 +67,17 @@ test :
 leak : 
 	@$(CC) -Iincludes  $(OBJ) $(LFLAGS) $(CFLAGS)  main.c  $(NAME) libft/libft.a minilibx-linux/libmlx.a -fsanitize=leak -fsanitize=address -fno-omit-frame-pointer -o  leak
 clean:
-	@make clean -C libft/
 	@/bin/rm -f $(OBJ)
-	@echo "[ft_printf] Removed object files!\n"
+	@echo "Removed object files!\n"
 
 fclean: clean
 	@/bin/rm -f $(NAME)
 	@/bin/rm -f minirt
 	@/bin/rm -f leak
 	@make fclean -C libft/
-	@make clean -C minilibx-linux/
+	@make fclean -C minilibx-linux/
 	@echo "Cleaning" [ $(NAME) ] $(OK)
 
-re: fclean all test
+re: all test
 
 .PHONY: all clean fclean re test

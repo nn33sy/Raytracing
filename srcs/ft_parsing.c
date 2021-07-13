@@ -89,13 +89,11 @@ int	gnl_parsing(t_scene *scene, int fd)
 	return (1);
 }
 
-t_scene	*main_parsing(char *file_scene)
+t_scene	*main_parsing(int fd)
 {
-	int		fd;
 	t_scene	*scene;
 	int		res;
 
-	fd = open(file_scene, O_RDONLY);
 	scene = malloc(sizeof(t_scene));
 	if (!scene)
 		return (NULL);

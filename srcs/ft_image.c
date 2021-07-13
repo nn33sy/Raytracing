@@ -91,12 +91,12 @@ void	ft_create_image(t_vars *vars, t_camera *cam, t_scene *scene)
 	ft_create_image_2(vars);
 }
 
-int	main_function(char *file_src, int photo)
+int	main_function(int fd, int photo)
 {
 	t_vars	vars;
 	t_scene	*scene;
 
-	scene = main_parsing(file_src);
+	scene = main_parsing(fd);
 	if (scene == NULL)
 		exit(EXIT_FAILURE);
 	scene->nb_rebond = 4;

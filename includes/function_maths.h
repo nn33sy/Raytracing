@@ -34,7 +34,7 @@ double	intersection_sphere(t_sphere *s, t_ray *r,
 			t_point *base, double *t_min);
 int		ft_visibilite(t_sphere *s, t_ray *r, double *t);
 void	ft_vectors_add_const(t_coord *a, double b, t_coord *res);
-int		main_function(char *file_src, int photo);
+int		main_function(int fd, int photo);
 char	*ft_parsing_double(char *line, double *nb);
 void	ft_scaling_one_value(double *value);
 double	ft_determinant_matrix(t_matrix_two *matrix);

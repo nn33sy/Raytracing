@@ -16,7 +16,6 @@ void	camera_matrice(t_camera *cam)
 {
 	t_coord	tmp;
 
-//	ft_normalize(&cam->forward);
 	ft_coord(-cam->direction.x, -cam->direction.y,
 		-cam->direction.z, &cam->forward);
 	ft_normalize(&cam->forward);

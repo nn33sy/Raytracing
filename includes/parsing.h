@@ -27,6 +27,6 @@ int			ft_p(char *line, t_scene *scene);
 int			ft_cy(char *line, t_scene *scene);
 int			ft_sq(char *line, t_scene *scene);
 int			ft_tr(char *line, t_scene *scene);
-t_scene		*main_parsing(char *file_scene);
+t_scene		*main_parsing(int fd);
 int			ft_parsing_line(char *line, t_scene *scene);
 #endif
