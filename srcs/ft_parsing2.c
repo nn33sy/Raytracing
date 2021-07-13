@@ -17,6 +17,8 @@ int	ft_r(char *line, t_scene *scene)
 	scene->r_x = ft_atoi_rt(line);
 	if (scene->r_x == -999)
 		return (-1);
+	while (*line && ft_space(*line) == 1)
+		line ++;
 	while (*line >= '0' && *line <= '9')
 		line++;
 	scene->r_y = ft_atoi_rt(line);
@@ -32,8 +34,10 @@ int	ft_r(char *line, t_scene *scene)
 	if (scene->r_y % 2 == 1)
 		scene->r_y += 1;
 	scene->ratio = scene->r_x / scene->r_y;
-	while (*line >= '0' && *line <= '9')
-		line++;
+	while (*line && ft_space(*line) == 1)
+		line ++;
+	while (*line && *line >= '0' && *line <= '9')
+		line ++;
 	return (ft_empty_line(line));
 }
 

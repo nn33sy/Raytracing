@@ -36,7 +36,7 @@ int	ft_cy(char *line, t_scene *scene)
 	if (line == NULL)
 		return (-1);
 	(*(scene->list))->magic = ft_atoi_rt(line);
-	if ((*(scene->list))-> magic >= 1 && (*(scene->list))-> magic <= 3)
+	if ((*(scene->list))-> magic >= 0 && (*(scene->list))-> magic <= 3)
 		return (1);
 	return (0);
 }
@@ -63,7 +63,7 @@ int	ft_tr(char *line, t_scene *scene)
 	if (line == NULL)
 		return (-1);
 	(*(scene->list))->magic = ft_atoi_rt(line);
-	if ((*(scene->list))-> magic >= 1 && (*(scene->list))-> magic <= 3)
+	if ((*(scene->list))-> magic >= 0 && (*(scene->list))-> magic <= 3)
 		return (1);
 	return (1);
 }
