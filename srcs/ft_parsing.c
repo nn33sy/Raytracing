@@ -43,7 +43,7 @@ int	ft_parsing_line(char *line, t_scene *scene)
 		res = ft_cy(&line[2], scene);
 	if (line[0] == 'A')
 		res = ft_a(&line[1], scene);
-	if (line[0] == 'c' && line[1] == ' ')
+	if (line[0] == 'c' && line[1] != 'y')
 		res = ft_c(&line[1], scene->camera);
 	if (line[0] == 'l')
 		res = ft_l(&line[1], scene->light);
@@ -72,7 +72,7 @@ int	gnl_parsing(t_scene *scene, int fd)
 		return (0);
 	while (get_next_line(fd, line) > 0)
 	{
-		if (ft_parsing_line(*line, scene) == -1)
+		if (ft_parsing_line(*line, scene) != 1)
 		{
 			ft_close_error(scene, fd, line);
 			return (0);
