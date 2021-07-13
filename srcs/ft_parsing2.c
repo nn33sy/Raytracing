@@ -100,7 +100,7 @@ int	ft_a(char *line, t_scene *scene)
 	line = ft_parsing_rgb(&scene->amb_light.rgb, line);
 	if (line == NULL)
 		return (-1);
-	return (1);
+	return (ft_empty_line(line));
 }
 
 int	ft_l(char *line, t_light **light)
@@ -121,5 +121,5 @@ int	ft_l(char *line, t_light **light)
 	line = ft_parsing_rgb(&l->rgb, line);
 	if (line == NULL)
 		return (-1);
-	return (1);
+	return (ft_empty_line(line));
 }

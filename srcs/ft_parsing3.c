@@ -44,7 +44,7 @@ int	ft_c(char *line, t_camera **camera)
 	if (c->fov < 0)
 		c->fov *= -1;
 	c->fov = (c->fov * 3.14) / 180;
-	return (1);
+	return (ft_empty_line(line));
 }
 
 int	ft_sp(char *line, t_scene *scene)
@@ -66,6 +66,8 @@ int	ft_sp(char *line, t_scene *scene)
 	if (line == NULL)
 		return (-1);
 	(*(scene->list))->magic = ft_atoi_rt(line);
+	if ((*(scene->list))-> magic != -999)
+		return (0);
 	return (1);
 }
 
