@@ -63,3 +63,14 @@ int	ft_tr(char *line, t_scene *scene)
 	(*(scene->list))->magic = ft_atoi_rt(line);
 	return (1);
 }
+
+int	ft_empty_line(char *chain)
+{
+	while (*chain != '\n' || *chain != '\0')
+	{
+		if (ft_space(*chain) == 0 || *chain != '\n')
+			return (0);
+		chain ++;
+	}
+	return (1);
+}

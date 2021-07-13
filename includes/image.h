@@ -20,6 +20,8 @@ void	ft_color_intensity_4(t_palette *color, t_scene *scene, t_point base,
 void	ft_check_magic(t_list *obj, t_palette *color);
 void	ft_calculate_color(t_palette *color,
 			t_scene *scene, t_point base, t_light *tmp);
+int		ft_space(char c);
+int		ft_empty_line(char *chain);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int		create_trgb(int t, int r, int g, int b);
 void	ft_initialize_img(t_vars *vars, t_data *img, t_scene *scene);

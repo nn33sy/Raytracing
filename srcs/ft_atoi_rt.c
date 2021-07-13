@@ -12,7 +12,7 @@
 
 #include "minirt.h"
 
-static int	ft_space(char c)
+int	ft_space(char c)
 {
 	if (c == '\t' || c == '\v' || c == '\f' || c == '\r'
 		|| c == '\n' || c == ' ' || c == ',' || c == '.')

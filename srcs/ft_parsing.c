@@ -29,6 +29,8 @@ int	ft_parsing_line(char *line, t_scene *scene)
 	int	res;
 
 	res = 0;
+	if (ft_empty_line(line) == 1)
+		return (1);
 	if (line[0] == 'R')
 		res = ft_r(&line[1], scene);
 	if (line[0] == 's' && line[1] == 'p')
@@ -72,7 +74,7 @@ int	gnl_parsing(t_scene *scene, int fd)
 		return (0);
 	while (get_next_line(fd, line) > 0)
 	{
-		if (ft_parsing_line(*line, scene) != 1)
+		if (ft_parsing_line(*line, scene) == -1)
 		{
 			ft_close_error(scene, fd, line);
 			return (0);
