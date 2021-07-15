@@ -59,10 +59,10 @@ $(NAME): $(OBJ)
 	@cp minilibx-linux/libmlx.a ./$(NAME)
 	@ar rc $@ $^
 	@echo "Compiling & indexing" [ $(NAME) ] $(SUCCESS)
-	@$(CC) -Iincludes  $(OBJ)  $(LFLAGS) $(CFLAGS)  main.c  $(NAME) libft/libft.a minilibx-linux/libmlx.a  -o  minirt
+	@$(CC) -Iincludes  $(OBJ)  $(LFLAGS) $(CFLAGS)  main.c  $(NAME) libft/libft.a minilibx-linux/libmlx.a  -o  miniRT
 
 test :
-	@$(CC) -Iincludes  $(OBJ) $(LFLAGS) $(CFLAGS)  main.c  $(NAME) libft/libft.a minilibx-linux/libmlx.a  -o  minirt
+	@$(CC) -Iincludes  $(OBJ) $(LFLAGS) $(CFLAGS)  main.c  $(NAME) libft/libft.a minilibx-linux/libmlx.a  -o  miniRT
 
 leak : 
 	@$(CC) -Iincludes  $(OBJ) $(LFLAGS) $(CFLAGS)  main.c  $(NAME) libft/libft.a minilibx-linux/libmlx.a -fsanitize=leak -fsanitize=address -fno-omit-frame-pointer -o  leak
