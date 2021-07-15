@@ -44,6 +44,10 @@ int	ft_c(char *line, t_camera **camera)
 	if (c->fov < 0)
 		c->fov *= -1;
 	c->fov = (c->fov * 3.14) / 180;
+	while (*line && ft_space(*line) == 1)
+		line ++;
+	while (*line && *line >= '0' && *line <= '9')
+		line ++;
 	return (ft_empty_line(line));
 }
 
